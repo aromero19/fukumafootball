@@ -1,6 +1,7 @@
 "use client";
 
 import { submitPicks } from "@/app/picks/actions";
+import { useRouter } from "next/navigation";
 import TeamImage from "@/components/team-image";
 import { imageCandidates } from "@/lib/theme-images.mjs";
 import { useMemo, useRef, useState } from "react";
@@ -15,6 +16,7 @@ type Pick = { game_id: number; team_id: number };
 type Props = { seasonActive: boolean; images: { team_id: number; theme_id: number; image_url: string; thumbnail_url: string | null; active: boolean }[]; defaultThemeId: number | null; year: number; week: number; games: Game[]; teams: Team[]; themes: Theme[]; entries: Entry[]; picks: Pick[]; themeId: number | null; initialEntryId?: number };
 
 export default function PicksForm({ seasonActive, images, defaultThemeId, year, week, games, teams, themes, entries, picks, themeId, initialEntryId }: Props) {
+  const router = useRouter();
   const loadVersion = useRef(0);
   const busy = useRef(false);
   const [loading, setLoading] = useState(false);
@@ -70,8 +72,8 @@ export default function PicksForm({ seasonActive, images, defaultThemeId, year, 
     try {
       const { data, error } = await submitPicks(payload);
       if (error) { setMessage("Picks were not confirmed: " + error.message + " Retry without changing your choices, or refresh to see updated game results."); return; }
-      setMessage(data?.email_status === "queued" ? "Picks saved. Confirmation email is queued; it has not been sent yet." : "Picks saved. No confirmation email was queued.");
-      // Keep the successful request key until choices change: repeated clicks are retries.
+      const query = new URLSearchParams({ year: String(year), week: String(week), entry: String(entry), email: data?.email_status === "queued" ? "queued" : "none" });
+      router.push(`/picks/success?${query}`);
     } catch { setMessage("Connection interrupted. Your picks may already be saved. Retry without changing your choices to safely confirm them."); }
     finally { busy.current = false; setSubmitting(false); }
   }
