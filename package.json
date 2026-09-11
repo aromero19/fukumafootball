@@ -6,16 +6,23 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "email:send": "node scripts/send-email-outbox.mjs",
+    "test:app": "node --test tests/family-picks.test.mjs",
+    "test:email-worker": "node --test tests/email-worker.test.mjs",
+    "test:db": "node --test tests/database.test.mjs",
+    "test:db:integration": "node scripts/test-db-integration.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",
     "@supabase/supabase-js": "^2.116.0",
     "next": "16.3.4",
+    "pg": "^8.23.0",
     "react": "19.2.8",
     "react-dom": "19.2.8"
   },
   "devDependencies": {
+    "@electric-sql/pglite": "0.4.6",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
