@@ -143,12 +143,60 @@ check('malformed and null picks cannot bypass validation', async () => {
     await rejects(() => submit({ selections }), /required|requires/);
   }
 });
-check('inactive players, unpublished weeks, inactive themes and missing emails fail', async () => {
+check('inactive players, unpublished weeks and inactive themes fail', async () => {
   await role('anon');
   await rejects(() => submit({ entry: 3 }), /Player is not active/);
   await rejects(() => submit({ week: 2 }), /not published/);
   await rejects(() => submit({ theme: 3 }), /Theme is not active/);
-  await rejects(() => submit({ entry: 4 }), /email address/);
+});
+check('players without email save picks and retry safely without becoming delivery jobs', async () => {
+  await role('anon');
+  const id = requestId();
+  const first = (await submit({ entry: 4, id })).rows;
+  assert.equal(first[0].result.email_status, 'not_queued');
+  assert.equal(first[0].result.picks.length, 2);
+  assert.deepEqual((await submit({ entry: 4, id })).rows, first);
+  await rejects(() => submit({ entry: 4, id, theme: 2 }), /already used/);
+  await role('authenticated', admin);
+  await db.query("select public.admin_set_entry_email(4,'later@example.test')");
+  await role('anon');
+  assert.deepEqual((await submit({ entry: 4, id })).rows, first);
+  assert.equal((await submit({ entry: 4 })).rows[0].result.email_status, 'queued');
+  await role('postgres');
+  const receipt = (await db.query('select skipped_at,sent_at,attempts from private.email_outbox where request_id=$1', [id])).rows[0];
+  assert.ok(receipt.skipped_at);
+  assert.equal(receipt.sent_at, null);
+  assert.equal(receipt.attempts, 0);
+  assert.equal((await db.query('select revision from public.weekly_submission where entry_id=4')).rows[0].revision, 2);
+});
+
+check('clearing a contact skips pending delivery and cannot revive it on re-add', async () => {
+  const id = requestId();
+  await submit({ id });
+  await db.query('update private.email_outbox set attempts=1 where request_id=$1', [id]);
+  await role('authenticated', stranger);
+  await rejects(() => db.query('select public.admin_set_entry_email(1,null)'), /Administrator/);
+  await role('authenticated', admin);
+  await db.query('select public.admin_set_entry_email(1,null)');
+  assert.equal((await db.query('select public.admin_entry_email(1) as email')).rows[0].email, null);
+  await db.query("select public.admin_set_entry_email(1,'restored@example.test')");
+  await role('postgres');
+  assert.ok((await db.query('select skipped_at from private.email_outbox where request_id=$1', [id])).rows[0].skipped_at);
+  await rejects(() => retryEmail(db, admin, id), /skipped/);
+});
+
+import { processEmailOutbox } from '../src/lib/email-worker.mjs';
+check('worker sends only eligible receipts and never sends previously skipped submissions', async () => {
+  await submit({ entry: 4 });
+  await role('authenticated', admin);
+  await db.query("select public.admin_set_entry_email(4,'added@example.test')");
+  await role('postgres');
+  await submit();
+  await db.query("update private.email_settings set enabled=true,sender_address='league@example.test'");
+  const deliveries = [];
+  const result = await processEmailOutbox(db, async message => deliveries.push(message));
+  assert.equal(result.sent, 1);
+  assert.deepEqual(deliveries.map(message => message.to), [['angelo@example.test']]);
 });
 check('kickoff never locks a TBD game', async () => {
   await db.exec("update public.game set game_date_time='2000-01-01' where game_id=100");
@@ -332,6 +380,17 @@ test('operations recheck admin rights and save player/contact atomically', async
   assert.equal((await db.query('select email from private.entry_contact where entry_id=$1',[id])).rows[0].email,'atomic@example.test');
   await db.query('delete from public.entry where entry_id=$1',[id]);
 });
+test('operations create a player without a contact and can add or remove one later', async () => {
+  const player = {first:'Optional Contact',last:'',email:null,active:true};
+  const id = await adminTransaction(db,admin,client=>savePlayerRecord(client,player));
+  assert.equal((await db.query('select * from private.entry_contact where entry_id=$1',[id])).rows.length,0);
+  await adminTransaction(db,admin,client=>savePlayerRecord(client,{...player,entryId:id,email:'optional@example.test'}));
+  assert.equal((await db.query('select email from private.entry_contact where entry_id=$1',[id])).rows[0].email,'optional@example.test');
+  await adminTransaction(db,admin,client=>savePlayerRecord(client,{...player,entryId:id}));
+  assert.equal((await db.query('select * from private.entry_contact where entry_id=$1',[id])).rows.length,0);
+  assert.equal((await db.query('select active from public.entry where entry_id=$1',[id])).rows[0].active,true);
+});
+
 test('email settings changes are audited and revoked actors cannot change them',async()=>{
   const settings={enabled:false,sender_address:'league@example.test',reply_to_address:null};
   await adminTransaction(db,admin,client=>saveEmailConfiguration(client,admin,settings));

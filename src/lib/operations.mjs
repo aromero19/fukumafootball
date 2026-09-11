@@ -39,8 +39,8 @@ export async function retryEmail(client, actorId, requestId) {
   // The worker holds this lock for delivery; never reset an in-flight attempt.
   const lock = await client.query("select pg_try_advisory_xact_lock(7062026,1) as locked");
   if (!lock.rows[0].locked) throw new InputError("Email delivery is running. Retry after the worker finishes.");
-  const row = await client.query("update private.email_outbox set attempts=0,last_error=null where request_id=$1 and sent_at is null and attempts>0 returning entry_id", [requestId]);
-  if (!row.rows.length) throw new InputError("This message is already sent, queued, or no longer exists.");
+  const row = await client.query("update private.email_outbox set attempts=0,last_error=null where request_id=$1 and sent_at is null and skipped_at is null and attempts>0 returning entry_id", [requestId]);
+  if (!row.rows.length) throw new InputError("This message is already sent, queued, skipped, or no longer exists.");
   await client.query("insert into private.admin_audit(actor_id,action,record_id,reason,after_value) values ($1,'email_retry',$2,'Administrator accepted possible duplicate delivery',$3)", [actorId,row.rows[0].entry_id,JSON.stringify({ request_id: requestId })]);
 }
 

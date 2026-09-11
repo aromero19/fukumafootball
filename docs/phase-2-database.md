@@ -65,15 +65,17 @@ The application backend calls `submit_weekly_picks` with:
 - Only matchup teams are legal selections. Tie/TBD are result markers only.
 - `win_team_id = 34` means open, even after kickoff. Every other valid winner
   locks the game; returning a result to 34 intentionally reopens it.
-- Player and season must be active, week published, theme active, and an email
-  configured. Historical/inactive seasons remain readable.
+- Player and season must be active, week published, and theme active. A contact
+  email is optional after migration 20260911000001. Historical/inactive seasons remain readable.
 - The function atomically validates picks, upserts them, updates the weekly
   theme/timestamp/revision, and creates a private email-outbox row.
 - Preserve a request UUID across retries of the **same payload**, including array
   order. Reusing it for different content fails. A new intentional submission gets
   a new UUID and confirmation. A retry after a result is entered returns the saved
   confirmation without changing the now-locked pick.
-- Responses report `email_status: queued`, never claim that an email was sent.
+- Responses report `email_status: queued` with a contact, or `not_queued` without one;
+  neither claims delivery. Private receipts with `skipped_at` preserve retry identity
+  without becoming delivery jobs, even if an email is added later.
 - The UI treats SQL validation errors as failed submissions; it must not show a
   saved/sent success state for a failed transaction.
 

@@ -68,9 +68,9 @@ export default function PicksForm({ seasonActive, images, defaultThemeId, year, 
     const id = requestId ?? crypto.randomUUID(); setRequestId(id);
     const payload = { p_entry_id:entry, p_year:year, p_week:week, p_theme_id:theme, p_request_id:id, p_picks:submissionPicks(selected) };
     try {
-      const { error } = await submitPicks(payload);
+      const { data, error } = await submitPicks(payload);
       if (error) { setMessage("Picks were not confirmed: " + error.message + " Retry without changing your choices, or refresh to see updated game results."); return; }
-      setMessage("Picks saved. Confirmation email is queued; it has not been sent yet.");
+      setMessage(data?.email_status === "queued" ? "Picks saved. Confirmation email is queued; it has not been sent yet." : "Picks saved. No confirmation email was queued.");
       // Keep the successful request key until choices change: repeated clicks are retries.
     } catch { setMessage("Connection interrupted. Your picks may already be saved. Retry without changing your choices to safely confirm them."); }
     finally { busy.current = false; setSubmitting(false); }

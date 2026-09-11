@@ -27,6 +27,9 @@ async function blocked(pid) {
   throw new Error('Expected a real PostgreSQL lock wait, but none occurred');
 }
 const outcome = promise => promise.then(value => ({ value }), error => ({ error }));
+async function adminSession(client) {
+  await client.query("begin; select set_config('request.jwt.claim.sub','10000000-0000-0000-0000-000000000001',true); set local role authenticated");
+}
 async function family(client) { await client.query('begin; set local role anon'); }
 async function submit(client, game, week, id = randomUUID(), team = 10) {
   return client.query('select public.submit_weekly_picks($1,9900,$2,1,$3,$4) as result',
@@ -125,6 +128,46 @@ race('concurrent intentional resubmissions serialize without duplicate picks', a
   assert.equal(picks.rows[0].team_id, 16);
 });
 
+race('contact removal before submission creates a skipped receipt', async ({ a,b,pid,game,week }) => {
+  await adminSession(a);
+  await a.query('select public.admin_set_entry_email($1,null)', [entry]);
+  await family(b);
+  const pending = outcome(submit(b,game,week));
+  await blocked(pid);
+  await a.query('commit');
+  const result = await pending;
+  assert.equal(result.error?.code, undefined);
+  assert.equal(result.value.rows[0].result.email_status, 'not_queued');
+  await b.query('commit');
+  assert.ok((await observer.query('select skipped_at from private.email_outbox where entry_id=$1 and year=9900 and week=$2',[entry,week])).rows[0].skipped_at);
+  await observer.query("insert into private.entry_contact values ($1,'integration@example.test')", [entry]);
+});
+
+race('contact removal after concurrent submission skips the newly committed job', async ({ a,b,pid,game,week }) => {
+  await family(a);
+  await submit(a,game,week);
+  await adminSession(b);
+  const pending = outcome(b.query('select public.admin_set_entry_email($1,null)', [entry]));
+  await blocked(pid);
+  await a.query('commit');
+  assert.equal((await pending).error?.code, undefined);
+  await b.query('commit');
+  assert.ok((await observer.query('select skipped_at from private.email_outbox where entry_id=$1 and year=9900 and week=$2',[entry,week])).rows[0].skipped_at);
+  await observer.query("insert into private.entry_contact values ($1,'integration@example.test')", [entry]);
+});
+
+test('contact removal cannot race a worker holding the delivery lock', async () => {
+  const worker = await stack.connect();
+  const operator = await stack.connect();
+  try {
+    await worker.query('select pg_advisory_lock(7062026,1)');
+    await adminSession(operator);
+    await assert.rejects(() => operator.query('select public.admin_set_entry_email($1,null)', [entry]), /delivery is running/);
+    await operator.query('rollback');
+    assert.equal((await observer.query('select email from private.entry_contact where entry_id=$1',[entry])).rows[0].email,'integration@example.test');
+  } finally { await worker.end(); await operator.end(); }
+});
+
 test('real Data API hides contact data and unpublished games', async () => {
   const api = createClient(stack.apiUrl, stack.anonKey, { auth: { persistSession: false } });
   const entries = await api.from('entry').select('*').eq('entry_id', entry);
@@ -172,6 +215,10 @@ test('real worker lock prevents competing sends and manual retries while deliver
  let release,started;const gate=new Promise(resolve=>{release=resolve;});const sending=new Promise(resolve=>{started=resolve;});
  let pending;
  try {
+  const week=++weekCounter,game=10000+week;
+  await observer.query('insert into public.week(year,week,published) values (9900,$1,true)',[week]);
+  await observer.query('insert into public.game(game_id,year,week,away_team_id,home_team_id) values ($1,9900,$2,10,16)',[game,week]);
+  await submit(observer,game,week);
   await observer.query("update private.email_settings set enabled=true,sender_address='league@example.test'");
   pending=processEmailOutbox(a,async()=>{started();await gate;},1);
   await Promise.race([sending,new Promise((_,reject)=>setTimeout(()=>reject(Error('Worker did not start')),8000))]);

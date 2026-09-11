@@ -37,14 +37,17 @@ export async function processEmailOutbox(client, send, limit = 25) {
     if (!configuration.sender_address) throw new Error("Email is enabled but sender_address is not configured.");
     const outbox = await client.query(
       "select o.request_id, o.entry_id, o.year, o.week, o.confirmation, c.email from private.email_outbox o left join private.entry_contact c using (entry_id) " +
-      "where o.sent_at is null and o.attempts < 5 and (o.attempts=0 or o.created_at > clock_timestamp() - interval '23 hours') order by o.created_at,o.request_id limit $1", [limit]);
+      "where o.sent_at is null and o.skipped_at is null and o.attempts < 5 and (o.attempts=0 or o.created_at > clock_timestamp() - interval '23 hours') order by o.created_at,o.request_id limit $1", [limit]);
     let sent=0,failed=0;
     for (const row of outbox.rows) {
+      if (!row.email) {
+        await client.query("update private.email_outbox set skipped_at=clock_timestamp(),last_error=null where request_id=$1 and sent_at is null", [row.request_id]);
+        continue;
+      }
       // Persist before contacting the provider: a crashed process leaves an uncertain
       // attempt, rather than silently treating it as a brand-new delivery.
       await client.query("update private.email_outbox set attempts=attempts+1, last_error='Delivery pending or uncertain' where request_id=$1 and sent_at is null", [row.request_id]);
       try {
-        if (!row.email) throw new Error("Player contact missing");
         const games = await client.query("select g.game_id,g.away_team_id,g.home_team_id,away.team_name as away_name,home.team_name as home_name from public.game g join public.team away on away.team_id=g.away_team_id join public.team home on home.team_id=g.home_team_id where g.year=$1 and g.week=$2 order by g.game_id", [row.year,row.week]);
         await send(confirmationEmail(row,games.rows,configuration.sender_address,configuration.reply_to_address),row.request_id);
         await client.query("update private.email_outbox set sent_at=clock_timestamp(),last_error=null where request_id=$1 and sent_at is null", [row.request_id]);
@@ -55,6 +58,6 @@ export async function processEmailOutbox(client, send, limit = 25) {
         failed++;
       }
     }
-    return { attempted:outbox.rows.length,sent,failed,disabled:false };
+    return { attempted:sent+failed,sent,failed,disabled:false };
   } finally { await client.query("select pg_advisory_unlock(7062026,1)"); }
 }

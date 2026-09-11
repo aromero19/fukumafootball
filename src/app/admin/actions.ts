@@ -174,10 +174,10 @@ export async function correctPick(formData: FormData) {
 async function persistPlayer(form: FormData, create: boolean) {
   const { actorId } = await operationsAccess();
   try {
-    const player = { entryId: create ? null : integer(form, "entry_id"), first: text(form, "name_first", 100, true), last: text(form, "name_last", 100), email: emailAddress(text(form, "email", 254, true)), active: create || form.get("active") === "on" };
+    const player = { entryId: create ? null : integer(form, "entry_id"), first: text(form, "name_first", 100, true), last: text(form, "name_last", 100), email: emailAddress(text(form, "email", 254), false), active: create || form.get("active") === "on" };
     await operationsDatabase(actorId, client => savePlayerRecord(client, player));
     revalidatePath("/admin/players"); revalidatePath("/picks"); revalidatePath("/standings"); revalidatePath("/admin");
-    return { ok: true, message: create ? "Player and email created." : "Player and email saved." };
+    return { ok: true, message: create ? "Player created." : "Player saved." };
   } catch (error) { return { ok: false, message: error instanceof InputError ? error.message : "Unable to confirm the save. Refresh and check the player before retrying." }; }
 }
 export async function createPlayer(form: FormData) { return persistPlayer(form, true); }
