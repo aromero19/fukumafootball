@@ -433,3 +433,20 @@ check('profile photos are public but only administrators can change them', async
   await db.query('update public.entry set photo_url=null where entry_id=1');
   assert.equal((await db.query('select photo_url from public.entry where entry_id=1')).rows[0].photo_url, null);
 });
+
+check('family profile editing changes only active player photos through the narrow RPC', async () => {
+  await role('anon');
+  await db.query('select public.update_profile_photo($1,$2)', [1, 'https://example.test/me.jpg']);
+  const player = (await db.query('select name_first,active,photo_url from public.entry where entry_id=1')).rows[0];
+  assert.deepEqual(player, {name_first:'Angelo', active:true, photo_url:'https://example.test/me.jpg'});
+  await rejects(() => db.query('update public.entry set name_first=$1 where entry_id=1', ['Changed']), /permission denied/);
+  for (const url of ['http://example.test/a', 'javascript:alert(1)', 'https://user:pass@example.test/a', 'https://example.test/a b', 'https://example.test/a\\b', 'https://', 'https://example.test/'+'a'.repeat(2048)]) {
+    await rejects(() => db.query('select public.update_profile_photo($1,$2)', [1,url]), /HTTPS/);
+  }
+  for (const id of [3,999,null]) await rejects(() => db.query('select public.update_profile_photo($1,$2)', [id,'https://example.test/a']), /Active player/);
+  await db.query('select public.update_profile_photo($1,$2)', [1,'']);
+  assert.equal((await db.query('select photo_url from public.entry where entry_id=1')).rows[0].photo_url, null);
+  await role('authenticated', stranger);
+  await db.query('select public.update_profile_photo($1,$2)', [2,'https://example.test/other.jpg']);
+  assert.equal((await db.query('select photo_url from public.entry where entry_id=2')).rows[0].photo_url, 'https://example.test/other.jpg');
+});

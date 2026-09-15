@@ -13,6 +13,7 @@ export async function savePlayerPhoto(form: FormData) {
   const { error } = await supabase.from("entry").update({ photo_url: photoUrl }).eq("entry_id", entryId).select("entry_id").single();
   if (error) return { ok: false, message: "Photo could not be saved. Refresh and try again." };
   revalidatePath("/admin/players");
+  revalidatePath("/profile");
   revalidatePath("/picks");
   revalidatePath("/picks/success");
   return { ok: true, message: photoUrl ? "Profile photo saved." : "Profile photo removed; using the silhouette." };

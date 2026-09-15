@@ -58,3 +58,9 @@ Apply `supabase/migrations/20260915000001_profile_photos.sql` before deploying t
 In **Admin → Players → Profile photos**, paste a publicly accessible HTTPS image URL for each player. Clear the URL to restore the gray silhouette. Square images work best; profiles render at 96 × 96 pixels, and the submitted game summaries use 36 × 36 pixels. Missing or broken images fall back to the silhouette.
 
 **Make picks** opens profile tiles first. Selecting a profile loads that player's saved picks and theme; **Change profile** returns to the tiles. After submission, each week's matchup shows the names/photos of its pickers and each team's percentage. The denominator is the number of recorded picks for that game, including historical picks from inactive players, excluding players who have no pick for that game. Percentages round to whole numbers and sum to 100% when picks exist; games without picks show 0% on both sides.
+
+## Self-service profiles
+
+The public **Profile** navigation link opens `/profile`, with the same player tiles as Make picks. Select your name, edit the image URL, preview it, and save. Clear the field and save to restore the silhouette.
+
+Apply `supabase/migrations/20260916000001_self_service_profile_photo.sql` before deploying this feature. Its narrow RPC lets family visitors update only the photo URL of an active player; direct table writes remain restricted. This uses the same honor system as picks, so it does not authenticate ownership of a selected name. Administrators retain their photo editor.
