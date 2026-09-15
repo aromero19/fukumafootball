@@ -15,7 +15,7 @@ export async function readStandings(year:number,week?:number) {
 }
 export async function readWeeks(year:number) { const s=await createClient();return checked(await s.from("week").select("year,week,published,is_current").eq("year",year).eq("published",true).order("week")) ?? []; }
 export async function readPublishedSeasons() { const s=await createClient();return [...new Set((checked(await s.from("week").select("year").eq("published",true).order("year",{ascending:false})) ?? []).map(week=>week.year))]; }
-export async function readEntries() { const s=await createClient();return checked(await s.from("entry").select("entry_id,name_first,name_last,active").order("name_first").order("name_last").order("entry_id")) ?? []; }
+export async function readEntries() { const s=await createClient();return checked(await s.from("entry").select("entry_id,name_first,name_last,active,photo_url").order("name_first").order("name_last").order("entry_id")) ?? []; }
 export async function readPicksPage(year:number,week:number,entryId?:number) {
  const s=await createClient();
  const [g,t,th,e,p,l,i,se]=await Promise.all([
@@ -32,3 +32,13 @@ export async function readPicksPage(year:number,week:number,entryId?:number) {
  return { games:checked(g) ?? [], teams:checked(t) ?? [], themes, entries:checked(e) ?? [], picks:checked(p) ?? [], images:checked(i) ?? [], seasonActive:checked(se)?.active ?? false, defaultThemeId, themeId:themes.some(theme=>theme.theme_id===latest?.theme_id)?latest!.theme_id:defaultThemeId };
 }
 export function queryNumber(value:string|undefined,min:number,max:number) { const number=Number(value);return value && Number.isSafeInteger(number)&&number>=min&&number<=max?number:undefined; }
+
+export async function readWeeklyPicks(year:number, week:number) {
+ const s=await createClient();
+ const picks: {entry_id:number;game_id:number;team_id:number}[]=[];
+ for(let offset=0;;offset+=1000) {
+  const rows=checked(await s.from("pick").select("entry_id,game_id,team_id,game!inner(year,week)").eq("game.year",year).eq("game.week",week).order("pick_id").range(offset,offset+999)) ?? [];
+  picks.push(...rows);
+  if(rows.length<1000) return picks;
+ }
+}

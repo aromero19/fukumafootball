@@ -50,3 +50,11 @@ See [the version-1 release guide](docs/version-1-release.md) for launch configur
 The worker reads process environment variables. The email:send command does not automatically load .env.local. Inject its environment through the worker host or use your trusted environment launcher. Run npm.cmd run email:send separately; no website request sends mail.
 
 Migrations 20260910000001 through 20260910000004 are the existing schema, reported deployed in the project handoff. No migration was added by this version-1 completion work. Historical imports and stored-file image uploads are deferred.
+
+## Profile photos and weekly pick summaries
+
+Apply `supabase/migrations/20260915000001_profile_photos.sql` before deploying this update. It adds the nullable `entry.photo_url` column and retains existing administrator-only write permissions.
+
+In **Admin → Players → Profile photos**, paste a publicly accessible HTTPS image URL for each player. Clear the URL to restore the gray silhouette. Square images work best; profiles render at 96 × 96 pixels, and the submitted game summaries use 36 × 36 pixels. Missing or broken images fall back to the silhouette.
+
+**Make picks** opens profile tiles first. Selecting a profile loads that player's saved picks and theme; **Change profile** returns to the tiles. After submission, each week's matchup shows the names/photos of its pickers and each team's percentage. The denominator is the number of recorded picks for that game, including historical picks from inactive players, excluding players who have no pick for that game. Percentages round to whole numbers and sum to 100% when picks exist; games without picks show 0% on both sides.

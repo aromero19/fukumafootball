@@ -418,3 +418,18 @@ test('default theme changes are atomic and reject inactive targets',async()=>{
  assert.equal((await db.query('select theme_id from public.theme where is_default')).rows[0].theme_id,2);
  await adminTransaction(db,admin,client=>setDefaultThemeRecord(client,1));
 });
+
+check('profile photos are public but only administrators can change them', async () => {
+  await role('authenticated', admin);
+  await db.query('update public.entry set photo_url=$1 where entry_id=1', ['https://example.test/player.jpg']);
+  await role('anon');
+  assert.equal((await db.query('select photo_url from public.entry where entry_id=1')).rows[0].photo_url, 'https://example.test/player.jpg');
+  await rejects(() => db.query("update public.entry set photo_url=null where entry_id=1"), /permission denied/);
+  await role('authenticated', stranger);
+  await db.query('update public.entry set photo_url=null where entry_id=1');
+  assert.equal((await db.query('select photo_url from public.entry where entry_id=1')).rows[0].photo_url, 'https://example.test/player.jpg');
+  await role('authenticated', admin);
+  await rejects(() => db.query("update public.entry set photo_url='http://example.test/photo.jpg' where entry_id=1"), /entry_photo_url_https/);
+  await db.query('update public.entry set photo_url=null where entry_id=1');
+  assert.equal((await db.query('select photo_url from public.entry where entry_id=1')).rows[0].photo_url, null);
+});

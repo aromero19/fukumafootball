@@ -69,3 +69,22 @@ test('submission boundary rejects excessive or duplicate picks and preserves ret
 test('submission rate guard bounds bursts and expires windows',()=>{
  const allow=createSubmissionLimiter();for(let i=0;i<30;i++)assert.equal(allow('client',100),true);assert.equal(allow('client',100),false);assert.equal(allow('another',100),true);assert.equal(allow('client',60101),true);
 });
+
+import { summarizeGamePicks } from "../src/lib/pick-summary.mjs";
+test("game percentages count each player once and ignore other games and invalid teams", () => {
+  const game = { game_id: 1, away_team_id: 10, home_team_id: 12 };
+  const picks = [
+    { game_id: 1, team_id: 10, entry_id: 1 },
+    { game_id: 1, team_id: 10, entry_id: 1 },
+    { game_id: 1, team_id: 12, entry_id: 2 },
+    { game_id: 1, team_id: 12, entry_id: 3 },
+    { game_id: 2, team_id: 10, entry_id: 4 },
+    { game_id: 1, team_id: 33, entry_id: 5 },
+  ];
+  assert.deepEqual(summarizeGamePicks(game, picks), { total: 3, sides: [
+    { teamId: 10, entryIds: [1], percentage: 33 },
+    { teamId: 12, entryIds: [2, 3], percentage: 67 },
+  ] });
+  assert.deepEqual(summarizeGamePicks(game, []).sides.map(side => side.percentage), [0, 0]);
+  assert.deepEqual(summarizeGamePicks(game, [picks[0]]).sides.map(side => side.percentage), [100, 0]);
+});

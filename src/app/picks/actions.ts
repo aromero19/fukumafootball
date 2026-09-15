@@ -1,5 +1,6 @@
 "use server";
 import { headers } from "next/headers";
+import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { validateSubmission,createSubmissionLimiter } from "@/lib/submission.mjs";
 import { submitWithRetry } from "@/lib/picks.mjs";
@@ -13,6 +14,10 @@ export async function submitPicks(input: unknown) {
  try {
   const supabase=await createClient();
   const result=await submitWithRetry((saved:typeof payload)=>supabase.rpc("submit_weekly_picks",saved),payload);
+  if (!result.error) {
+   revalidatePath("/picks");
+   revalidatePath("/picks/success");
+  }
   return {data:result.data,error:result.error?{code:result.error.code,message:result.error.message}:null};
  }catch{return {data:null,error:{code:"CONNECTION",message:"Connection interrupted. Your picks may already be saved; retry without changing your choices."}};}
 }

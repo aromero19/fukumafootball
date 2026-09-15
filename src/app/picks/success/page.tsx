@@ -1,3 +1,4 @@
+import WeeklyPickSummary from "@/components/weekly-pick-summary";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { queryNumber } from "@/lib/data";
@@ -15,7 +16,7 @@ export default async function PicksSuccess({ searchParams }: {
 
   const editQuery = new URLSearchParams({ year: String(year), week: String(week), entry: String(entry) });
 
-  return <section className="card narrow-card">
+  return <><section className="card submission-summary">
     <div className="eyebrow">{year} season · Week {week}</div>
     <h1>Picks submitted successfully!</h1>
     <p>Your picks have been saved. You’re all set for this week.</p>
@@ -27,5 +28,5 @@ export default async function PicksSuccess({ searchParams }: {
       <a className="button" href={`/picks?${editQuery}`}>Back to edit picks</a>
       <Link className="button secondary" href="/">Back to home</Link>
     </div>
-  </section>;
+  </section><WeeklyPickSummary year={year} week={week} entry={entry} /></>;
 }
