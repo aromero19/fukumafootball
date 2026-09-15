@@ -9,6 +9,7 @@
     "lint": "eslint",
     "email:send": "node scripts/send-email-outbox.mjs",
     "test:app": "node --test tests/family-picks.test.mjs",
+    "test:images": "node --test tests/image-upload.test.mjs",
     "test:email-worker": "node --test tests/email-worker.test.mjs",
     "test:db": "node --test tests/database.test.mjs",
     "test:db:integration": "node scripts/test-db-integration.mjs"
@@ -19,7 +20,8 @@
     "next": "16.3.4",
     "pg": "^8.23.0",
     "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "react-dom": "19.2.8",
+    "sharp": "^0.35.4"
   },
   "devDependencies": {
     "@electric-sql/pglite": "0.4.6",

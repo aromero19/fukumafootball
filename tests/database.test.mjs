@@ -48,6 +48,11 @@ before(async () => {
     create role service_role nologin bypassrls;
     grant usage on schema public to anon, authenticated, service_role;
     create schema auth;
+    -- Storage itself is exercised by the Docker integration stack.
+    create schema storage;
+    create table storage.buckets (id text primary key, name text, public boolean, file_size_limit bigint, allowed_mime_types text[]);
+    create table storage.objects (id uuid default gen_random_uuid(), bucket_id text, name text);
+    alter table storage.objects enable row level security;
     create table auth.users (id uuid primary key);
     create function auth.uid() returns uuid language sql stable as
       $$ select nullif(current_setting('request.jwt.claim.sub', true), '')::uuid $$;
@@ -79,6 +84,33 @@ before(async () => {
   `);
 });
 after(async () => { await db?.close(); });
+
+check('image buckets restrict stored types and clients cannot access upload quotas', async () => {
+  const { rows } = await db.query("select id,public,file_size_limit,allowed_mime_types from storage.buckets where id in ('player-photos','team-themes') order by id");
+  assert.equal(rows.length, 2);
+  for (const bucket of rows) {
+    assert.equal(bucket.public, true);
+    assert.equal(Number(bucket.file_size_limit), 2097152);
+    assert.deepEqual(bucket.allowed_mime_types, ['image/webp']);
+  }
+  for (const name of ['anon', 'authenticated', 'service_role']) {
+    await role(name, stranger);
+    await rejects(() => db.query('select * from private.image_upload_attempt'), /permission denied/);
+    await rejects(() => db.query("insert into private.image_upload_attempt(target,is_profile) values ('players/1',true)"), /permission denied/);
+  }
+});
+
+check('image buckets reject browser uploads even with a broad storage policy', async () => {
+  await db.exec(`grant usage on schema storage to anon, authenticated;
+    grant insert on storage.objects to anon, authenticated;
+    create policy test_broad_storage_insert on storage.objects for insert to anon, authenticated with check (true);`);
+  for (const name of ['anon', 'authenticated']) {
+    await role(name, stranger);
+    for (const bucket of ['player-photos', 'team-themes']) {
+      await rejects(() => db.query('insert into storage.objects(bucket_id,name) values ($1,$2)', [bucket, 'unapproved.webp']), /row-level security/);
+    }
+  }
+});
 
 check('historical team IDs and reserved values are preserved', async () => {
   const { rows } = await db.query('select team_id,team_name from public.team order by team_id');

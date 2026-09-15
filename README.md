@@ -1,6 +1,6 @@
 # Fukuma Football
 
-A family NFL Pick'em league built with Next.js 16.3.4 and Supabase. Version 1 uses honor-system player selection, public picks for published weeks, and authenticated allowlisted administrators. Images remain HTTPS URLs for this release.
+A family NFL Pick'em league built with Next.js 16.3.4 and Supabase. It uses honor-system player selection, public picks for published weeks, and authenticated allowlisted administrators. Profile and theme images support Supabase Storage uploads as well as HTTPS URLs. See [image upload setup](docs/image-uploads.md) for the required migration and server credential.
 
 ## Version 1 workflows
 
@@ -64,6 +64,8 @@ In **Admin → Players → Profile photos**, paste a publicly accessible HTTPS i
 **Make picks** opens profile tiles first. Selecting a profile loads that player's saved picks and theme; **Change profile** returns to the tiles. After submission, each week's matchup shows the names/photos of its pickers and each team's percentage. The denominator is the number of recorded picks for that game, including historical picks from inactive players, excluding players who have no pick for that game. Percentages round to whole numbers and sum to 100% when picks exist; games without picks show 0% on both sides.
 
 ## Self-service profiles
+
+File uploads are now available on Profile, Admin → Players, and Admin → Themes once [image upload setup](docs/image-uploads.md) is applied. Player uploads retain the unauthenticated honor system. The URL workflow below also remains available.
 
 The public **Profile** navigation link opens `/profile`, with the same player tiles as Make picks. Select your name, edit the image URL, preview it, and save. Clear the field and save to restore the silhouette.
 
