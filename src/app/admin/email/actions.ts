@@ -1,5 +1,6 @@
 "use server";
 import { revalidatePath } from "next/cache";
+import { sendConfirmationAfterResponse } from "@/lib/email-after";
 import { operationsAccess, operationsDatabase } from "@/lib/operations-server";
 import { saveEmailConfiguration, retryEmail } from "@/lib/operations.mjs";
 import { InputError, emailAddress, text } from "@/lib/validation.mjs";
@@ -11,7 +12,7 @@ export async function saveEmailSettings(form: FormData) {
     const settings = { enabled, sender_address: emailAddress(text(form,"sender_address",254),enabled), reply_to_address: emailAddress(text(form,"reply_to_address",254),false) };
     await operationsDatabase(actorId, client => saveEmailConfiguration(client,actorId,settings));
     revalidatePath("/admin/email");
-    return { ok: true, message: "Email settings saved. Delivery runs only when the separate worker runs." };
+    return { ok: true, message: "Email settings saved. New submissions send automatically when production delivery is configured." };
   } catch (error) { return { ok: false, message: error instanceof InputError ? error.message : "Unable to confirm the settings save. Refresh before retrying." }; }
 }
 export async function queueEmailRetry(form: FormData) {
@@ -21,7 +22,8 @@ export async function queueEmailRetry(form: FormData) {
     if (!/^[0-9a-f-]{36}$/i.test(id)) throw new InputError("Invalid message reference.");
     if (form.get("confirm_retry") !== "on") throw new InputError("Confirm that retrying could deliver a duplicate email.");
     await operationsDatabase(actorId, client => retryEmail(client,actorId,id));
+    sendConfirmationAfterResponse(id);
     revalidatePath("/admin/email");
-    return { ok: true, message: "Message queued for the next worker run. No email has been sent by this page." };
+    return { ok: true, message: "Retry queued. Production delivery will attempt it in the background; refresh to check its status." };
   } catch (error) { return { ok: false, message: error instanceof InputError ? error.message : "Unable to queue retry. Refresh and check its status." }; }
 }

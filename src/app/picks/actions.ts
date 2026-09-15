@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { validateSubmission,createSubmissionLimiter } from "@/lib/submission.mjs";
 import { submitWithRetry } from "@/lib/picks.mjs";
+import { sendConfirmationAfterResponse } from "@/lib/email-after";
 const allow=createSubmissionLimiter();
 export async function submitPicks(input: unknown) {
  let payload;
@@ -15,6 +16,7 @@ export async function submitPicks(input: unknown) {
   const supabase=await createClient();
   const result=await submitWithRetry((saved:typeof payload)=>supabase.rpc("submit_weekly_picks",saved),payload);
   if (!result.error) {
+   sendConfirmationAfterResponse(payload.p_request_id);
    revalidatePath("/picks");
    revalidatePath("/picks/success");
   }

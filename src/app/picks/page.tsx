@@ -3,6 +3,8 @@ import { readLeague, readEntries, readPicksPage, readPublishedSeasons, readWeeks
 import PicksForm from "@/components/picks-form";
 import ProfileAvatar from "@/components/profile-avatar";
 
+export const maxDuration = 60;
+
 export default async function Picks({ searchParams }: { searchParams: Promise<{ year?: string; week?: string; entry?: string }> }) {
   const q = await searchParams;
   const [league, seasons, entries] = await Promise.all([readLeague(), readPublishedSeasons(), readEntries()]);

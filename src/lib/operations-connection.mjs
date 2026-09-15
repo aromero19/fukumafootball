@@ -1,4 +1,5 @@
 import pg from "pg";
+import { databaseOptions } from "./database-options.mjs";
 import { InputError } from "./validation.mjs";
 
 export function connectionFailure(error) {
@@ -17,7 +18,7 @@ export async function connectOperations() {
   if (!process.env.FUKUMA_DATABASE_URL) throw new InputError("The server-only operations connection is not configured. Ask the operator to configure it before saving.");
   let client;
   try {
-    client = new pg.Client({ connectionString: process.env.FUKUMA_DATABASE_URL, connectionTimeoutMillis: 5000, statement_timeout: 15000, idle_in_transaction_session_timeout: 20000 });
+    client = new pg.Client({ ...databaseOptions(), statement_timeout: 15000, idle_in_transaction_session_timeout: 20000 });
     await client.connect();
     return client;
   } catch (error) {

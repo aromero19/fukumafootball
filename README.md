@@ -8,6 +8,10 @@ A family NFL Pick'em league built with Next.js 16.3.4 and Supabase. Version 1 us
 - Admin: sign-in/session refresh/sign-out; atomic player/contact saves; active/current seasons and published/current weeks; game creation, results/reopening, kickoff updates, removal before picks exist; theme activation/default selection and team image URLs; confirmed, audited pick corrections; email settings, queue inspection, and deliberate retries.
 - Email: separate server-only Resend worker. A saved pick queues a confirmation; no application page claims delivery before the worker records it.
 
+## Automatic email on Vercel
+
+See [Vercel email setup](docs/vercel-email.md) for immediate background confirmation delivery and production environment requirements. This supersedes the original separate-worker-only launch instructions below. Failed deliveries remain queued for recovery.
+
 ## Configuration
 
 Configure these through the server environment or an ignored local environment file. Never commit credentials.

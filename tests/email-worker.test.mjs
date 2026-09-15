@@ -45,3 +45,13 @@ test("invalid batch and database failures never send and release an acquired loc
  const client=mock();const query=client.query.bind(client);client.query=async sql=>{if(sql.startsWith("select enabled"))throw Error("DB");return query(sql);};
  await assert.rejects(()=>processEmailOutbox(client,()=>assert.fail()),/DB/);assert.match(client.queries.at(-1).sql,/pg_advisory_unlock/);
 });
+
+test("automatic delivery selects only its committed request, preserving the retry filters",async()=>{
+ const client=mock({rows:[]});
+ await processEmailOutbox(client,()=>assert.fail(),1,"saved-request");
+ const query=client.queries.find(q=>q.sql.startsWith("select o.request_id"));
+ assert.match(query.sql,/o.request_id=\$2::uuid/);
+ assert.match(query.sql,/sent_at is null and o.skipped_at is null/);
+ assert.match(query.sql,/o.attempts < 5/);
+ assert.deepEqual(query.params,[1,"saved-request"]);
+});

@@ -20,7 +20,7 @@ export default async function PicksSuccess({ searchParams }: {
     <div className="eyebrow">{year} season · Week {week}</div>
     <h1>Picks submitted successfully!</h1>
     <p>Your picks have been saved. You’re all set for this week.</p>
-    {query.email === "queued" && <p className="muted">Your confirmation email is queued; it has not been sent yet.</p>}
+    {query.email === "queued" && <p className="muted">Check your email for a confirmation. Delivery may take a moment.</p>}
     {query.email === "none" && <p className="muted">No confirmation email was queued.</p>}
     <p>You can go back and edit your picks while games are still open.</p>
     <div className="toolbar">

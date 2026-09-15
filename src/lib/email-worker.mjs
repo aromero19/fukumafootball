@@ -26,7 +26,8 @@ export function confirmationEmail(row, games, sender, replyTo) {
   };
 }
 
-export async function processEmailOutbox(client, send, limit = 25) {
+/** @param {any} client @param {Function} send @param {number} limit @param {string | null} requestId */
+export async function processEmailOutbox(client, send, limit = 25, requestId = null) {
   if (!Number.isInteger(limit) || limit < 1 || limit > MAX_BATCH_SIZE) throw new Error("Batch size must be between 1 and " + MAX_BATCH_SIZE + ".");
   const lock = await client.query("select pg_try_advisory_lock(7062026,1) as locked");
   if (!lock.rows[0]?.locked) return { attempted:0,sent:0,failed:0,disabled:false,busy:true };
@@ -37,7 +38,9 @@ export async function processEmailOutbox(client, send, limit = 25) {
     if (!configuration.sender_address) throw new Error("Email is enabled but sender_address is not configured.");
     const outbox = await client.query(
       "select o.request_id, o.entry_id, o.year, o.week, o.confirmation, c.email from private.email_outbox o left join private.entry_contact c using (entry_id) " +
-      "where o.sent_at is null and o.skipped_at is null and o.attempts < 5 and (o.attempts=0 or o.created_at > clock_timestamp() - interval '23 hours') order by o.created_at,o.request_id limit $1", [limit]);
+      "where o.sent_at is null and o.skipped_at is null and o.attempts < 5 and (o.attempts=0 or o.created_at > clock_timestamp() - interval '23 hours') " +
+      (requestId ? "and o.request_id=$2::uuid " : "") +
+      "order by o.created_at,o.request_id limit $1", requestId ? [limit, requestId] : [limit]);
     let sent=0,failed=0;
     for (const row of outbox.rows) {
       if (!row.email) {
