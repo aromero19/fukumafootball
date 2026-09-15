@@ -42,3 +42,13 @@ export async function readWeeklyPicks(year:number, week:number) {
   if(rows.length<1000) return picks;
  }
 }
+
+export async function readPlayerHistory(entryId:number) {
+ const s=await createClient();
+ const rows:{year:number;week:number;correct_picks:number;scored_picks:number;rank:number}[]=[];
+ for(let offset=0;;offset+=1000) {
+  const page=checked(await s.from("weekly_standings").select("year,week,correct_picks,scored_picks,rank").eq("entry_id",entryId).gt("scored_picks",0).order("year").order("week").range(offset,offset+999)) ?? [];
+  rows.push(...page);
+  if(page.length<1000)return rows;
+ }
+}

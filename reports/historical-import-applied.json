@@ -1,0 +1,1993 @@
+{
+  "applied": true,
+  "planSha256": "6266ecae827e5bcf756f34a5d4ee1711fdf2eea19b58a95489154f334b55a85c",
+  "newPlayers": [
+    {
+      "entry_id": "31",
+      "active": false
+    },
+    {
+      "entry_id": "32",
+      "active": false
+    },
+    {
+      "entry_id": "33",
+      "active": false
+    },
+    {
+      "entry_id": "34",
+      "active": false
+    },
+    {
+      "entry_id": "35",
+      "active": false
+    },
+    {
+      "entry_id": "36",
+      "active": false
+    },
+    {
+      "entry_id": "37",
+      "active": false
+    },
+    {
+      "entry_id": "38",
+      "active": false
+    },
+    {
+      "entry_id": "39",
+      "active": false
+    },
+    {
+      "entry_id": "40",
+      "active": false
+    },
+    {
+      "entry_id": "41",
+      "active": false
+    },
+    {
+      "entry_id": "42",
+      "active": false
+    }
+  ],
+  "insertedPicks": 32565,
+  "stagedPicks": 32565,
+  "players": [
+    "Angelo Romero",
+    "Angi Reed",
+    "Aunty Mats",
+    "Austin Norton",
+    "Chris Enomoto",
+    "Danny Walker",
+    "Ella Walker",
+    "Grandma Sumi",
+    "Hayden Ricci",
+    "Jeffrey Barr",
+    "Jill Sunata",
+    "Joe Layzell",
+    "John Symmes",
+    "Karen Fukuma",
+    "Ken Reed",
+    "Kyle Dowd",
+    "Lexi Reed",
+    "Logan Walker",
+    "Mady Romero",
+    "Nicole Finan",
+    "Pam Barr",
+    "Peggy Whitt",
+    "Robyn Sunata",
+    "Sandy Reed",
+    "Sarah Boyd",
+    "Tom Finan",
+    "Uncle James"
+  ],
+  "coverage": [
+    {
+      "year": 2016,
+      "weeks": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "missingWeeks": [
+        12
+      ],
+      "games": 240,
+      "picks": 4301
+    },
+    {
+      "year": 2017,
+      "weeks": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "missingWeeks": [],
+      "games": 256,
+      "picks": 3584
+    },
+    {
+      "year": 2018,
+      "weeks": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "missingWeeks": [],
+      "games": 256,
+      "picks": 4753
+    },
+    {
+      "year": 2019,
+      "weeks": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "missingWeeks": [
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "games": 176,
+      "picks": 3377
+    },
+    {
+      "year": 2020,
+      "weeks": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "missingWeeks": [],
+      "games": 254,
+      "picks": 3225
+    },
+    {
+      "year": 2021,
+      "weeks": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18
+      ],
+      "missingWeeks": [],
+      "games": 271,
+      "picks": 4684
+    },
+    {
+      "year": 2022,
+      "weeks": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18
+      ],
+      "missingWeeks": [
+        11
+      ],
+      "games": 257,
+      "picks": 4293
+    },
+    {
+      "year": 2023,
+      "weeks": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "missingWeeks": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18
+      ],
+      "games": 93,
+      "picks": 1612
+    },
+    {
+      "year": 2024,
+      "weeks": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "missingWeeks": [
+        13,
+        14,
+        15,
+        16,
+        17,
+        18
+      ],
+      "games": 179,
+      "picks": 2736
+    }
+  ],
+  "issues": [
+    {
+      "source": "2017/2017 Week 1-report.xlsx",
+      "column": 9,
+      "teams": [
+        17,
+        30
+      ],
+      "reason": "Column does not match one scheduled game"
+    },
+    {
+      "source": "2020/2020 Week 05.csv",
+      "column": 14,
+      "teams": [
+        10,
+        19
+      ],
+      "reason": "Column does not match one scheduled game"
+    },
+    {
+      "source": "2020/2020 Week 06.csv",
+      "column": 12,
+      "teams": [
+        22,
+        26
+      ],
+      "reason": "Column does not match one scheduled game"
+    },
+    {
+      "source": "2020/2020 Week 06.csv",
+      "column": 13,
+      "teams": [
+        10,
+        17
+      ],
+      "reason": "Column does not match one scheduled game"
+    },
+    {
+      "source": "2022/2022 Week 17.csv/2022 Week 17.csv",
+      "column": 18,
+      "teams": [
+        4,
+        7
+      ],
+      "reason": "Column does not match one scheduled game"
+    },
+    {
+      "source": "2023/2023 Week 06.csv",
+      "row": 6,
+      "column": 8,
+      "reason": "Invalid matchup selection; withheld",
+      "value": "at Bears"
+    }
+  ],
+  "revisions": [
+    {
+      "name": "Angi Reed",
+      "game": "2018_16_ATL_CAR",
+      "selected": {
+        "name": "Angi Reed",
+        "game": "2018_16_ATL_CAR",
+        "team": 2,
+        "timestamp": "2018-12-23T00:49:37Z",
+        "source": "2018/2018 Week 16.xlsx",
+        "row": 10,
+        "column": 7
+      },
+      "earlier": [
+        {
+          "name": "Angi Reed",
+          "game": "2018_16_ATL_CAR",
+          "team": 2,
+          "timestamp": "2018-12-23T00:49:37Z",
+          "source": "2018/2018 Week 16.xlsx",
+          "row": 10,
+          "column": 7
+        },
+        {
+          "name": "Angi Reed",
+          "game": "2018_16_ATL_CAR",
+          "team": 5,
+          "timestamp": "2018-12-15T18:21:15Z",
+          "source": "2018/2018 Week 16.xlsx",
+          "row": 17,
+          "column": 7
+        }
+      ]
+    },
+    {
+      "name": "Angi Reed",
+      "game": "2018_16_CIN_CLE",
+      "selected": {
+        "name": "Angi Reed",
+        "game": "2018_16_CIN_CLE",
+        "team": 8,
+        "timestamp": "2018-12-23T00:49:37Z",
+        "source": "2018/2018 Week 16.xlsx",
+        "row": 10,
+        "column": 8
+      },
+      "earlier": [
+        {
+          "name": "Angi Reed",
+          "game": "2018_16_CIN_CLE",
+          "team": 8,
+          "timestamp": "2018-12-23T00:49:37Z",
+          "source": "2018/2018 Week 16.xlsx",
+          "row": 10,
+          "column": 8
+        },
+        {
+          "name": "Angi Reed",
+          "game": "2018_16_CIN_CLE",
+          "team": 7,
+          "timestamp": "2018-12-15T18:21:15Z",
+          "source": "2018/2018 Week 16.xlsx",
+          "row": 17,
+          "column": 8
+        }
+      ]
+    },
+    {
+      "name": "Angi Reed",
+      "game": "2018_16_DEN_OAK",
+      "selected": {
+        "name": "Angi Reed",
+        "game": "2018_16_DEN_OAK",
+        "team": 10,
+        "timestamp": "2018-12-23T00:49:37Z",
+        "source": "2018/2018 Week 16.xlsx",
+        "row": 10,
+        "column": 18
+      },
+      "earlier": [
+        {
+          "name": "Angi Reed",
+          "game": "2018_16_DEN_OAK",
+          "team": 10,
+          "timestamp": "2018-12-23T00:49:37Z",
+          "source": "2018/2018 Week 16.xlsx",
+          "row": 10,
+          "column": 18
+        },
+        {
+          "name": "Angi Reed",
+          "game": "2018_16_DEN_OAK",
+          "team": 23,
+          "timestamp": "2018-12-15T18:21:15Z",
+          "source": "2018/2018 Week 16.xlsx",
+          "row": 17,
+          "column": 18
+        }
+      ]
+    },
+    {
+      "name": "Angi Reed",
+      "game": "2019_12_OAK_NYJ",
+      "selected": {
+        "name": "Angi Reed",
+        "game": "2019_12_OAK_NYJ",
+        "team": 23,
+        "timestamp": "2019-11-24T21:13:46Z",
+        "source": "2019/2019 Week 12.csv",
+        "row": 17,
+        "column": 10
+      },
+      "earlier": [
+        {
+          "name": "Angi Reed",
+          "game": "2019_12_OAK_NYJ",
+          "team": 22,
+          "timestamp": "2019-11-23T16:08:12Z",
+          "source": "2019/2019 Week 12.csv",
+          "row": 5,
+          "column": 10
+        },
+        {
+          "name": "Angi Reed",
+          "game": "2019_12_OAK_NYJ",
+          "team": 23,
+          "timestamp": "2019-11-24T21:13:46Z",
+          "source": "2019/2019 Week 12.csv",
+          "row": 17,
+          "column": 10
+        }
+      ]
+    },
+    {
+      "name": "Austin Norton",
+      "game": "2019_12_NYG_CHI",
+      "selected": {
+        "name": "Austin Norton",
+        "game": "2019_12_NYG_CHI",
+        "team": 6,
+        "timestamp": "2019-11-24T21:14:31Z",
+        "source": "2019/2019 Week 12.csv",
+        "row": 18,
+        "column": 6
+      },
+      "earlier": [
+        {
+          "name": "Austin Norton",
+          "game": "2019_12_NYG_CHI",
+          "team": 21,
+          "timestamp": "2019-11-23T16:05:56Z",
+          "source": "2019/2019 Week 12.csv",
+          "row": 4,
+          "column": 6
+        },
+        {
+          "name": "Austin Norton",
+          "game": "2019_12_NYG_CHI",
+          "team": 6,
+          "timestamp": "2019-11-24T21:14:31Z",
+          "source": "2019/2019 Week 12.csv",
+          "row": 18,
+          "column": 6
+        }
+      ]
+    },
+    {
+      "name": "Karen Fukuma",
+      "game": "2018_02_ARI_LA",
+      "selected": {
+        "name": "Karen Fukuma",
+        "game": "2018_02_ARI_LA",
+        "team": 29,
+        "timestamp": "2018-09-13T03:40:02Z",
+        "source": "2018/2018 Week 2.xlsx",
+        "row": 10,
+        "column": 13
+      },
+      "earlier": [
+        {
+          "name": "Karen Fukuma",
+          "game": "2018_02_ARI_LA",
+          "team": 29,
+          "timestamp": "2018-09-13T03:40:02Z",
+          "source": "2018/2018 Week 2.xlsx",
+          "row": 10,
+          "column": 13
+        },
+        {
+          "name": "Karen Fukuma",
+          "game": "2018_02_ARI_LA",
+          "team": 1,
+          "timestamp": "2018-09-13T03:34:06Z",
+          "source": "2018/2018 Week 2.xlsx",
+          "row": 12,
+          "column": 13
+        }
+      ]
+    },
+    {
+      "name": "Karen Fukuma",
+      "game": "2018_02_CAR_ATL",
+      "selected": {
+        "name": "Karen Fukuma",
+        "game": "2018_02_CAR_ATL",
+        "team": 2,
+        "timestamp": "2018-09-13T03:40:02Z",
+        "source": "2018/2018 Week 2.xlsx",
+        "row": 10,
+        "column": 4
+      },
+      "earlier": [
+        {
+          "name": "Karen Fukuma",
+          "game": "2018_02_CAR_ATL",
+          "team": 2,
+          "timestamp": "2018-09-13T03:40:02Z",
+          "source": "2018/2018 Week 2.xlsx",
+          "row": 10,
+          "column": 4
+        },
+        {
+          "name": "Karen Fukuma",
+          "game": "2018_02_CAR_ATL",
+          "team": 5,
+          "timestamp": "2018-09-13T03:34:06Z",
+          "source": "2018/2018 Week 2.xlsx",
+          "row": 12,
+          "column": 4
+        }
+      ]
+    },
+    {
+      "name": "Karen Fukuma",
+      "game": "2018_02_DET_SF",
+      "selected": {
+        "name": "Karen Fukuma",
+        "game": "2018_02_DET_SF",
+        "team": 27,
+        "timestamp": "2018-09-13T03:40:02Z",
+        "source": "2018/2018 Week 2.xlsx",
+        "row": 10,
+        "column": 14
+      },
+      "earlier": [
+        {
+          "name": "Karen Fukuma",
+          "game": "2018_02_DET_SF",
+          "team": 27,
+          "timestamp": "2018-09-13T03:40:02Z",
+          "source": "2018/2018 Week 2.xlsx",
+          "row": 10,
+          "column": 14
+        },
+        {
+          "name": "Karen Fukuma",
+          "game": "2018_02_DET_SF",
+          "team": 11,
+          "timestamp": "2018-09-13T03:34:06Z",
+          "source": "2018/2018 Week 2.xlsx",
+          "row": 12,
+          "column": 14
+        }
+      ]
+    },
+    {
+      "name": "Karen Fukuma",
+      "game": "2018_02_HOU_TEN",
+      "selected": {
+        "name": "Karen Fukuma",
+        "game": "2018_02_HOU_TEN",
+        "team": 13,
+        "timestamp": "2018-09-13T03:40:02Z",
+        "source": "2018/2018 Week 2.xlsx",
+        "row": 10,
+        "column": 11
+      },
+      "earlier": [
+        {
+          "name": "Karen Fukuma",
+          "game": "2018_02_HOU_TEN",
+          "team": 13,
+          "timestamp": "2018-09-13T03:40:02Z",
+          "source": "2018/2018 Week 2.xlsx",
+          "row": 10,
+          "column": 11
+        },
+        {
+          "name": "Karen Fukuma",
+          "game": "2018_02_HOU_TEN",
+          "team": 31,
+          "timestamp": "2018-09-13T03:34:06Z",
+          "source": "2018/2018 Week 2.xlsx",
+          "row": 12,
+          "column": 11
+        }
+      ]
+    },
+    {
+      "name": "Karen Fukuma",
+      "game": "2018_02_KC_PIT",
+      "selected": {
+        "name": "Karen Fukuma",
+        "game": "2018_02_KC_PIT",
+        "team": 25,
+        "timestamp": "2018-09-13T03:40:02Z",
+        "source": "2018/2018 Week 2.xlsx",
+        "row": 10,
+        "column": 9
+      },
+      "earlier": [
+        {
+          "name": "Karen Fukuma",
+          "game": "2018_02_KC_PIT",
+          "team": 25,
+          "timestamp": "2018-09-13T03:40:02Z",
+          "source": "2018/2018 Week 2.xlsx",
+          "row": 10,
+          "column": 9
+        },
+        {
+          "name": "Karen Fukuma",
+          "game": "2018_02_KC_PIT",
+          "team": 16,
+          "timestamp": "2018-09-13T03:34:06Z",
+          "source": "2018/2018 Week 2.xlsx",
+          "row": 12,
+          "column": 9
+        }
+      ]
+    },
+    {
+      "name": "Karen Fukuma",
+      "game": "2018_02_MIN_GB",
+      "selected": {
+        "name": "Karen Fukuma",
+        "game": "2018_02_MIN_GB",
+        "team": 12,
+        "timestamp": "2018-09-13T03:40:02Z",
+        "source": "2018/2018 Week 2.xlsx",
+        "row": 10,
+        "column": 6
+      },
+      "earlier": [
+        {
+          "name": "Karen Fukuma",
+          "game": "2018_02_MIN_GB",
+          "team": 12,
+          "timestamp": "2018-09-13T03:40:02Z",
+          "source": "2018/2018 Week 2.xlsx",
+          "row": 10,
+          "column": 6
+        },
+        {
+          "name": "Karen Fukuma",
+          "game": "2018_02_MIN_GB",
+          "team": 18,
+          "timestamp": "2018-09-13T03:34:06Z",
+          "source": "2018/2018 Week 2.xlsx",
+          "row": 12,
+          "column": 6
+        }
+      ]
+    },
+    {
+      "name": "Karen Fukuma",
+      "game": "2018_02_PHI_TB",
+      "selected": {
+        "name": "Karen Fukuma",
+        "game": "2018_02_PHI_TB",
+        "team": 24,
+        "timestamp": "2018-09-13T03:40:02Z",
+        "source": "2018/2018 Week 2.xlsx",
+        "row": 10,
+        "column": 10
+      },
+      "earlier": [
+        {
+          "name": "Karen Fukuma",
+          "game": "2018_02_PHI_TB",
+          "team": 24,
+          "timestamp": "2018-09-13T03:40:02Z",
+          "source": "2018/2018 Week 2.xlsx",
+          "row": 10,
+          "column": 10
+        },
+        {
+          "name": "Karen Fukuma",
+          "game": "2018_02_PHI_TB",
+          "team": 30,
+          "timestamp": "2018-09-13T03:34:06Z",
+          "source": "2018/2018 Week 2.xlsx",
+          "row": 12,
+          "column": 10
+        }
+      ]
+    },
+    {
+      "name": "Karen Fukuma",
+      "game": "2022_08_CIN_CLE",
+      "selected": {
+        "name": "Karen Fukuma",
+        "game": "2022_08_CIN_CLE",
+        "team": 7,
+        "timestamp": "2022-10-26T01:40:07Z",
+        "source": "2022/2022 Week 08.csv/2022 Week 08.csv",
+        "row": 3,
+        "column": 17
+      },
+      "earlier": [
+        {
+          "name": "Karen Fukuma",
+          "game": "2022_08_CIN_CLE",
+          "team": 8,
+          "timestamp": "2022-10-26T01:37:01Z",
+          "source": "2022/2022 Week 08.csv/2022 Week 08.csv",
+          "row": 2,
+          "column": 17
+        },
+        {
+          "name": "Karen Fukuma",
+          "game": "2022_08_CIN_CLE",
+          "team": 7,
+          "timestamp": "2022-10-26T01:40:07Z",
+          "source": "2022/2022 Week 08.csv/2022 Week 08.csv",
+          "row": 3,
+          "column": 17
+        }
+      ]
+    },
+    {
+      "name": "Karen Fukuma",
+      "game": "2022_08_WAS_IND",
+      "selected": {
+        "name": "Karen Fukuma",
+        "game": "2022_08_WAS_IND",
+        "team": 32,
+        "timestamp": "2022-10-26T01:40:07Z",
+        "source": "2022/2022 Week 08.csv/2022 Week 08.csv",
+        "row": 3,
+        "column": 13
+      },
+      "earlier": [
+        {
+          "name": "Karen Fukuma",
+          "game": "2022_08_WAS_IND",
+          "team": 14,
+          "timestamp": "2022-10-26T01:37:01Z",
+          "source": "2022/2022 Week 08.csv/2022 Week 08.csv",
+          "row": 2,
+          "column": 13
+        },
+        {
+          "name": "Karen Fukuma",
+          "game": "2022_08_WAS_IND",
+          "team": 32,
+          "timestamp": "2022-10-26T01:40:07Z",
+          "source": "2022/2022 Week 08.csv/2022 Week 08.csv",
+          "row": 3,
+          "column": 13
+        }
+      ]
+    },
+    {
+      "name": "Karen Fukuma",
+      "game": "2022_17_PIT_BAL",
+      "selected": {
+        "name": "Karen Fukuma",
+        "game": "2022_17_PIT_BAL",
+        "team": 3,
+        "timestamp": "2022-12-29T00:45:53Z",
+        "source": "2022/2022 Week 17.csv/2022 Week 17.csv",
+        "row": 5,
+        "column": 11
+      },
+      "earlier": [
+        {
+          "name": "Karen Fukuma",
+          "game": "2022_17_PIT_BAL",
+          "team": 25,
+          "timestamp": "2022-12-29T00:43:03Z",
+          "source": "2022/2022 Week 17.csv/2022 Week 17.csv",
+          "row": 4,
+          "column": 11
+        },
+        {
+          "name": "Karen Fukuma",
+          "game": "2022_17_PIT_BAL",
+          "team": 3,
+          "timestamp": "2022-12-29T00:45:53Z",
+          "source": "2022/2022 Week 17.csv/2022 Week 17.csv",
+          "row": 5,
+          "column": 11
+        }
+      ]
+    },
+    {
+      "name": "Nicole Finan",
+      "game": "2019_04_CAR_HOU",
+      "selected": {
+        "name": "Nicole Finan",
+        "game": "2019_04_CAR_HOU",
+        "team": 5,
+        "timestamp": "2019-09-29T16:36:52Z",
+        "source": "2019/2019 Week 04.xlsx",
+        "row": 4,
+        "column": 8
+      },
+      "earlier": [
+        {
+          "name": "Nicole Finan",
+          "game": "2019_04_CAR_HOU",
+          "team": 5,
+          "timestamp": "2019-09-29T16:36:52Z",
+          "source": "2019/2019 Week 04.xlsx",
+          "row": 4,
+          "column": 8
+        },
+        {
+          "name": "Nicole Finan",
+          "game": "2019_04_CAR_HOU",
+          "team": 13,
+          "timestamp": "2019-09-27T02:40:16Z",
+          "source": "2019/2019 Week 04.xlsx",
+          "row": 16,
+          "column": 8
+        }
+      ]
+    },
+    {
+      "name": "Nicole Finan",
+      "game": "2019_04_WAS_NYG",
+      "selected": {
+        "name": "Nicole Finan",
+        "game": "2019_04_WAS_NYG",
+        "team": 21,
+        "timestamp": "2019-09-29T16:36:52Z",
+        "source": "2019/2019 Week 04.xlsx",
+        "row": 4,
+        "column": 10
+      },
+      "earlier": [
+        {
+          "name": "Nicole Finan",
+          "game": "2019_04_WAS_NYG",
+          "team": 21,
+          "timestamp": "2019-09-29T16:36:52Z",
+          "source": "2019/2019 Week 04.xlsx",
+          "row": 4,
+          "column": 10
+        },
+        {
+          "name": "Nicole Finan",
+          "game": "2019_04_WAS_NYG",
+          "team": 32,
+          "timestamp": "2019-09-27T02:40:16Z",
+          "source": "2019/2019 Week 04.xlsx",
+          "row": 16,
+          "column": 10
+        }
+      ]
+    },
+    {
+      "name": "Peggy Whitt",
+      "game": "2019_12_CAR_NO",
+      "selected": {
+        "name": "Peggy Whitt",
+        "game": "2019_12_CAR_NO",
+        "team": 20,
+        "timestamp": "2019-11-20T01:27:20Z",
+        "source": "2019/2019 Week 12.csv",
+        "row": 3,
+        "column": 9
+      },
+      "earlier": [
+        {
+          "name": "Peggy Whitt",
+          "game": "2019_12_CAR_NO",
+          "team": 5,
+          "timestamp": "2019-11-18T18:30:48Z",
+          "source": "2019/2019 Week 12.csv",
+          "row": 2,
+          "column": 9
+        },
+        {
+          "name": "Peggy Whitt",
+          "game": "2019_12_CAR_NO",
+          "team": 20,
+          "timestamp": "2019-11-20T01:27:20Z",
+          "source": "2019/2019 Week 12.csv",
+          "row": 3,
+          "column": 9
+        }
+      ]
+    },
+    {
+      "name": "Peggy Whitt",
+      "game": "2019_12_GB_SF",
+      "selected": {
+        "name": "Peggy Whitt",
+        "game": "2019_12_GB_SF",
+        "team": 27,
+        "timestamp": "2019-11-20T01:27:20Z",
+        "source": "2019/2019 Week 12.csv",
+        "row": 3,
+        "column": 14
+      },
+      "earlier": [
+        {
+          "name": "Peggy Whitt",
+          "game": "2019_12_GB_SF",
+          "team": 12,
+          "timestamp": "2019-11-18T18:30:48Z",
+          "source": "2019/2019 Week 12.csv",
+          "row": 2,
+          "column": 14
+        },
+        {
+          "name": "Peggy Whitt",
+          "game": "2019_12_GB_SF",
+          "team": 27,
+          "timestamp": "2019-11-20T01:27:20Z",
+          "source": "2019/2019 Week 12.csv",
+          "row": 3,
+          "column": 14
+        }
+      ]
+    },
+    {
+      "name": "Peggy Whitt",
+      "game": "2019_12_PIT_CIN",
+      "selected": {
+        "name": "Peggy Whitt",
+        "game": "2019_12_PIT_CIN",
+        "team": 25,
+        "timestamp": "2019-11-20T01:27:20Z",
+        "source": "2019/2019 Week 12.csv",
+        "row": 3,
+        "column": 7
+      },
+      "earlier": [
+        {
+          "name": "Peggy Whitt",
+          "game": "2019_12_PIT_CIN",
+          "team": 7,
+          "timestamp": "2019-11-18T18:30:48Z",
+          "source": "2019/2019 Week 12.csv",
+          "row": 2,
+          "column": 7
+        },
+        {
+          "name": "Peggy Whitt",
+          "game": "2019_12_PIT_CIN",
+          "team": 25,
+          "timestamp": "2019-11-20T01:27:20Z",
+          "source": "2019/2019 Week 12.csv",
+          "row": 3,
+          "column": 7
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "source": "2016/2016 Week 1 Team Picks Final.xlsx",
+      "sha256": "7ee6d7e5640d93cfa0bf1862be2f19cdb89432241c922e81a27d26638a80b7eb",
+      "year": 2016,
+      "week": 1,
+      "rows": 19
+    },
+    {
+      "source": "2016/2016 Week 1-report.xlsx",
+      "sha256": "d5b5f7024efe606b8d94d9bf96a9062d677e23fa37d7215c77cf90c38649c8dd",
+      "year": 2016,
+      "week": 1,
+      "rows": 19
+    },
+    {
+      "source": "2016/2016 Week 10-report.xlsx",
+      "sha256": "9b249d88c8c83dc1f623f3bd428902b05bef11f3839c3d6ea968c1369ae3ff47",
+      "year": 2016,
+      "week": 10,
+      "rows": 18
+    },
+    {
+      "source": "2016/2016 Week 11-report.xlsx",
+      "sha256": "82aeacdf496f3ee3df89b76f5add8dd48208b2351309c8f26935fb9e95d2afd8",
+      "year": 2016,
+      "week": 11,
+      "rows": 18
+    },
+    {
+      "source": "2016/2016 Week 13-report.xlsx",
+      "sha256": "7111a22e990521d5615e51462adb4449971448c13f30f2874643e80c97ee92dd",
+      "year": 2016,
+      "week": 13,
+      "rows": 18
+    },
+    {
+      "source": "2016/2016 Week 14-report.xlsx",
+      "sha256": "ed2c1949dbb45b0cb299fc3e6c0fe734f8f875794068aec8ae280013f9651a2a",
+      "year": 2016,
+      "week": 14,
+      "rows": 18
+    },
+    {
+      "source": "2016/2016 Week 15-report.xlsx",
+      "sha256": "af1ab33420b28047be75e7143c126fba0035af89a89886b792da5affb642d5e1",
+      "year": 2016,
+      "week": 15,
+      "rows": 18
+    },
+    {
+      "source": "2016/2016 Week 17-report.xlsx",
+      "sha256": "edf0b8fddf4bbd87d0e6649df6613c149e47060598c6426a7d9f124407e5b577",
+      "year": 2016,
+      "week": 17,
+      "rows": 17
+    },
+    {
+      "source": "2016/2016 Week 3-report(1).xlsx",
+      "sha256": "7965df65e5d20dc5330cba537dc98986ce11829c88abb1bf1d5ccbcb45fd1e02",
+      "year": 2016,
+      "week": 3,
+      "rows": 18
+    },
+    {
+      "source": "2016/2016 Week 4-report.xlsx",
+      "sha256": "95893262e6948498469c366fc9b5a2494b81cc9a3b0ad6763134ded0dce48185",
+      "year": 2016,
+      "week": 4,
+      "rows": 18
+    },
+    {
+      "source": "2016/2016 Week 5-report.xlsx",
+      "sha256": "9b835384df42e0ad2a7f39313c6a9f5fe7032805450033941a0662a631fb96a2",
+      "year": 2016,
+      "week": 5,
+      "rows": 18
+    },
+    {
+      "source": "2016/2016 Week 6-report.xlsx",
+      "sha256": "f9c213d610adef2f7933672e62d7ea9cc1150d5136d8e346c37bf7d45d3826ee",
+      "year": 2016,
+      "week": 6,
+      "rows": 18
+    },
+    {
+      "source": "2016/2016 Week 7-report.xlsx",
+      "sha256": "d4080e72d1c59a89b04a35f0e0f8254db5e32fa0a122ee8faf99144b8faad8f4",
+      "year": 2016,
+      "week": 7,
+      "rows": 18
+    },
+    {
+      "source": "2016/2016 Week 8-report(2).xlsx",
+      "sha256": "f23d771841f99a3cfe623c0c8b01db8b513fb7baf47f79793242cce697e6b317",
+      "year": 2016,
+      "week": 8,
+      "rows": 21
+    },
+    {
+      "source": "2016/2016 Week 8-report.xlsx",
+      "sha256": "f2b2596bd7d3bcfdbcbbc81cca7e8dd421e983c29d76c5396b51aa1fc6de37ee",
+      "year": 2016,
+      "week": 8,
+      "rows": 20
+    },
+    {
+      "source": "2016/2016 Week 9-report.xlsx",
+      "sha256": "961ad1cbabca9cc36a0e0c5c7cb5c86229ade8c0df700d8f7ac6f109be89b6c1",
+      "year": 2016,
+      "week": 9,
+      "rows": 18
+    },
+    {
+      "source": "2016/Copy of 2016 Week 16-report.xlsx",
+      "sha256": "d6cda6265759eb793421f5b0363f71b909dab7a888bf6bc17ed7fdb743adb3fe",
+      "year": 2016,
+      "week": 16,
+      "rows": 17
+    },
+    {
+      "source": "2016/Copy of 2016 Week 2-report-1.xlsx",
+      "sha256": "e124a56bebb5fb1bd3b0310ab2a8fb8565ec9629c710a332d2cd308edf680e45",
+      "year": 2016,
+      "week": 2,
+      "rows": 18
+    },
+    {
+      "source": "2017/2017 Week 1-report.xlsx",
+      "sha256": "171fa2927571b9780180cd14647074375873df1e10536218652038ae1abb19cc",
+      "year": 2017,
+      "week": 1,
+      "rows": 14
+    },
+    {
+      "source": "2017/2017 Week 10-report.xlsx",
+      "sha256": "6f41fe0c7f7f3de750a58e00814bf896e5464fd6f2a2c0704d734e335d606d18",
+      "year": 2017,
+      "week": 10,
+      "rows": 14
+    },
+    {
+      "source": "2017/2017 Week 11-report.xlsx",
+      "sha256": "6cbea01e59ff37442af3f8fff90d4eb8c0ef9b2d2e143ae91d09722697f88319",
+      "year": 2017,
+      "week": 11,
+      "rows": 14
+    },
+    {
+      "source": "2017/2017 Week 12-report.xlsx",
+      "sha256": "48a2e5b2543476d153ea5cc51aa2e26da0aed5fb88994a6071ff14df056872a8",
+      "year": 2017,
+      "week": 12,
+      "rows": 14
+    },
+    {
+      "source": "2017/2017 Week 13-report.xlsx",
+      "sha256": "640a75ad5e2db24cb075e98e941feeb2f532981e8abb966772db54f0b7764f2f",
+      "year": 2017,
+      "week": 13,
+      "rows": 14
+    },
+    {
+      "source": "2017/2017 Week 14-report.xlsx",
+      "sha256": "c318b9d4b6c1fe2c7f7d07d9526632e0368cbb21d2ff2c2030a1a4dc1a8beb16",
+      "year": 2017,
+      "week": 14,
+      "rows": 14
+    },
+    {
+      "source": "2017/2017 Week 15-report.xlsx",
+      "sha256": "7495ecf8051ce67070f265a777c5e616f47a6f384a5bc9b085ad3f4f690c9ae6",
+      "year": 2017,
+      "week": 15,
+      "rows": 14
+    },
+    {
+      "source": "2017/2017 Week 16-report.xlsx",
+      "sha256": "2bf6db433544220a81aed194cabf11013af1d9012c637faf8f3dfe395c7ea9a3",
+      "year": 2017,
+      "week": 16,
+      "rows": 14
+    },
+    {
+      "source": "2017/2017 Week 17-report.xlsx",
+      "sha256": "564089191e1fc3ec35bdd10e04e58f480b0aade00c14086c7e63cb1205856559",
+      "year": 2017,
+      "week": 17,
+      "rows": 14
+    },
+    {
+      "source": "2017/2017 Week 2-report.xlsx",
+      "sha256": "62741f5f893dcbbe6294755bca161c1e5317a64cc4506d21485bd3a8f0e7a334",
+      "year": 2017,
+      "week": 2,
+      "rows": 14
+    },
+    {
+      "source": "2017/2017 Week 3-report.xlsx",
+      "sha256": "5d71e148da9198a8b2c11da3078a0da2a6c4009fd21a7db340b54d6153d3fbc0",
+      "year": 2017,
+      "week": 3,
+      "rows": 14
+    },
+    {
+      "source": "2017/2017 Week 4-report.xlsx",
+      "sha256": "0f529ad5975d8c3c93bea3cdc25d5af298af65660c5d32778d13ba7b4018ec3d",
+      "year": 2017,
+      "week": 4,
+      "rows": 14
+    },
+    {
+      "source": "2017/2017 Week 5-report.xlsx",
+      "sha256": "25846359fd23142f88d080be6ae38fe321e61c443ed23fb8d8dbd377740d1f53",
+      "year": 2017,
+      "week": 5,
+      "rows": 14
+    },
+    {
+      "source": "2017/2017 Week 6-report.xlsx",
+      "sha256": "8da34265e5aac69e90c8c6ecfe1ee7554eebff6a61fdaa6fdc72715856fa4a53",
+      "year": 2017,
+      "week": 6,
+      "rows": 14
+    },
+    {
+      "source": "2017/2017 Week 7-report.xlsx",
+      "sha256": "e60e0a1f3b5916ecdd59c219c01d1c9d47d1b96d19ab8a3d5adbe11df5516ad1",
+      "year": 2017,
+      "week": 7,
+      "rows": 14
+    },
+    {
+      "source": "2017/2017 Week 8-report.xlsx",
+      "sha256": "e86c74b9a9da75231ea5d0415368f39291947ab1502bee074555862ce7412726",
+      "year": 2017,
+      "week": 8,
+      "rows": 14
+    },
+    {
+      "source": "2017/2017 Week 9-report.xlsx",
+      "sha256": "c8246689560eab5db8ffb6a147b5e789e7fd305e593006c9204619b98d12590f",
+      "year": 2017,
+      "week": 9,
+      "rows": 14
+    },
+    {
+      "source": "2018/2018 Week 1.xlsx",
+      "sha256": "89b53f84cef963d5ed207d2b57ecdba1733e4c345b9c7fc121650b050b9e7bfe",
+      "year": 2018,
+      "week": 1,
+      "rows": 19
+    },
+    {
+      "source": "2018/2018 Week 10.xlsx",
+      "sha256": "1fb85b0871e71b29e8c993819749204f2c7252205621108bb05b739067ad2359",
+      "year": 2018,
+      "week": 10,
+      "rows": 19
+    },
+    {
+      "source": "2018/2018 Week 11.xlsx",
+      "sha256": "51cbaf441d30b0744f113902e9771c3c43c7a41f267283dd65403c65e49b76cf",
+      "year": 2018,
+      "week": 11,
+      "rows": 19
+    },
+    {
+      "source": "2018/2018 Week 12.xlsx",
+      "sha256": "97028742f0935113790b32562790a0895793d9863f6291d97e9ddcab76bfe4dc",
+      "year": 2018,
+      "week": 12,
+      "rows": 18
+    },
+    {
+      "source": "2018/2018 Week 13.xlsx",
+      "sha256": "9c7c85e39ce7cfbb44ef0c81ce8e7a7bc879e65660ff82e9f057f4aedd2eceb7",
+      "year": 2018,
+      "week": 13,
+      "rows": 19
+    },
+    {
+      "source": "2018/2018 Week 14.xlsx",
+      "sha256": "e8457aedef3596dd4501f91af9b944d73632fb09f2a431cef50e536f77c1a763",
+      "year": 2018,
+      "week": 14,
+      "rows": 18
+    },
+    {
+      "source": "2018/2018 Week 15.xlsx",
+      "sha256": "81ba2c63b5d99bf6c77978eea021dad12a89ceae1d6d70257c02fd51ec3f92b6",
+      "year": 2018,
+      "week": 15,
+      "rows": 18
+    },
+    {
+      "source": "2018/2018 Week 16.xlsx",
+      "sha256": "22975f0389bce69faee81c705196340b0e8236d8bf0e1d5d2a11ce371e5a8ed3",
+      "year": 2018,
+      "week": 16,
+      "rows": 17
+    },
+    {
+      "source": "2018/2018 Week 17.xlsx",
+      "sha256": "4977d5d43de45afb7081a8559065bf8935d9adf8a9dfadc1c54dd93fd1dd11b0",
+      "year": 2018,
+      "week": 17,
+      "rows": 18
+    },
+    {
+      "source": "2018/2018 Week 2.xlsx",
+      "sha256": "ac78333c3449acc9c67eddd5f83e837487601bd723b47e7ac1c5ac75b087a746",
+      "year": 2018,
+      "week": 2,
+      "rows": 20
+    },
+    {
+      "source": "2018/2018 Week 3.xlsx",
+      "sha256": "9c3acb7768819f57bb5620da4a2d538f11035521486fdc1640067e3a8ced51b1",
+      "year": 2018,
+      "week": 3,
+      "rows": 19
+    },
+    {
+      "source": "2018/2018 Week 4.xlsx",
+      "sha256": "425e0bd6ca32e1474759bd85e312a300d68316138f2fc7982001cf119c45a307",
+      "year": 2018,
+      "week": 4,
+      "rows": 20
+    },
+    {
+      "source": "2018/2018 Week 5.xlsx",
+      "sha256": "b755845a41ed5cc849a38ffd36bfec43ba3053972dcd4f3e49a4cc3f5ec2e2d0",
+      "year": 2018,
+      "week": 5,
+      "rows": 19
+    },
+    {
+      "source": "2018/2018 Week 6.xlsx",
+      "sha256": "930d47c448c96b5b5831c650433688ed924dd611b857faf6c5d445e81cd6ded6",
+      "year": 2018,
+      "week": 6,
+      "rows": 20
+    },
+    {
+      "source": "2018/2018 Week 7.xlsx",
+      "sha256": "06e857e44e09016006511e2e4ad71bfe364ac5b2b8a04578b1a8b64706637e33",
+      "year": 2018,
+      "week": 7,
+      "rows": 19
+    },
+    {
+      "source": "2018/2018 Week 8.xlsx",
+      "sha256": "33621b20d884d64de5ff8bef4f804f49c1d2f008c2efaf92012eaf30a21ee582",
+      "year": 2018,
+      "week": 8,
+      "rows": 19
+    },
+    {
+      "source": "2018/2018 Week 9.xlsx",
+      "sha256": "15014c7955663407a15be6d13a06c1ccda305500a20f588f7052e6a264104ca9",
+      "year": 2018,
+      "week": 9,
+      "rows": 19
+    },
+    {
+      "source": "2019/2019 Week 01.xlsx",
+      "sha256": "bf4f59acff70cfd9675cf06f4d5ac8153331e1d61f4785e020c9757c37263fed",
+      "year": 2019,
+      "week": 1,
+      "rows": 20
+    },
+    {
+      "source": "2019/2019 Week 02.xlsx",
+      "sha256": "d78edfc5e07d81c83398c404a81df45727ed354eeb74dc0b67336e547d9aa2ca",
+      "year": 2019,
+      "week": 2,
+      "rows": 20
+    },
+    {
+      "source": "2019/2019 Week 03.xlsx",
+      "sha256": "57cf31cd715a0bfb6675139e0e7f5d0c66a4ead2e0beb866b6418b177d3272aa",
+      "year": 2019,
+      "week": 3,
+      "rows": 20
+    },
+    {
+      "source": "2019/2019 Week 04.xlsx",
+      "sha256": "fb29afb699877a3df588d9855588838d6d0a2efb6a153ffce51be6d3913d3bfa",
+      "year": 2019,
+      "week": 4,
+      "rows": 20
+    },
+    {
+      "source": "2019/2019 Week 05.xlsx",
+      "sha256": "3862cd04f01c6ef752ae9832d9eb4c2c67bcc51e833ac91b848a9b016c3fd591",
+      "year": 2019,
+      "week": 5,
+      "rows": 18
+    },
+    {
+      "source": "2019/2019 Week 06.xlsx",
+      "sha256": "94b4940bdfa439689438cf08dbe7686162f9571d81ff5adcf3b3aa860536b95e",
+      "year": 2019,
+      "week": 6,
+      "rows": 20
+    },
+    {
+      "source": "2019/2019 Week 07.xlsx",
+      "sha256": "d0025d607002cdfac017a7c20570c91ea451cdae63aa91471161eb639daa8d39",
+      "year": 2019,
+      "week": 7,
+      "rows": 20
+    },
+    {
+      "source": "2019/2019 Week 08.xlsx",
+      "sha256": "ed38f81e7747ea6ff14e935f96449d47ff9da537960a75366f7b18c38b8d9dd2",
+      "year": 2019,
+      "week": 8,
+      "rows": 20
+    },
+    {
+      "source": "2019/2019 Week 09.csv",
+      "sha256": "3a49541d8ea7a16ebcd34ce18ffaacfbb413d73c9bff69ab330793524f012b2f",
+      "year": 2019,
+      "week": 9,
+      "rows": 17
+    },
+    {
+      "source": "2019/2019 Week 10.csv",
+      "sha256": "9e055a0d096bfb1394f140b47456a51ebfafba6f17af9ece9cd179968f084599",
+      "year": 2019,
+      "week": 10,
+      "rows": 21
+    },
+    {
+      "source": "2019/2019 Week 11.csv",
+      "sha256": "66dbc7227da2be261754f79c0d782a4a4a097b8814b58260ff4084cb72828e8b",
+      "year": 2019,
+      "week": 11,
+      "rows": 20
+    },
+    {
+      "source": "2019/2019 Week 12.csv",
+      "sha256": "a8d4ec223ab72dc464d2ab0d0ff89205e4638ca2c4987ef20d039a8e54dcce8a",
+      "year": 2019,
+      "week": 12,
+      "rows": 19
+    },
+    {
+      "source": "2019/responses.xlsx",
+      "sha256": "2007bc1f4ac5578dfcad13d17432bcc5718aeacb84257168e0bbec848ef4609f",
+      "year": 2019,
+      "week": 9,
+      "rows": 3
+    },
+    {
+      "source": "2020/2020 Week 01.csv",
+      "sha256": "6bc4b202a1ded61e691111edca98c7e64c0fc070cc15a4b3a5ec502bd195582b",
+      "year": 2020,
+      "week": 1,
+      "rows": 19
+    },
+    {
+      "source": "2020/2020 Week 02.csv",
+      "sha256": "1ce3e13cefb5a6c0bac551578310f830ddfa392c4f9df13b30c4b9a19f07206b",
+      "year": 2020,
+      "week": 2,
+      "rows": 19
+    },
+    {
+      "source": "2020/2020 Week 03.csv",
+      "sha256": "5651d013d3c0bbdffb7e933219ece62fd78442320d3865e84f0ee3af649e3f24",
+      "year": 2020,
+      "week": 3,
+      "rows": 18
+    },
+    {
+      "source": "2020/2020 Week 04.csv",
+      "sha256": "1d6ddb5a02015da7919d088a491db32a9628f74f1e2ce0c863194a5c5382fd05",
+      "year": 2020,
+      "week": 4,
+      "rows": 18
+    },
+    {
+      "source": "2020/2020 Week 05.csv",
+      "sha256": "46219b2b9fce4baa15ee29e062e6ac25a94e1517235851e228feac856b9fc9d3",
+      "year": 2020,
+      "week": 5,
+      "rows": 17
+    },
+    {
+      "source": "2020/2020 Week 06.csv",
+      "sha256": "e22e3d7140e59a88665e568bc4b9647cffd97411e89e7bdd45efd8c562b6108c",
+      "year": 2020,
+      "week": 6,
+      "rows": 13
+    },
+    {
+      "source": "2020/2020 Week 07.csv",
+      "sha256": "cd010a7d0eca3ad71f81a060768e3bdc1f44f723f4c90cbd24842ee745cb6427",
+      "year": 2020,
+      "week": 7,
+      "rows": 15
+    },
+    {
+      "source": "2020/2020 Week 08.csv",
+      "sha256": "670a8cf16d929c9778bcfd8bc161382baa600c5933a80d763763498dacd6168d",
+      "year": 2020,
+      "week": 8,
+      "rows": 12
+    },
+    {
+      "source": "2020/2020 Week 09.csv",
+      "sha256": "9a55594d5d4765bd9a77c349d6b53cdbbd9b870eb708b685291086a50fe0d962",
+      "year": 2020,
+      "week": 9,
+      "rows": 12
+    },
+    {
+      "source": "2020/2020 Week 10.csv",
+      "sha256": "904e13565680cd5ae61d2e5ae99ee7bdd6b235f718d962f347b056e71ef3a355",
+      "year": 2020,
+      "week": 10,
+      "rows": 11
+    },
+    {
+      "source": "2020/2020 Week 11.csv",
+      "sha256": "2cc7585187a8513b9c1ca8f73ca0a6aa0dd4d1e4762802dd1a3ad7e26609ace4",
+      "year": 2020,
+      "week": 11,
+      "rows": 9
+    },
+    {
+      "source": "2020/2020 Week 12.csv",
+      "sha256": "0e7165247f0c3edbbb38a68c70d7cbeea74d0baa7dc0a64af34dc67f19b4079c",
+      "year": 2020,
+      "week": 12,
+      "rows": 9
+    },
+    {
+      "source": "2020/2020 Week 13.csv",
+      "sha256": "bbc2e43995d931f85494a8347e5ea2a2e9df030046f911f282bdc043ec8d85c2",
+      "year": 2020,
+      "week": 13,
+      "rows": 9
+    },
+    {
+      "source": "2020/2020 Week 14.csv",
+      "sha256": "5b24f0e0e4a63a6f61a7f076bb61111a78f1ec87579dfeec767b831716632dfd",
+      "year": 2020,
+      "week": 14,
+      "rows": 9
+    },
+    {
+      "source": "2020/2020 Week 15.csv",
+      "sha256": "bbd802545dfe07e18d61da51a80d757e9492c94ef24fa112644a1d9f2ab713a7",
+      "year": 2020,
+      "week": 15,
+      "rows": 8
+    },
+    {
+      "source": "2020/2020 Week 16.csv",
+      "sha256": "6bc4aa85c86691156ad7e0f7c424ccca7f0b14bab271386d98fb95da96ea82e6",
+      "year": 2020,
+      "week": 16,
+      "rows": 9
+    },
+    {
+      "source": "2020/2020 Week 17.csv",
+      "sha256": "9c671eec769cdae2d9028ca100990c8a4f8aa3b482ff7618d276c376fa2536ef",
+      "year": 2020,
+      "week": 17,
+      "rows": 11
+    },
+    {
+      "source": "2021/2021 Week 01.csv",
+      "sha256": "302888363dc697eefe96b47d76fc4855a7e1849c9338a2f6f2f3c2326dab6b0a",
+      "year": 2021,
+      "week": 1,
+      "rows": 20
+    },
+    {
+      "source": "2021/2021 Week 02.csv",
+      "sha256": "4ac6e4066112ba0364605bb7b58ad69652ab012d46d216afb10f186a94d709b6",
+      "year": 2021,
+      "week": 2,
+      "rows": 18
+    },
+    {
+      "source": "2021/2021 Week 03.csv",
+      "sha256": "0a4c115efc45909aa03324815ce0af0397e1de2453ba41bb8bb595cbdb2b1c67",
+      "year": 2021,
+      "week": 3,
+      "rows": 18
+    },
+    {
+      "source": "2021/2021 Week 04.csv",
+      "sha256": "06d507a0f5a823a38734233d6d2ac32f67423b040b5f96ae57258b8ee2fd807e",
+      "year": 2021,
+      "week": 4,
+      "rows": 18
+    },
+    {
+      "source": "2021/2021 Week 05.csv",
+      "sha256": "3d1b5e857114017a39823ef84287c00a14d00f04676a2f9e69aa7ca410a6f00a",
+      "year": 2021,
+      "week": 5,
+      "rows": 18
+    },
+    {
+      "source": "2021/2021 Week 06.csv",
+      "sha256": "419266462dd2ecf1425286adad904a69f29efab8f6b418e6e7f85b407c43778e",
+      "year": 2021,
+      "week": 6,
+      "rows": 18
+    },
+    {
+      "source": "2021/2021 Week 07.csv",
+      "sha256": "9fcb50c9a0daa259308e5f482a5f0df2fd8f80ff89df135355416089f6ec3550",
+      "year": 2021,
+      "week": 7,
+      "rows": 17
+    },
+    {
+      "source": "2021/2021 Week 08.csv",
+      "sha256": "d4b6d6e631fd8ff17ced29a23803f9c7478c0ed465e5511e880cd3594fa98819",
+      "year": 2021,
+      "week": 8,
+      "rows": 18
+    },
+    {
+      "source": "2021/2021 Week 09.csv",
+      "sha256": "22caf95cd6dad6c355e69e42823b14b737bbdf201e12b42d80d571a80f4a2013",
+      "year": 2021,
+      "week": 9,
+      "rows": 17
+    },
+    {
+      "source": "2021/2021 Week 10.csv",
+      "sha256": "5c9c87c2aad082ff776c52d93486983ff584a5221d13e32a788ea32bd858ed3b",
+      "year": 2021,
+      "week": 10,
+      "rows": 18
+    },
+    {
+      "source": "2021/2021 Week 11.csv",
+      "sha256": "b6ec8edc1348d2fd18644233fbc83d4f7d75f7a5c1ff702320d269599800b1f0",
+      "year": 2021,
+      "week": 11,
+      "rows": 17
+    },
+    {
+      "source": "2021/2021 Week 12.csv",
+      "sha256": "f461c03858e0871f467fc49bf7a26d504df759611da5df2483836cc5483e31c2",
+      "year": 2021,
+      "week": 12,
+      "rows": 17
+    },
+    {
+      "source": "2021/2021 Week 13.csv",
+      "sha256": "4b808e5aaa482af5146c93d930d3031022efdc9da2f3ba67eea1c3166596fe48",
+      "year": 2021,
+      "week": 13,
+      "rows": 17
+    },
+    {
+      "source": "2021/2021 Week 14.csv",
+      "sha256": "68418c9e86a3072612c244deedc0d6730fddfba1103d20801dbc22a6e1782009",
+      "year": 2021,
+      "week": 14,
+      "rows": 16
+    },
+    {
+      "source": "2021/2021 Week 15.csv",
+      "sha256": "52fef4e34b125d1bbceb98ad51b8e4255ba8c56bf2008f41f818511d3e187977",
+      "year": 2021,
+      "week": 15,
+      "rows": 17
+    },
+    {
+      "source": "2021/2021 Week 16.csv",
+      "sha256": "df9fcfc67891e01e3a4e03a641c5f488fdc730c8f4922fa8ede8d933c3e83a8b",
+      "year": 2021,
+      "week": 16,
+      "rows": 16
+    },
+    {
+      "source": "2021/2021 Week 17.csv",
+      "sha256": "66fceb1562eeafb80c53db994284b84a5cd884ead702e4d5beac75850dc0f304",
+      "year": 2021,
+      "week": 17,
+      "rows": 15
+    },
+    {
+      "source": "2021/2021 Week 18.csv",
+      "sha256": "fecbf8bbdec0de83b737ac7ab56b1ce68c8220fd8ed0389d9f7378a6ad63d4c7",
+      "year": 2021,
+      "week": 18,
+      "rows": 16
+    },
+    {
+      "source": "2022/2022 Week 01.csv",
+      "sha256": "fe4ed116dc663f0b76686416e3f9173b7ba348a98c1c8ce9a2e33f0c69539f27",
+      "year": 2022,
+      "week": 1,
+      "rows": 20
+    },
+    {
+      "source": "2022/2022 Week 02.csv",
+      "sha256": "415e88df1b9760bc6131e1b6d1c519f19f87a7cc0914ba553c5ac99cd4803b76",
+      "year": 2022,
+      "week": 2,
+      "rows": 18
+    },
+    {
+      "source": "2022/2022 Week 03.csv/2022 Week 03.csv",
+      "sha256": "ec2fd97362ef7f3c73bda25daa9ff8799cbf2be2f8d382f88a17ce1fa98a46ed",
+      "year": 2022,
+      "week": 3,
+      "rows": 18
+    },
+    {
+      "source": "2022/2022 Week 04.csv/2022 Week 04.csv",
+      "sha256": "9ccf7616e9a9f2deaa56fa189a35ef9ad2057c440fa3a75a83f58871f871d977",
+      "year": 2022,
+      "week": 4,
+      "rows": 18
+    },
+    {
+      "source": "2022/2022 Week 05.csv/2022 Week 05.csv",
+      "sha256": "32d7d1bf48e662f3e8a76274c8f4f271f8ce4499fb6fddf652b2290c57a7f876",
+      "year": 2022,
+      "week": 5,
+      "rows": 16
+    },
+    {
+      "source": "2022/2022 Week 06.csv/2022 Week 06.csv",
+      "sha256": "eef7eba298ffc83f6372ef0f19fe8bc95aaa4d8c29286d494825117782043f46",
+      "year": 2022,
+      "week": 6,
+      "rows": 16
+    },
+    {
+      "source": "2022/2022 Week 07.csv/2022 Week 07.csv",
+      "sha256": "31f9d9f8fdfda97b3845dfc37bb400215281131ae141cde4937c0aa1bd2a3741",
+      "year": 2022,
+      "week": 7,
+      "rows": 17
+    },
+    {
+      "source": "2022/2022 Week 08.csv/2022 Week 08.csv",
+      "sha256": "67bbee89a7866e09606934833fb8e8d50b89b30a02908ff28b8a3392c61c400c",
+      "year": 2022,
+      "week": 8,
+      "rows": 18
+    },
+    {
+      "source": "2022/2022 Week 09.csv/2022 Week 09.csv",
+      "sha256": "f929b4b2d3437eff00515e76ef52b1d01f67fde242fdd629fe04c3888588154d",
+      "year": 2022,
+      "week": 9,
+      "rows": 17
+    },
+    {
+      "source": "2022/2022 Week 10.csv/2022 Week 10.csv",
+      "sha256": "e3b7aaa8358ef89e9ae371c2c21174b3d6125054ed729e4c11ff251d72aa916b",
+      "year": 2022,
+      "week": 10,
+      "rows": 17
+    },
+    {
+      "source": "2022/2022 Week 12.csv/2022 Week 12.csv",
+      "sha256": "e455855b4f3c9e15b3c49bacc71fce9d90e623e4955929cee5ae9c5bb830cb4b",
+      "year": 2022,
+      "week": 12,
+      "rows": 17
+    },
+    {
+      "source": "2022/2022 Week 13.csv/2022 Week 13.csv",
+      "sha256": "b34b90ac09af056208598ad24e32e4112502848a505638e12acaea11f62f5f90",
+      "year": 2022,
+      "week": 13,
+      "rows": 16
+    },
+    {
+      "source": "2022/2022 Week 14.csv/2022 Week 14.csv",
+      "sha256": "44e6b61978eefff4a4f32c7576f60fec0cb8ae4573a7bf74eef15467a635a1be",
+      "year": 2022,
+      "week": 14,
+      "rows": 17
+    },
+    {
+      "source": "2022/2022 Week 15.csv/2022 Week 15.csv",
+      "sha256": "854325a3f2443ab0f4b19f2469e608147bd44b2113975bcd26450d0e32f0f554",
+      "year": 2022,
+      "week": 15,
+      "rows": 15
+    },
+    {
+      "source": "2022/2022 Week 16.csv/2022 Week 16.csv",
+      "sha256": "df9aff5cb66a7e69a31fe99df9ba26484542aea4fb93f5406ceba40d64bdffda",
+      "year": 2022,
+      "week": 16,
+      "rows": 16
+    },
+    {
+      "source": "2022/2022 Week 17.csv/2022 Week 17.csv",
+      "sha256": "a4df1d7ee617764a64eb7714c7a0857778804bbf7539b55f7e9a3d5ff83e1c35",
+      "year": 2022,
+      "week": 17,
+      "rows": 17
+    },
+    {
+      "source": "2022/2022 Week 18.csv/2022 Week 18.csv",
+      "sha256": "d2516f51716caab13461fe23ad4316871b7e7cd3686b22e3f39d0a2c048a60a3",
+      "year": 2022,
+      "week": 18,
+      "rows": 15
+    },
+    {
+      "source": "2023/2023 Week 01.csv",
+      "sha256": "d7d64d4c1b81900af3b139cda4611ad51387c72564ea37555813ed71a434c46d",
+      "year": 2023,
+      "week": 1,
+      "rows": 19
+    },
+    {
+      "source": "2023/2023 Week 02.csv",
+      "sha256": "0f37c0de4d23fde8636cdd5e87b42c9981b658fc4b35fabb822ac2a1466c82d4",
+      "year": 2023,
+      "week": 2,
+      "rows": 18
+    },
+    {
+      "source": "2023/2023 Week 03.csv",
+      "sha256": "dac635989978669b688fc7a982795964221c70aea579da7f0874bb4b9615fa0a",
+      "year": 2023,
+      "week": 3,
+      "rows": 17
+    },
+    {
+      "source": "2023/2023 Week 04.csv",
+      "sha256": "f4798fe81c9b41547153961d46939390180112724f9755a2b6cd8446daf942aa",
+      "year": 2023,
+      "week": 4,
+      "rows": 17
+    },
+    {
+      "source": "2023/2023 Week 05.csv",
+      "sha256": "881debd104c9f03bff686b14a2e98ffd967f90141cbdfb15a63d69761e3fd0f8",
+      "year": 2023,
+      "week": 5,
+      "rows": 17
+    },
+    {
+      "source": "2023/2023 Week 06.csv",
+      "sha256": "0b1a5fba923a8d165b890f51bbdcc92b26beaf30e9e5c3a4cb5a31bb4d8cab2d",
+      "year": 2023,
+      "week": 6,
+      "rows": 17
+    },
+    {
+      "source": "2024/2024 Week 01.csv",
+      "sha256": "d667e7edd5268c352687b6ec34889d80b16b93f841691e4b07b1379ea2bad51f",
+      "year": 2024,
+      "week": 1,
+      "rows": 16
+    },
+    {
+      "source": "2024/2024 Week 02.csv",
+      "sha256": "5c4060fce8e447c87ed21cf74d22fe7eda27f98d73b17018cc71a5180ff81a2a",
+      "year": 2024,
+      "week": 2,
+      "rows": 17
+    },
+    {
+      "source": "2024/2024 Week 03.csv",
+      "sha256": "74b4760463ebd4051c9defe531ae7fb854c8f75e479dc594bcd36c2f44aa56fc",
+      "year": 2024,
+      "week": 3,
+      "rows": 16
+    },
+    {
+      "source": "2024/2024 Week 04.csv",
+      "sha256": "c8bfc8ca6f64c8b810e657242dcd2716a48d2cafffb159ff727c3fea30365f16",
+      "year": 2024,
+      "week": 4,
+      "rows": 17
+    },
+    {
+      "source": "2024/2024 Week 05.csv",
+      "sha256": "a0c2c640ea6d8e6bbb4d1f0543a8dc0057e1bfff00bc5214041cfc442f060d0f",
+      "year": 2024,
+      "week": 5,
+      "rows": 15
+    },
+    {
+      "source": "2024/2024 Week 06.csv",
+      "sha256": "77580e881b3c2de8e21d6ab0cbd72d74f513d95baebabf423f3c690a782dc88e",
+      "year": 2024,
+      "week": 6,
+      "rows": 15
+    },
+    {
+      "source": "2024/2024 Week 07.csv",
+      "sha256": "55aa02e5548ef81eba2e7ce302229092d4fbb50d54c9e690009777d74ceb6def",
+      "year": 2024,
+      "week": 7,
+      "rows": 16
+    },
+    {
+      "source": "2024/2024 Week 08.csv",
+      "sha256": "dd8c0a4d45cd8c2451dba9fc2d8f259694884a3113aa905d5c14d075020ab8fd",
+      "year": 2024,
+      "week": 8,
+      "rows": 15
+    },
+    {
+      "source": "2024/2024 Week 09.csv",
+      "sha256": "981265e6bbc90daf83e7c728b5d500e99e7637d77f23f99e2d8b6ef6705bb3e0",
+      "year": 2024,
+      "week": 9,
+      "rows": 18
+    },
+    {
+      "source": "2024/2024 Week 10.csv",
+      "sha256": "f5874c5aa207fe5f7823c8d6a187b3258a364b44fac0bdf2e38ffed50a7d4f26",
+      "year": 2024,
+      "week": 10,
+      "rows": 18
+    },
+    {
+      "source": "2024/2024 Week 11.csv",
+      "sha256": "ae24c43c451a214847cb0a51e8baff4cbea51ebc3402a0989ae37d86392e2601",
+      "year": 2024,
+      "week": 11,
+      "rows": 20
+    },
+    {
+      "source": "2024/2024 Week 12.csv",
+      "sha256": "7738b072e956118432ef261e1ef51177210faefd891f2288b6d238db04e304c0",
+      "year": 2024,
+      "week": 12,
+      "rows": 17
+    },
+    {
+      "source": "2022/2022 Week 10.csv/2022 Week 10.csv",
+      "sha256": "e3b7aaa8358ef89e9ae371c2c21174b3d6125054ed729e4c11ff251d72aa916b",
+      "year": 2021,
+      "week": 18,
+      "rows": 16
+    }
+  ],
+  "scheduleSource": "https://github.com/nflverse/nfldata/blob/master/data/games.csv",
+  "scheduleSha256": "ea0ee42249dcb5ca3e7daaf31e46c76f72620b06fdbe87eb6cb3f5b2a5826de1"
+}

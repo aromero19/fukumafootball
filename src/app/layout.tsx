@@ -4,7 +4,7 @@ import Link from "next/link";
 import "./globals.css";
 
 export const metadata: Metadata = { title: "Fukuma Family Football", description: "The home of the Fukuma family NFL pick'em league" };
-const navigation = [["Make picks", "/picks"], ["Profile", "/profile"], ["Standings", "/standings"], ["Results", "/results"], ["Rules", "/rules"]] as const;
+const navigation = [["Make picks", "/picks"], ["Profile", "/profile"], ["Standings", "/standings"], ["Results", "/results"], ["History", "/history"], ["Rules", "/rules"]] as const;
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return <html lang="en"><body>

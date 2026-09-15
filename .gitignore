@@ -23,6 +23,7 @@
 /build
 
 # misc
+.historical-source/
 .DS_Store
 *.pem
 

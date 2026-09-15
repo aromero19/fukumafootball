@@ -1,5 +1,9 @@
 # Fukuma Football
 
+## Historical archive
+
+The 2016–2024 archive has been reconstructed and imported. **History** adds career totals, season/weekly accuracy graphs, and an archive coverage grid for current and inactive players. See [historical results](docs/historical-results.md) for recovery decisions, missing records, import commands, and validation. No schema migration is required for this update.
+
 A family NFL Pick'em league built with Next.js 16.3.4 and Supabase. It uses honor-system player selection, public picks for published weeks, and authenticated allowlisted administrators. Profile and theme images support Supabase Storage uploads as well as HTTPS URLs. See [image upload setup](docs/image-uploads.md) for the required migration and server credential.
 
 ## Version 1 workflows
@@ -53,7 +57,7 @@ See [the version-1 release guide](docs/version-1-release.md) for launch configur
 
 The worker reads process environment variables. The email:send command does not automatically load .env.local. Inject its environment through the worker host or use your trusted environment launcher. Run npm.cmd run email:send separately; no website request sends mail.
 
-Migrations 20260910000001 through 20260910000004 are the existing schema, reported deployed in the project handoff. No migration was added by this version-1 completion work. Historical imports and stored-file image uploads are deferred.
+Migrations 20260910000001 through 20260910000004 are the existing schema, reported deployed in the project handoff. No migration was added by this version-1 completion work. Historical imports and stored-file image uploads are now supported; see their setup guides above.
 
 ## Profile photos and weekly pick summaries
 
