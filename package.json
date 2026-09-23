@@ -9,7 +9,7 @@
     "lint": "eslint",
     "email:send": "node scripts/send-email-outbox.mjs",
     "test:app": "node --test tests/family-picks.test.mjs",
-    "test:images": "node --test tests/image-upload.test.mjs",
+    "test:images": "node --test tests/image-upload.test.mjs tests/image-upload-request.test.mjs",
     "test:email-worker": "node --test tests/email-worker.test.mjs",
     "test:db": "node --test tests/database.test.mjs",
     "test:db:integration": "node scripts/test-db-integration.mjs"

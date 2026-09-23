@@ -13,6 +13,8 @@
 - **Admin → Players:** administrators can also upload photos for inactive players.
 - **Admin → Themes:** select a theme and team, inspect the preview, then upload and save. Upload replaces the image, clears any old thumbnail URL, and uses the current Active image selection.
 - Existing HTTPS URL fields remain available. Upload saves immediately; the separate URL save button is only needed for manual URL edits. Clearing a profile URL restores the silhouette.
+- Preparation and saving have separate progress labels. Image decoding and preview encoding each time out after 15 seconds; the save request times out after 65 seconds and releases the controls. If a save times out, refresh and check the photo before retrying because the server may already have saved it.
+- Server Storage requests time out after 15 seconds. Removal of a replaced image runs after the success response so cleanup cannot keep a saved photo waiting on screen.
 
 ## Storage and limits
 

@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { uploadImage, withImageTimeout } from '@/lib/image-upload-request.mjs';
 
 export default function ImageUpload({ destination, profile = false, onSaved, disabled = false, onBusyChange }: {
   destination: string; profile?: boolean; onSaved: (url: string) => void; disabled?: boolean; onBusyChange?: (busy: boolean) => void;
@@ -9,6 +10,7 @@ export default function ImageUpload({ destination, profile = false, onSaved, dis
   const [preview, setPreview] = useState('');
   const [prepared, setPrepared] = useState<Blob | null>(null);
   const [busy, setBusy] = useState(false);
+  const [stage, setStage] = useState('');
   const [message, setMessage] = useState('');
   const input = useRef<HTMLInputElement>(null);
   const generation = useRef(0);
@@ -24,9 +26,13 @@ export default function ImageUpload({ destination, profile = false, onSaved, dis
         if (!['image/jpeg','image/png','image/webp'].includes(file.type) || file.size > (profile ? 2 : 5) * 1024 * 1024) {
           setMessage(`Choose a JPEG, PNG, or WebP smaller than ${profile ? 2 : 5} MB.`); return;
         }
-        setBusy(true);
+        setBusy(true); setStage('Preparing preview…');
+        let expired = false;
         try {
-          const bitmap = await createImageBitmap(file);
+          const bitmap = await withImageTimeout(createImageBitmap(file).then(bitmap => {
+            if (expired) bitmap.close();
+            return bitmap;
+          }), 15000, 'This image is taking too long to open. Try a smaller photo or choose it again.', () => { expired = true; });
           try {
             if (bitmap.width * bitmap.height > 25_000_000) throw new Error('Choose an image under 25 megapixels.');
             const canvas = document.createElement('canvas');
@@ -39,7 +45,7 @@ export default function ImageUpload({ destination, profile = false, onSaved, dis
               const side = Math.min(bitmap.width, bitmap.height);
               context.drawImage(bitmap, (bitmap.width-side)/2, (bitmap.height-side)/2, side, side, 0, 0, 512, 512);
             } else context.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
-            const blob = await new Promise<Blob | null>(resolve => canvas.toBlob(resolve, 'image/webp', 0.85));
+            const blob = await withImageTimeout(new Promise<Blob | null>(resolve => canvas.toBlob(resolve, 'image/webp', 0.85)), 15000, 'This image is taking too long to prepare. Try a smaller photo or choose it again.');
             if (!blob || blob.size > 2 * 1024 * 1024) throw new Error('Choose a smaller image.');
             if (current === generation.current) { setPrepared(blob); setPreview(URL.createObjectURL(blob)); }
           } finally { bitmap.close(); }
@@ -54,17 +60,15 @@ export default function ImageUpload({ destination, profile = false, onSaved, dis
     </div>}
     <button className="button secondary" type="button" disabled={!prepared || busy} onClick={async () => {
       if (!prepared || busy) return;
-      setBusy(true); setMessage('');
+      setBusy(true); setStage('Saving image…'); setMessage('');
       try {
-        const response = await fetch(`/api/images?${destination}`, { method: 'POST', headers: { 'Content-Type': prepared.type }, body: prepared });
-        const result = await response.json();
-        if (!response.ok || !result.ok) throw new Error(result.message || 'Upload failed. Please retry.');
+        const result = await uploadImage(destination, prepared);
         onSaved(result.url); setMessage(result.message); setPrepared(null); setPreview('');
         if (input.current) input.current.value = '';
         router.refresh();
       } catch (error) { setMessage(error instanceof Error ? error.message : 'Unable to confirm the upload. Refresh and check before retrying.'); }
       finally { setBusy(false); }
-    }}>{busy ? 'Preparing / saving…' : 'Upload and save image'}</button>
+    }}>{busy ? stage : 'Upload and save image'}</button>
     <p role="status" aria-live="polite">{message}</p>
   </fieldset>;
 }

@@ -1,6 +1,12 @@
 // Keep newest additions first. The home page displays the first five entries.
 export const featureUpdates = [
   {
+    title: "Clearer photo uploads",
+    description: "Photo uploads now show separate preview and saving steps, with helpful messages if a request takes too long.",
+    href: "/profile",
+    linkLabel: "Update your photo",
+  },
+  {
     title: "Clearer historical standings",
     description: "Browse past seasons with readable week links and standings limited to players with recorded scores. Recovered historical records remain incomplete.",
     href: "/standings",
@@ -23,11 +29,5 @@ export const featureUpdates = [
     description: "Choose a photo from your phone or computer, preview it, and save it directly to your profile.",
     href: "/profile",
     linkLabel: "Upload a photo",
-  },
-  {
-    title: "Player profile photos",
-    description: "Put a face to your name! Choose your profile to add or update your player photo.",
-    href: "/profile",
-    linkLabel: "Find your profile",
   },
 ] as const;

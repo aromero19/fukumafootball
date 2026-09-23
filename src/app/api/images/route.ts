@@ -1,6 +1,7 @@
 import { randomUUID } from 'node:crypto';
 import { createClient as storageClient } from '@supabase/supabase-js';
 import { revalidatePath } from 'next/cache';
+import { after } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import { connectOperations } from '@/lib/operations-connection.mjs';
 import { normalizeImage, readImageBody, reserveUpload } from '@/lib/image-upload.mjs';
@@ -21,15 +22,26 @@ export async function POST(request: Request) {
     return fail('Choose a valid player or team and theme.');
   const key = process.env.SUPABASE_SECRET_KEY;
   if (!key || !process.env.FUKUMA_DATABASE_URL) return fail('Image uploads are not configured yet. Contact the administrator.', 503);
-  const supabase = await createClient();
   let actor: string | undefined;
   if (!profile || adminProfile) {
+    const supabase = await createClient();
     const { data: { user } } = await supabase.auth.getUser();
     const { error } = user ? await supabase.rpc('admin_entry_email', { p_entry_id: 0 }) : { error: true };
     if (!user || error) return fail('Sign in as an administrator to upload this image.', 403);
     actor = user.id;
   }
-  const storage = storageClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, key, { auth: { persistSession: false, autoRefreshToken: false } });
+  const storage = storageClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, key, {
+    auth: { persistSession: false, autoRefreshToken: false },
+    global: {
+      // Bound uploads and old-file cleanup, including reading response bodies.
+      fetch: (url, options) => fetch(url, {
+        ...options,
+        signal: options?.signal
+          ? AbortSignal.any([options.signal, AbortSignal.timeout(15000)])
+          : AbortSignal.timeout(15000),
+      }),
+    },
+  });
   const bucket = profile ? 'player-photos' : 'team-themes';
   const target = profile ? `players/${id}` : `themes/${id}/teams/${team}`;
   const path = `${target}/${randomUUID()}.webp`;
@@ -47,7 +59,10 @@ export async function POST(request: Request) {
     try { bytes = await normalizeImage(await readImageBody(request), profile); }
     catch { return fail('Choose a still JPEG, PNG, or WebP image. The prepared file must be under 2 MB and 25 megapixels.'); }
     const { error: uploadError } = await storage.storage.from(bucket).upload(path, bytes, { contentType: 'image/webp', upsert: false, cacheControl: '31536000' });
-    if (uploadError) return fail('The image could not be uploaded. Please retry or contact the administrator.', 503);
+    if (uploadError) {
+      console.error('Image upload failed at storage');
+      return fail('The image could not be uploaded. Please retry or contact the administrator.', 503);
+    }
     uploaded = true;
     const url = storage.storage.from(bucket).getPublicUrl(path).data.publicUrl;
     await client.query('begin');
@@ -71,11 +86,17 @@ export async function POST(request: Request) {
     const old = previous.rows[0]?.url as string | undefined;
     const prefix = storage.storage.from(bucket).getPublicUrl(`${target}/`).data.publicUrl;
     if (old?.startsWith(prefix) && /^[0-9a-f-]+\.webp$/.test(old.slice(prefix.length))) {
-      try {
-        const referenced = await client.query(`select 1 from public.entry where photo_url=$1 union all
-          select 1 from public.team_theme_image where image_url=$1 or thumbnail_url=$1 limit 1`, [old]);
-        if (!referenced.rowCount) await storage.storage.from(bucket).remove([`${target}/${old.slice(prefix.length)}`]);
-      } catch { /* A cleanup failure must not turn a saved upload into an error. */ }
+      // A slow old-file deletion must not hide an already-saved photo.
+      after(async () => {
+        let cleanupClient: Awaited<ReturnType<typeof connectOperations>> | undefined;
+        try {
+          cleanupClient = await connectOperations();
+          const referenced = await cleanupClient.query(`select 1 from public.entry where photo_url=$1 union all
+            select 1 from public.team_theme_image where image_url=$1 or thumbnail_url=$1 limit 1`, [old]);
+          if (!referenced.rowCount) await storage.storage.from(bucket).remove([`${target}/${old.slice(prefix.length)}`]);
+        } catch { /* A cleanup failure must not turn a saved upload into an error. */ }
+        finally { await cleanupClient?.end().catch(() => {}); }
+      });
     }
     for (const page of ['/profile', '/picks', '/picks/success', '/admin/players', '/admin/themes']) revalidatePath(page);
     return Response.json({ ok: true, url, message: 'Image uploaded and saved.' });
