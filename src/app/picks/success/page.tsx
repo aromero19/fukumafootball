@@ -14,7 +14,7 @@ export default async function PicksSuccess({ searchParams }: {
   const entry = queryNumber(query.entry, 1, Number.MAX_SAFE_INTEGER);
   if (!year || !week || !entry) redirect("/picks");
 
-  const editQuery = new URLSearchParams({ year: String(year), week: String(week), entry: String(entry) });
+  const editQuery = new URLSearchParams({ year: String(year), week: String(week), entry: String(entry), edit: "1" });
 
   return <><section className="card submission-summary">
     <div className="eyebrow">{year} season · Week {week}</div>

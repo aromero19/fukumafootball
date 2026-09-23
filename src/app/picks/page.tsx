@@ -1,12 +1,13 @@
 import Link from "next/link";
-import { readLeague, readEntries, readPicksPage, readPublishedSeasons, readWeeks, queryNumber } from "@/lib/data";
+import { redirect } from "next/navigation";
+import { readLeague, readEntries, readPicksPage, readPublishedSeasons, readWeeks, queryNumber, hasSubmittedPicks } from "@/lib/data";
 import PicksForm from "@/components/picks-form";
 import SeasonFilters from "@/components/season-filters";
 import ProfileAvatar from "@/components/profile-avatar";
 
 export const maxDuration = 60;
 
-export default async function Picks({ searchParams }: { searchParams: Promise<{ year?: string; week?: string; entry?: string }> }) {
+export default async function Picks({ searchParams }: { searchParams: Promise<{ year?: string; week?: string; entry?: string; edit?: string }> }) {
   const q = await searchParams;
   const [league, seasons, entries] = await Promise.all([readLeague(), readPublishedSeasons(), readEntries()]);
   const year = queryNumber(q.year, 1920, 9999) ?? (league.hasCurrentSeason ? league.year : seasons[0] ?? league.year);
@@ -16,6 +17,9 @@ export default async function Picks({ searchParams }: { searchParams: Promise<{ 
   const players = entries.filter(row => row.active);
   const player = players.find(row => row.entry_id === requestedEntry);
   const selectionQuery = `year=${year}${week ? `&week=${week}` : ""}`;
+  if (player && week && league.hasCurrentSeason && year === league.year && week === league.week && q.edit !== "1" && await hasSubmittedPicks(year, week, player.entry_id)) {
+    redirect(`/picks/success?${selectionQuery}&entry=${player.entry_id}`);
+  }
   const data = player && week ? await readPicksPage(year, week, player.entry_id) : null;
 
   return <>

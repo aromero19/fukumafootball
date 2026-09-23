@@ -1,6 +1,12 @@
 // Keep newest additions first. The home page displays the first five entries.
 export const featureUpdates = [
   {
+    title: "Your saved picks, right away",
+    description: "Already submitted this week? Choose your profile to see who you picked. Use Back to edit picks to make changes while games are still open.",
+    href: "/picks",
+    linkLabel: "See your picks",
+  },
+  {
     title: "One clear profile photo",
     description: "See your current photo separately from replacement links. Saving a new image clears pending choices, and Remove photo restores the silhouette.",
     href: "/profile",
@@ -11,12 +17,6 @@ export const featureUpdates = [
     description: "Results opens to the latest week with recorded results. See team images, winners, and everyone’s picks, with your selected player first.",
     href: "/results",
     linkLabel: "See weekly results",
-  },
-  {
-    title: "Easier player management",
-    description: "Admins can find players in a compact table, filter participation, and edit details or photos in one place.",
-    href: "/admin/players",
-    linkLabel: "Manage players (admin only)",
   },
   {
     title: "Playing for money",

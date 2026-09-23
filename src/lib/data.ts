@@ -23,6 +23,10 @@ export async function readLatestResultsWeek(year:number, publishedWeeks:number[]
 }
 export async function readPublishedSeasons() { const s=await createClient();return [...new Set((checked(await s.from("week").select("year").eq("published",true).order("year",{ascending:false})) ?? []).map(week=>week.year))]; }
 export async function readEntries() { const s=await createClient();return checked(await s.from("entry").select("entry_id,name_first,name_last,active,photo_url,playing_for_money").order("name_first").order("name_last").order("entry_id")) ?? []; }
+export async function hasSubmittedPicks(year:number,week:number,entryId:number) {
+ const s=await createClient();
+ return Boolean(checked(await s.from("weekly_submission").select("entry_id").eq("year",year).eq("week",week).eq("entry_id",entryId).maybeSingle()));
+}
 export async function readPicksPage(year:number,week:number,entryId?:number) {
  const s=await createClient();
  const [g,t,th,e,p,l,i,se]=await Promise.all([
