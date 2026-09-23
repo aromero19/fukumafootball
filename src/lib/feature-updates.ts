@@ -1,6 +1,12 @@
 // Keep newest additions first. The home page displays the first five entries.
 export const featureUpdates = [
   {
+    title: "Easier player management",
+    description: "Admins can find players in a compact table, filter participation, and edit details or photos in one place.",
+    href: "/admin/players",
+    linkLabel: "Manage players (admin only)",
+  },
+  {
     title: "Admin password recovery",
     description: "Admins can choose a new password using a recovery email. Ask the league administrator for a fresh recovery link if you cannot sign in.",
     href: "/admin/login",
@@ -18,12 +24,7 @@ export const featureUpdates = [
     href: "/profile",
     linkLabel: "Update your photo",
   },
-  {
-    title: "Clearer historical standings",
-    description: "Browse past seasons with readable week links and standings limited to players with recorded scores. Recovered historical records remain incomplete.",
-    href: "/standings",
-    linkLabel: "View standings",
-  },
+
 
   {
     title: "Past seasons recovered",
