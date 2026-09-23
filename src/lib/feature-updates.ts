@@ -1,6 +1,12 @@
 // Keep newest additions first. The home page displays the first five entries.
 export const featureUpdates = [
   {
+    title: "Admin password recovery",
+    description: "Admins can choose a new password using a recovery email. Ask the league administrator for a fresh recovery link if you cannot sign in.",
+    href: "/admin/login",
+    linkLabel: "Admin sign-in",
+  },
+  {
     title: "Playing for money",
     description: "Standings now show admin-confirmed money participation. Find Angelo’s Venmo account and QR code on the new Play for Money page; status is updated manually after payment.",
     href: "/PlayForMoney",
@@ -18,12 +24,7 @@ export const featureUpdates = [
     href: "/standings",
     linkLabel: "View standings",
   },
-  {
-    title: "Historical statistics",
-    description: "Explore career totals, season accuracy, and weekly trends for current and former players.",
-    href: "/history",
-    linkLabel: "Explore player history",
-  },
+
   {
     title: "Past seasons recovered",
     description: "Recovered picks from 2016–2024 are now available. Some games and weeks are missing, so these records and totals are incomplete.",
