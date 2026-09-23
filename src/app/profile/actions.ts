@@ -12,6 +12,6 @@ export async function updateProfilePhoto(form: FormData) {
   const supabase = await createClient();
   const { error } = await supabase.rpc("update_profile_photo", { p_entry_id: entryId, p_photo_url: url });
   if (error) return { ok: false, message: "Your photo could not be saved. Check that your profile is still active and try again." };
-  for (const path of ["/profile", "/picks", "/picks/success", "/admin/players"]) revalidatePath(path);
+  for (const path of ["/profile", "/picks", "/picks/success", "/admin/players", "/results", "/standings"]) revalidatePath(path);
   return { ok: true, message: url ? "Your profile photo is saved." : "Your photo has been cleared. Your profile now uses the gray silhouette." };
 }

@@ -98,7 +98,7 @@ export async function POST(request: Request) {
         finally { await cleanupClient?.end().catch(() => {}); }
       });
     }
-    for (const page of ['/profile', '/picks', '/picks/success', '/admin/players', '/admin/themes']) revalidatePath(page);
+    for (const page of ['/profile', '/picks', '/picks/success', '/admin/players', '/admin/themes', '/results', '/standings']) revalidatePath(page);
     return Response.json({ ok: true, url, message: 'Image uploaded and saved.' });
   } catch {
     await client?.query('rollback').catch(() => {});

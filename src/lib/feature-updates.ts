@@ -1,6 +1,12 @@
 // Keep newest additions first. The home page displays the first five entries.
 export const featureUpdates = [
   {
+    title: "One clear profile photo",
+    description: "See your current photo separately from replacement links. Saving a new image clears pending choices, and Remove photo restores the silhouette.",
+    href: "/profile",
+    linkLabel: "Update your photo",
+  },
+  {
     title: "See the whole family’s results",
     description: "Results opens to the latest week with recorded results. See team images, winners, and everyone’s picks, with your selected player first.",
     href: "/results",
@@ -17,12 +23,6 @@ export const featureUpdates = [
     description: "Standings now show admin-confirmed money participation. Find Angelo’s Venmo account and QR code on the new Play for Money page; status is updated manually after payment.",
     href: "/PlayForMoney",
     linkLabel: "Play for money",
-  },
-  {
-    title: "Clearer photo uploads",
-    description: "Photo uploads now show separate preview and saving steps, with helpful messages if a request takes too long.",
-    href: "/profile",
-    linkLabel: "Update your photo",
   },
 
 

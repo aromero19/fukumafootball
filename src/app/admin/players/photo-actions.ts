@@ -14,6 +14,8 @@ export async function savePlayerPhoto(form: FormData) {
   if (error) return { ok: false, message: "Photo could not be saved. Refresh and try again." };
   revalidatePath("/admin/players");
   revalidatePath("/profile");
+  revalidatePath("/results");
+  revalidatePath("/standings");
   revalidatePath("/picks");
   revalidatePath("/picks/success");
   return { ok: true, message: photoUrl ? "Profile photo saved." : "Profile photo removed; using the silhouette." };
