@@ -12,12 +12,6 @@ export default async function Home() {
       <div className="hero-actions"><Link className="button" href="/picks">Make your picks <span aria-hidden="true">→</span></Link><Link className="text-link light-link" href="/rules">Read the playbook</Link></div>
     </div><div className="season-stamp" aria-hidden="true"><strong>FFF</strong><span>EST. 2017</span></div></section>
     <section className="grid home-grid">
-      <section className="card" aria-labelledby="feature-updates-title"><div className="eyebrow">Latest additions</div><h2 id="feature-updates-title">What’s new</h2>
-        <ul className="feature-updates">{featureUpdates.slice(0, 5).map(update => <li key={update.title}>
-          <h3>{update.title}</h3><p className="muted">{update.description}</p>
-          <Link className="text-link" href={update.href}>{update.linkLabel} <span aria-hidden="true">→</span></Link>
-        </li>)}</ul>
-      </section>
       <div className="home-season"><div className="card"><div className="eyebrow">This week</div><h2>Current season</h2>
         <p className="muted">{league.week ? `Week ${league.week} is published. Games marked TBD remain open; a recorded result locks picks.` : "The next current week has not been announced yet. Published weeks and past results remain available."}</p>
         <Link className="text-link" href="/standings">See full standings <span aria-hidden="true">→</span></Link></div>
@@ -26,5 +20,11 @@ export default async function Home() {
       </div>
       </div>
     </section>
+      <section className="card home-news" aria-labelledby="feature-updates-title"><div className="eyebrow">Latest additions</div><h2 id="feature-updates-title">What’s new</h2>
+        <ul className="feature-updates">{featureUpdates.slice(0, 5).map(update => <li key={update.title}>
+          <h3>{update.title}</h3><p className="muted">{update.description}</p>
+          <Link className="text-link" href={update.href}>{update.linkLabel} <span aria-hidden="true">→</span></Link>
+        </li>)}</ul>
+      </section>
   </>;
 }

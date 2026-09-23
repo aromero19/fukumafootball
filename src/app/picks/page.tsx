@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { readLeague, readEntries, readPicksPage, readPublishedSeasons, readWeeks, queryNumber } from "@/lib/data";
 import PicksForm from "@/components/picks-form";
+import SeasonFilters from "@/components/season-filters";
 import ProfileAvatar from "@/components/profile-avatar";
 
 export const maxDuration = 60;
@@ -20,8 +21,7 @@ export default async function Picks({ searchParams }: { searchParams: Promise<{ 
   return <>
     <div className="section-title"><div><div className="eyebrow">Family pick sheet · {year}{week ? ` · Week ${week}` : ""}</div><h1>{player ? "Make your picks" : "Choose your profile"}</h1></div></div>
     {player ? <div className="selected-profile"><ProfileAvatar url={player.photo_url} small /><strong>{player.name_first} {player.name_last}</strong><Link href={`/picks?${selectionQuery}`}>Change profile</Link></div> : <p>Choose your name to make or edit your picks. Profiles use the honor system; everyone’s picks are public.</p>}
-    <div className="toolbar">{seasons.map(season => <Link className="button secondary" key={season} href={`/picks?year=${season}${player ? `&entry=${player.entry_id}` : ""}`}>{season}</Link>)}</div>
-    <div className="toolbar week-toolbar"><span>Week:</span>{weeks.map(row => <Link className="button secondary" aria-current={row.week === week ? "page" : undefined} key={row.week} href={`/picks?year=${year}&week=${row.week}${player ? `&entry=${player.entry_id}` : ""}`}>W{row.week}</Link>)}</div>
+    <SeasonFilters path="/picks" seasons={seasons} weeks={weeks.map(row => row.week)} year={year} week={week} entry={player?.entry_id} />
     {!player ? <>
       {requestedEntry && <p className="status">That profile is unavailable. Choose an active player below.</p>}
       <div className="profile-grid">{players.map(row => <Link className="card profile-tile" key={row.entry_id} href={`/picks?${selectionQuery}&entry=${row.entry_id}`}><ProfileAvatar url={row.photo_url} /><strong>{row.name_first} {row.name_last}</strong><span className="muted">Make picks →</span></Link>)}</div>

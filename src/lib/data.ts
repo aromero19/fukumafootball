@@ -14,6 +14,13 @@ export async function readStandings(year:number,week?:number) {
  return (checked(await q) ?? []).sort((a,b)=>Number(b.correct_picks)-Number(a.correct_picks)||a.name_first.localeCompare(b.name_first)||a.name_last.localeCompare(b.name_last)||a.entry_id-b.entry_id);
 }
 export async function readWeeks(year:number) { const s=await createClient();return checked(await s.from("week").select("year,week,published,is_current").eq("year",year).eq("published",true).order("week")) ?? []; }
+/** Prefer the latest published week with a recorded winner or tie, not the active pick week. */
+export async function readLatestResultsWeek(year:number, publishedWeeks:number[]) {
+ if(!publishedWeeks.length) return undefined;
+ const s=await createClient();
+ const rows=checked(await s.from("game").select("week").eq("year",year).in("week",publishedWeeks).neq("win_team_id",34).order("week",{ascending:false}).limit(1));
+ return rows?.[0]?.week;
+}
 export async function readPublishedSeasons() { const s=await createClient();return [...new Set((checked(await s.from("week").select("year").eq("published",true).order("year",{ascending:false})) ?? []).map(week=>week.year))]; }
 export async function readEntries() { const s=await createClient();return checked(await s.from("entry").select("entry_id,name_first,name_last,active,photo_url,playing_for_money").order("name_first").order("name_last").order("entry_id")) ?? []; }
 export async function readPicksPage(year:number,week:number,entryId?:number) {

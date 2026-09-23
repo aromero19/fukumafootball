@@ -1,16 +1,16 @@
 // Keep newest additions first. The home page displays the first five entries.
 export const featureUpdates = [
   {
+    title: "See the whole family’s results",
+    description: "Results opens to the latest week with recorded results. See team images, winners, and everyone’s picks, with your selected player first.",
+    href: "/results",
+    linkLabel: "See weekly results",
+  },
+  {
     title: "Easier player management",
     description: "Admins can find players in a compact table, filter participation, and edit details or photos in one place.",
     href: "/admin/players",
     linkLabel: "Manage players (admin only)",
-  },
-  {
-    title: "Admin password recovery",
-    description: "Admins can choose a new password using a recovery email. Ask the league administrator for a fresh recovery link if you cannot sign in.",
-    href: "/admin/login",
-    linkLabel: "Admin sign-in",
   },
   {
     title: "Playing for money",

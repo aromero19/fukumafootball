@@ -23,8 +23,8 @@ export default function PicksForm({ seasonActive, images, defaultThemeId, year, 
   const [message, setMessage] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const names = useMemo(() => Object.fromEntries(teams.map((team) => [team.team_id, team.team_name])), [teams]);
-  const themeColors = ["#ffffff", "#eef8f4", "#eef5fb", "#fff4e5", "#f8f0fb"];
-  const themeColor = themeColors[Number(theme) % themeColors.length];
+  const openGames = games.filter(game => game.win_team_id === 34);
+  const completed = openGames.filter(game => selected[game.game_id] === game.home_team_id || selected[game.game_id] === game.away_team_id).length;
 
   function choosePick(game: Game, teamId: number) {
     if (game.win_team_id !== 34 || busy.current || !seasonActive) return;
@@ -49,21 +49,21 @@ export default function PicksForm({ seasonActive, images, defaultThemeId, year, 
     finally { busy.current = false; setSubmitting(false); }
   }
 
-  return <div className="card" style={{ backgroundColor: themeColor }}>
-    <div className="toolbar">
+  return <div className="pick-sheet">
+    <div className="toolbar pick-sheet-toolbar">
       <label>Theme <select value={theme} onChange={(event) => { setTheme(Number(event.target.value)); setRequestId(null); }} disabled={!entry || submitting || !seasonActive}>{themes.map((item) => <option key={item.theme_id} value={item.theme_id}>{item.theme_name}</option>)}</select></label>
     </div>
     {!seasonActive && <p className="status">This season is closed for submissions. Saved picks remain available in Results.</p>}
     {!games.length && <p>No games are published for this week yet.</p>}
     {!themes.length && <p>No active themes are available. Contact the administrator.</p>}
     {message && <div className="status" role="status">{message}</div>}
-    <div>{games.map((game) => {
+    <div className="matchup-list">{games.map((game) => {
       const locked = game.win_team_id !== 34;
-      return <div className="game" key={game.game_id}>
+      return <div className={`game matchup-card${locked ? " is-locked" : ""}`} key={game.game_id}>
         <div className="game-meta"><span>{game.game_date_time ? new Date(game.game_date_time).toLocaleString("en-US",{timeZone:"America/Denver",timeZoneName:"short"}) : "Game time TBD"}</span><span>{locked ? game.win_team_id === 33 ? "Tie · locked" : `Winner: ${names[game.win_team_id]} · locked` : "Open for picks"}</span></div>
-        {[game.away_team_id, game.home_team_id].map((teamId) => <button key={teamId} className={`pick-button ${selected[game.game_id] === teamId ? "selected" : ""}`} disabled={locked || !entry || submitting || !seasonActive} onClick={() => choosePick(game, teamId)}><TeamImage key={String(theme) + "-" + teamId} urls={imageCandidates(images, teamId, theme, defaultThemeId)} />{names[teamId]}<br /><small>{teamId === game.away_team_id ? "Away" : "Home"}</small></button>)}
+        {[game.away_team_id, game.home_team_id].map((teamId) => <button key={teamId} className={`pick-button ${selected[game.game_id] === teamId ? "selected" : ""}`} aria-pressed={selected[game.game_id] === teamId} disabled={locked || !entry || submitting || !seasonActive} onClick={() => choosePick(game, teamId)}><TeamImage key={String(theme) + "-" + teamId} urls={imageCandidates(images, teamId, theme, defaultThemeId)} /><span className="pick-team-name">{names[teamId]}<small>{teamId === game.away_team_id ? "Away" : "Home"}</small></span><span className="pick-check" aria-hidden="true">{selected[game.game_id] === teamId ? "✓" : "+"}</span></button>)}
       </div>;
     })}</div>
-    <button className="button" disabled={submitting || !entry || !theme || !seasonActive || !games.length} onClick={submit}>{submitting ? "Saving…" : "Submit picks"}</button>
+    <div className="pick-submit-bar"><div><strong aria-live="polite">{completed} of {openGames.length} open games selected</strong><span className="muted">{!seasonActive ? "Season closed" : !openGames.length ? "No open games to pick" : completed === openGames.length ? "Ready to submit your picks" : `${openGames.length - completed} more to choose`}</span><progress value={completed} max={openGames.length || 1} aria-label="Open game selection progress" /></div><button className="button" disabled={submitting || !entry || !theme || !seasonActive || !games.length} onClick={submit}>{submitting ? "Saving…" : "Submit picks →"}</button></div>
   </div>;
 }
