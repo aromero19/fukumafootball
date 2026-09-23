@@ -1,6 +1,12 @@
 // Keep newest additions first. The home page displays the first five entries.
 export const featureUpdates = [
   {
+    title: "Clearer historical standings",
+    description: "Browse past seasons with readable week links and standings limited to players with recorded scores. Recovered historical records remain incomplete.",
+    href: "/standings",
+    linkLabel: "View standings",
+  },
+  {
     title: "Historical statistics",
     description: "Explore career totals, season accuracy, and weekly trends for current and former players.",
     href: "/history",
