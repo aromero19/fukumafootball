@@ -20,10 +20,10 @@ export async function savePlayerRecord(client, player) {
   await client.query("set local role authenticated");
   let id = player.entryId;
   if (id) {
-    const updated = await client.query("update public.entry set name_first=$2,name_last=$3,active=$4 where entry_id=$1 returning entry_id", [id,player.first,player.last,player.active]);
+    const updated = await client.query("update public.entry set name_first=$2,name_last=$3,active=$4,playing_for_money=coalesce($5,playing_for_money) where entry_id=$1 returning entry_id", [id,player.first,player.last,player.active,player.playingForMoney ?? null]);
     if (!updated.rows.length) throw new InputError("Player no longer exists. Refresh the page.");
   } else {
-    const created = await client.query("insert into public.entry(name_first,name_last,active) values ($1,$2,$3) returning entry_id", [player.first,player.last,player.active]);
+    const created = await client.query("insert into public.entry(name_first,name_last,active,playing_for_money) values ($1,$2,$3,$4) returning entry_id", [player.first,player.last,player.active,player.playingForMoney ?? false]);
     id = created.rows[0].entry_id;
   }
   await client.query("select public.admin_set_entry_email($1,$2)", [id,player.email]);

@@ -401,6 +401,28 @@ check('team images allow admin replacement and deactivation but reject family wr
 
 
 import { adminTransaction,savePlayerRecord,saveEmailConfiguration,retryEmail } from '../src/lib/operations.mjs';
+test('money participation is public to read but only admins can change it', async () => {
+  await db.exec("select setval(pg_get_serial_sequence('public.entry','entry_id'),900)");
+  const player = {first:'Money Status',last:'',email:null,active:true};
+  const id = await adminTransaction(db,admin,client=>savePlayerRecord(client,player));
+  const status = async () => (await db.query('select playing_for_money from public.entry where entry_id=$1',[id])).rows[0].playing_for_money;
+  assert.equal(await status(),false);
+  await adminTransaction(db,admin,client=>savePlayerRecord(client,{...player,entryId:id,playingForMoney:true}));
+  assert.equal(await status(),true);
+  await db.exec('begin');
+  try {
+    await role('anon');
+    assert.equal(await status(),true);
+    await rejects(()=>db.query('update public.entry set playing_for_money=false where entry_id=$1',[id]),/permission denied/);
+    await role('authenticated',stranger);
+    const denied = await db.query('update public.entry set playing_for_money=false where entry_id=$1 returning entry_id',[id]);
+    assert.equal(denied.rows.length,0);
+    assert.equal(await status(),true);
+  } finally { await db.exec('rollback'); }
+  await adminTransaction(db,admin,client=>savePlayerRecord(client,{...player,entryId:id,playingForMoney:false}));
+  assert.equal(await status(),false);
+  await db.query('delete from public.entry where entry_id=$1',[id]);
+});
 test('operations recheck admin rights and save player/contact atomically', async () => {
   await db.exec("select setval(pg_get_serial_sequence('public.entry','entry_id'),1000)");
   await assert.rejects(()=>adminTransaction(db,stranger,()=>assert.fail('must not run')),/Administrator/);

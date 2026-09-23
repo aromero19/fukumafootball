@@ -20,3 +20,5 @@
 
 /* Home page feature announcements. */
 .home-season{display:grid;gap:1rem;align-content:start}.feature-updates{list-style:none;padding:0;margin:1.25rem 0 0}.feature-updates li+li{border-top:1px solid var(--line);margin-top:1.1rem;padding-top:1.1rem}.feature-updates h3{font-size:1.05rem;margin:0 0 .35rem}.feature-updates p{margin:0 0 .65rem}.feature-updates .text-link{font-size:.9rem}
+
+.money-status{display:inline-grid;place-items:center;width:1.8rem;height:1.8rem;border:2px solid #237444;border-radius:50%;color:#237444;font-weight:800}.money-invite{font-size:.8rem;color:var(--blue)}.venmo-qr{display:block;width:min(100%,280px);height:auto;margin:1rem auto}.money-page{max-width:640px;margin:1rem auto}.player-form{grid-template-columns:repeat(auto-fit,minmax(140px,1fr))}

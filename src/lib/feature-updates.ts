@@ -1,6 +1,12 @@
 // Keep newest additions first. The home page displays the first five entries.
 export const featureUpdates = [
   {
+    title: "Playing for money",
+    description: "Standings now show admin-confirmed money participation. Find Angelo’s Venmo account and QR code on the new Play for Money page; status is updated manually after payment.",
+    href: "/PlayForMoney",
+    linkLabel: "Play for money",
+  },
+  {
     title: "Clearer photo uploads",
     description: "Photo uploads now show separate preview and saving steps, with helpful messages if a request takes too long.",
     href: "/profile",
@@ -24,10 +30,5 @@ export const featureUpdates = [
     href: "/history",
     linkLabel: "Browse the season archive",
   },
-  {
-    title: "Upload your pictures",
-    description: "Choose a photo from your phone or computer, preview it, and save it directly to your profile.",
-    href: "/profile",
-    linkLabel: "Upload a photo",
-  },
+
 ] as const;
