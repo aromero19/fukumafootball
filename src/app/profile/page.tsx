@@ -2,6 +2,8 @@ import Link from "next/link";
 import { queryNumber, readEntries } from "@/lib/data";
 import ProfileAvatar from "@/components/profile-avatar";
 import ProfilePhotoForm from "@/components/profile-photo-form";
+import PickReminderForm from "@/components/pick-reminder-form";
+import { createClient } from "@/lib/supabase/server";
 
 export const metadata = { title: "Profile | Fukuma Football" };
 
@@ -10,12 +12,14 @@ export default async function Profile({ searchParams }: { searchParams: Promise<
   const players = (await readEntries()).filter(player => player.active);
   const entryId = queryNumber(query.entry, 1, Number.MAX_SAFE_INTEGER);
   const player = players.find(row => row.entry_id === entryId);
+  const reminder = player ? await (await createClient()).rpc("get_pick_reminder_setting", { p_entry_id: player.entry_id }) : null;
   return <>
     <div className="section-title"><div><div className="eyebrow">Family profiles</div><h1>{player ? "Your profile" : "Choose your profile"}</h1></div></div>
-    <p>Choose your own name to update your photo. Like picks, profiles use the honor system: anyone can select a name, so please edit only your own profile.</p>
+    <p>Choose your own name to update your photo and email reminders. Like picks, profiles use the honor system: anyone can select a name, so please edit only your own profile.</p>
     {player ? <section className="card profile-editor">
       <div className="selected-profile"><h2>{player.name_first} {player.name_last}</h2><Link href="/profile">Change profile</Link></div>
       <ProfilePhotoForm key={player.entry_id} entryId={player.entry_id} photoUrl={player.photo_url} />
+      {reminder?.data && !reminder.error ? <PickReminderForm key={`reminder-${player.entry_id}`} entryId={player.entry_id} setting={reminder.data} /> : <p role="status">Reminder settings could not be loaded. Please try again shortly.</p>}
       <p><Link href={`/picks?entry=${player.entry_id}`}>Make your picks →</Link></p>
     </section> : <>
       {query.entry && <p className="status">That profile is unavailable. Choose an active player below.</p>}

@@ -1,6 +1,12 @@
 // Keep newest additions first. The home page displays the first five entries.
 export const featureUpdates = [
   {
+    title: "A friendly reminder to make your picks",
+    description: "Turn on email reminders in your Entry Profile and choose a day, time, and time zone. The default is Wednesday at 6 p.m. Mountain time. We’ll remind you before the first kickoff only if you haven’t submitted. An email address must be on file. Thanks to Ken Reed for the suggestion!",
+    href: "/profile",
+    linkLabel: "Set up pick reminders",
+  },
+  {
     title: "Your saved picks, right away",
     description: "Already submitted this week? Choose your profile to see who you picked. Use Back to edit picks to make changes while games are still open.",
     href: "/picks",
@@ -26,11 +32,5 @@ export const featureUpdates = [
   },
 
 
-  {
-    title: "Past seasons recovered",
-    description: "Recovered picks from 2016–2024 are now available. Some games and weeks are missing, so these records and totals are incomplete.",
-    href: "/history",
-    linkLabel: "Browse the season archive",
-  },
 
 ] as const;

@@ -3,6 +3,7 @@ import { readFile, readdir } from 'node:fs/promises';
 import { after, before, test } from 'node:test';
 import { PGlite } from '@electric-sql/pglite';
 import { localStack } from './helpers/local-stack.mjs';
+import { processPickReminders } from '../src/lib/pick-reminder-worker.mjs';
 
 // SQL runs in a real embedded PostgreSQL engine, never against the linked project.
 // Supabase's roles/auth.uid are emulated; Docker integration remains a release gate.
@@ -84,6 +85,92 @@ before(async () => {
   `);
 });
 after(async () => { await db?.close(); });
+
+check('reminder settings default off, validate schedules and keep contacts private', async () => {
+  await role('anon');
+  const result = (await db.query('select public.get_pick_reminder_setting(1) as setting')).rows[0].setting;
+  assert.deepEqual(result, { enabled:false, day:3, send_time:'18:00:00', timezone:'America/Denver', has_email:true });
+  await db.query("select public.update_pick_reminder_setting(1,true,3,'18:00','America/Denver')");
+  assert.equal((await db.query('select public.get_pick_reminder_setting(1) as setting')).rows[0].setting.enabled,true);
+  await rejects(() => db.query('select * from private.pick_reminder_setting'), /permission denied/);
+  await rejects(() => db.query('select * from private.pick_reminder_delivery'), /permission denied/);
+  await rejects(() => db.query("select private.due_pick_reminders(now())"), /permission denied/);
+  await rejects(() => db.query("select public.update_pick_reminder_setting(4,true,3,'18:00','America/Denver')"), /email address/);
+  await rejects(() => db.query("select public.update_pick_reminder_setting(3,true,3,'18:00','America/Denver')"), /Active player/);
+  for (const [day,time,zone] of [[7,'18:00','America/Denver'],[3,'24:00','America/Denver'],[3,'18:00:30','America/Denver'],[3,'18:00','Invalid/Zone']]) {
+    await rejects(() => db.query('select public.update_pick_reminder_setting(1,true,$1,$2,$3)', [day,time,zone]), /Invalid reminder/);
+  }
+  await db.query("select public.update_pick_reminder_setting(1,false,3,'18:00','America/Denver')");
+  assert.equal((await db.query('select public.get_pick_reminder_setting(1) as setting')).rows[0].setting.enabled,false);
+});
+
+async function reminderFixture() {
+  await db.exec("update public.week set is_current=true where year=2026 and week=1; update public.game set win_team_id=34,game_date_time='2026-09-25 00:20Z' where year=2026 and week=1");
+  await db.query("select public.update_pick_reminder_setting(1,true,3,'18:00','America/Denver')");
+}
+async function due(at) { return (await db.query('select * from private.due_pick_reminders($1)', [at])).rows; }
+
+check('reminders are due at the local schedule and never at or after first kickoff', async () => {
+  await reminderFixture();
+  assert.equal((await due('2026-09-23 23:59Z')).length,0);
+  assert.equal((await due('2026-09-24 00:00Z')).length,1);
+  assert.equal((await due('2026-09-25 00:19Z')).length,1);
+  assert.equal((await due('2026-09-25 00:20Z')).length,0);
+  // Friday is after Thursday kickoff, so the previous Friday is the due date.
+  await db.query("select public.update_pick_reminder_setting(1,true,5,'18:00','America/Denver')");
+  assert.equal((await due('2026-09-18 23:59Z')).length,0);
+  assert.equal((await due('2026-09-19 00:00Z')).length,1);
+  // Winter Mountain time is UTC-7 instead of UTC-6.
+  await db.exec("update public.game set game_date_time='2026-12-04 01:20Z' where year=2026 and week=1");
+  await db.query("select public.update_pick_reminder_setting(1,true,3,'18:00','America/Denver')");
+  assert.equal((await due('2026-12-03 00:59Z')).length,0);
+  assert.equal((await due('2026-12-03 01:00Z')).length,1);
+});
+
+check('submitted picks, opt-outs, inactive players and missing schedule/contact suppress reminders', async () => {
+  await reminderFixture();
+  for (const change of [
+    "update private.pick_reminder_setting set enabled=false",
+    "update public.entry set active=false where entry_id=1",
+    "delete from private.entry_contact where entry_id=1",
+    "update public.game set game_date_time=null where game_id=100",
+    "update public.game set win_team_id=10 where game_id=100",
+    "update public.week set is_current=false where year=2026 and week=1",
+    "update public.week set is_current=false,published=false where year=2026 and week=1",
+    "update public.season set is_current=false where year=2026",
+  ]) {
+    await db.exec('savepoint suppression');
+    await db.exec(change);
+    assert.equal((await due('2026-09-24 00:00Z')).length,0,change);
+    await db.exec('rollback to savepoint suppression; release savepoint suppression');
+  }
+  await submit({ selections: [...picks,{game_id:102,team_id:1}] });
+  assert.equal((await due('2026-09-24 00:00Z')).length,0);
+});
+
+check('reminder worker retries uncertain sends with the same payload and never repeats a sent reminder', async () => {
+  await reminderFixture();
+  await db.exec("update public.game set game_date_time=clock_timestamp()+interval '1 hour' where year=2026 and week=1");
+  await db.exec("update private.pick_reminder_setting set day=extract(dow from (clock_timestamp() at time zone 'America/Denver')-interval '1 day')::integer");
+  await db.exec("update private.email_settings set enabled=true,sender_address='league@example.test' where singleton=true");
+  // Retain the enclosing test transaction while exercising worker transactions.
+  const client = {query(sql,params) {
+    if(sql==='begin') return db.exec('savepoint worker');
+    if(sql==='commit') return db.exec('release savepoint worker');
+    if(sql==='rollback') return db.exec('rollback to savepoint worker; release savepoint worker');
+    return db.query(sql,params);
+  }};
+  const calls=[];
+  const send=async(message,id)=>{ calls.push({message,id}); if(calls.length===1) throw Error('uncertain'); };
+  assert.equal((await processPickReminders(client,send,'https://example.test')).failed,1);
+  assert.equal((await processPickReminders(client,send,'https://example.test')).sent,1);
+  assert.equal((await processPickReminders(client,send,'https://example.test')).sent,0);
+  assert.equal(calls.length,2);
+  assert.deepEqual(calls[0],calls[1]);
+  const receipt=(await db.query('select attempts,sent_at from private.pick_reminder_delivery')).rows[0];
+  assert.equal(receipt.attempts,2);
+  assert.ok(receipt.sent_at);
+});
 
 check('image buckets restrict stored types and clients cannot access upload quotas', async () => {
   const { rows } = await db.query("select id,public,file_size_limit,allowed_mime_types from storage.buckets where id in ('player-photos','team-themes') order by id");

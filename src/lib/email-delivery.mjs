@@ -1,9 +1,10 @@
 import { Client } from "pg";
 import { databaseOptions } from "./database-options.mjs";
 import { processEmailOutbox } from "./email-worker.mjs";
+import { processPickReminders } from "./pick-reminder-worker.mjs";
 
 /** @param {number} limit @param {string | null} requestId */
-export async function runEmailDelivery(limit = 25, requestId = null) {
+export async function runEmailDelivery(limit = 25, requestId = null, reminders = false) {
   const key = process.env.RESEND_API_KEY;
   if (!key) throw new Error("Email configuration missing");
   const client = new Client(databaseOptions());
@@ -17,6 +18,7 @@ export async function runEmailDelivery(limit = 25, requestId = null) {
       });
       if (!response.ok) throw new Error("Provider delivery not confirmed");
     };
+    if (reminders) return await processPickReminders(client, send, process.env.FUKUMA_SITE_URL);
     // Wait briefly for concurrent submissions/worker runs, without sending twice.
     const deadline = Date.now() + 15000;
     let result;
