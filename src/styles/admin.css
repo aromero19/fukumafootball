@@ -1,0 +1,219 @@
+.compact-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
+  gap: .75rem;
+  align-items: end;
+}
+.admin-shell {
+  display: grid;
+  gap: 1.25rem;
+}
+.admin-nav {
+  padding-bottom: .75rem;
+  border-bottom: 1px solid var(--line);
+}
+.admin-number {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: .25rem 0 1rem;
+}
+.week-form {
+  display: grid;
+  gap: .75rem;
+  align-items: end;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--line);
+}
+.result-form {
+  display: grid;
+  gap: .75rem;
+  align-items: end;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--line);
+}
+.theme-form {
+  display: grid;
+  gap: .75rem;
+  align-items: end;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--line);
+}
+.week-form {
+  grid-template-columns: 1fr auto 1fr auto;
+}
+.result-form {
+  grid-template-columns: 1.5fr 1fr auto auto;
+}
+.theme-form {
+  grid-template-columns: 1fr 1.5fr .6fr auto auto auto;
+}
+.check-label {
+  display: flex !important;
+  align-items: center;
+  gap: .4rem;
+}
+.check-label input {
+  width: auto !important;
+}
+@media (max-width:650px) {
+  .week-form {
+    grid-template-columns: 1fr 1fr;
+  }
+  .result-form {
+    grid-template-columns: 1fr 1fr;
+  }
+  .theme-form {
+    grid-template-columns: 1fr 1fr;
+  }
+  .result-form>span {
+    grid-column: 1/-1;
+  }
+}
+
+.admin-fields {
+  display: contents;
+}
+.form-feedback {
+  grid-column: 1/-1;
+  margin: 0;
+  color: var(--blue);
+}
+.admin-fields:disabled {
+  opacity: .7;
+}
+.player-add>summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--blue);
+}
+.player-photo-details>summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--blue);
+}
+.player-directory-notes>summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--blue);
+}
+.player-add[open]>summary {
+  margin-bottom: 1rem;
+}
+.player-directory-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.player-directory-heading h2 {
+  margin: 0;
+}
+.player-directory-heading>span {
+  font-size: .85rem;
+}
+.player-filters {
+  display: grid;
+  grid-template-columns: minmax(200px,2fr) 1fr 1fr;
+  gap: .75rem;
+  margin-top: 1rem;
+}
+.player-filters input {
+  width: 100%;
+  min-width: 0;
+  padding: .55rem .65rem;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  font: inherit;
+  color: var(--ink);
+}
+.player-directory-help {
+  font-size: .85rem;
+  margin: .75rem 0;
+}
+.admin-player-table {
+  font-size: .875rem;
+  min-width: 720px;
+}
+.admin-player-table th {
+  padding: .55rem .65rem;
+  vertical-align: middle;
+}
+.admin-player-table thead {
+  background: #edf3f7;
+}
+.admin-player-table tbody th {
+  text-transform: none;
+  font-size: inherit;
+  color: var(--ink);
+  font-weight: 700;
+}
+.admin-player-table tbody tr:not(.player-editor-row):hover {
+  background: #f6f9fb;
+}
+.admin-player-table tr[hidden] {
+  display: none;
+}
+.player-email {
+  overflow-wrap: anywhere;
+  max-width: 300px;
+}
+.player-status {
+  display: inline-block;
+  border-radius: 4px;
+  padding: .15rem .45rem;
+  font-size: .75rem;
+  background: #edf0f2;
+  color: #53616d;
+  white-space: nowrap;
+}
+.player-status.is-active {
+  background: #e5f3ea;
+  color: #246240;
+}
+.player-paid {
+  color: #246240;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.player-edit-form {
+  grid-template-columns: 1fr 1fr 1.5fr;
+  gap: .65rem;
+  align-items: end;
+}
+.player-edit-form input {
+  padding: .5rem;
+  border-radius: 4px;
+}
+.player-edit-form .button {
+  justify-self: end;
+}
+.player-edit-form .form-feedback:empty {
+  display: none;
+}
+.player-photo-details {
+  margin-top: .8rem;
+  font-size: .85rem;
+}
+.player-photo-editor {
+  max-width: 580px;
+  padding-top: 1rem;
+}
+.player-directory-notes {
+  margin-top: 1rem;
+  font-size: .8rem;
+}
+@media (max-width:650px) {
+  .player-filters {
+    grid-template-columns: 1fr 1fr;
+  }
+  .player-filters label:first-child {
+    grid-column: 1/-1;
+  }
+  .player-directory-heading {
+    align-items: baseline;
+  }
+  .player-directory-heading h2 {
+    font-size: 1.3rem;
+  }
+}

@@ -1,0 +1,332 @@
+.weekly-games {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+.matchup-heading {
+  font-size: 1.15rem;
+  margin: 0;
+}
+.matchup-teams {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.team-picks {
+  min-width: 0;
+  background: #f6f9fa;
+  border-radius: 14px;
+  padding: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.team-picks::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--team-bg);
+}
+
+.family-game .winning-team {
+  background: #edf7f0;
+  border: 2px solid var(--fff-turf);
+}
+.pick-percentage {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--blue);
+}
+.pick-meter {
+  height: 6px;
+  background: var(--line);
+  border-radius: 6px;
+  overflow: hidden;
+  margin: .6rem 0 1rem;
+}
+.pickers {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+.pickers li {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  font-size: .8rem;
+  overflow-wrap: anywhere;
+}
+.team-picks.your-pick {
+  outline: 2px solid var(--blue);
+}
+.submission-summary {
+  margin-bottom: 1.5rem;
+}
+@media (max-width:450px) {
+  .matchup-teams {
+    gap: .6rem;
+  }
+  .team-picks {
+    padding: .65rem;
+  }
+}
+
+.result-summary {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+.result-summary .card {
+  padding: 1rem 1.25rem;
+}
+.summary-correct strong {
+  color: #246240;
+}
+.summary-incorrect strong {
+  color: #a52a38;
+}
+.winner-label {
+  color: #246240;
+  font-size: .8rem;
+  font-weight: 650;
+}
+@media (max-width:520px) {
+  .results-filters label:last-of-type {
+    flex-basis: 100%;
+  }
+  .result-summary {
+    grid-template-columns: repeat(2,1fr);
+    gap: .65rem;
+  }
+}
+
+.results-intro {
+  margin: .3rem 0 .75rem;
+  font-size: .9rem;
+}
+.results-page .results-filters {
+  margin: .75rem 0;
+  padding: .7rem .9rem;
+  gap: .7rem;
+}
+.results-page .result-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin: .65rem 0;
+}
+.results-page .result-summary .card {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  padding: .45rem .8rem;
+}
+.results-page .result-summary strong {
+  font-size: 1.1rem;
+}
+.results-note {
+  font-size: .75rem;
+  margin: .6rem 0;
+}
+.results-games {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: .8rem;
+  align-items: start;
+}
+.family-game {
+  min-width: 0;
+}
+.family-game .matchup-heading {
+  margin: .5rem 0 0;
+}
+.family-game .game-meta {
+  gap: .5rem;
+  flex-wrap: wrap;
+}
+.team-pick-heading {
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+}
+.team-pick-heading .team-image {
+  margin: 0;
+  flex-shrink: 0;
+}
+.team-side-label {
+  font-size: .75rem;
+  color: var(--muted);
+}
+.your-pick-label {
+  font-size: .75rem;
+  color: var(--blue);
+  font-weight: 750;
+  margin-top: .35rem;
+}
+.family-game .winning-team {
+  background: #edf7f0;
+}
+.winning-team .pick-meter span {
+  background: #287547;
+}
+.family-game .pickers li {
+  min-width: 0;
+}
+.pickers .selected-picker {
+  font-weight: 750;
+  background: #e3eef8;
+  border-radius: 6px;
+  padding: .2rem .35rem;
+}
+.pickers small {
+  display: block;
+  font-size: .65rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+.results-games .family-game {
+  padding: .85rem;
+}
+.results-games .game-meta {
+  font-size: .7rem;
+}
+.results-games .matchup-heading {
+  font-size: .9rem;
+}
+.results-games .matchup-teams {
+  gap: .65rem;
+  margin-top: .7rem;
+}
+.results-games .team-picks {
+  padding: .7rem;
+  border-radius: 8px;
+}
+.results-games .team-image {
+  width: 44px;
+  height: 44px;
+}
+.results-games .pick-count {
+  margin-top: .35rem;
+  font-size: .75rem;
+}
+.results-games .pick-percentage {
+  font-size: 1.2rem;
+}
+.results-games .pick-meter {
+  height: 4px;
+  margin: .35rem 0 .65rem;
+}
+.results-games .pickers {
+  display: grid;
+  gap: .35rem;
+}
+.results-games .pickers li {
+  font-size: .72rem;
+  gap: .4rem;
+  line-height: 1.2;
+}
+.results-games .profile-avatar.small {
+  width: 27px;
+  height: 27px;
+}
+.no-picks {
+  font-size: .75rem;
+  margin: .5rem 0 0;
+}
+@media (max-width:900px) {
+  .results-games {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width:520px) {
+  .results-page .results-filters {
+    gap: .5rem;
+    padding: .65rem;
+  }
+  .results-page .results-filters label:last-of-type {
+    flex-basis: calc(50% - .5rem);
+  }
+  .results-page .results-filters .button {
+    flex: 1;
+    font-size: .8rem;
+    padding: .65rem;
+  }
+  .results-games .team-pick-heading {
+    gap: .4rem;
+  }
+  .results-games .team-pick-heading h3 {
+    font-size: .8rem;
+  }
+  .results-games .team-image {
+    width: 36px;
+    height: 36px;
+  }
+  .results-games .team-picks {
+    padding: .55rem;
+  }
+  .results-games .pickers li {
+    font-size: .7rem;
+  }
+  .results-page .result-summary .card {
+    padding: .35rem .6rem;
+  }
+  .results-page .result-summary span {
+    font-size: .7rem;
+  }
+}
+
+.results-games .pickers {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: .4rem .3rem;
+}
+.results-games .pickers li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 56px;
+  gap: .2rem;
+  font-size: .62rem;
+  line-height: 1.15;
+  padding: .2rem 0;
+}
+.results-games .pickers li>span {
+  width: 100%;
+  overflow-wrap: anywhere;
+}
+.results-games .pickers small {
+  font-size: .56rem;
+}
+.results-games .profile-avatar.small {
+  width: 32px;
+  height: 32px;
+}
+.results-games .pickers li,
+.results-games .pickers small,
+.results-games .game-meta,
+.results-games .pick-count,
+.results-games .team-side-label,
+.results-games .your-pick-label,
+.results-games .winner-label,
+.results-games .no-picks {
+  font-size: 12px;
+}
+.results-games .selected-picker .profile-avatar {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+.results-page .result-summary .card span {
+  font-size: 12px;
+}

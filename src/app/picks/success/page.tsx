@@ -27,6 +27,7 @@ export default async function PicksSuccess({ searchParams }: {
       {/* Reload saved picks instead of restoring a cached form. */}
       <a className="button" href={`/picks?${editQuery}`}>Back to edit picks</a>
       <Link className="button secondary" href="/">Back to home</Link>
+      <Link className="text-link" href="/picks?choose=1">Not you? Change profile</Link>
     </div>
   </section><WeeklyPickSummary year={year} week={week} entry={entry} /></>;
 }

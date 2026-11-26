@@ -1,36 +1,38 @@
 // Keep newest additions first. The home page displays the first five entries.
 export const featureUpdates = [
   {
+    title: "A simpler profile page",
+    description:
+      "Your profile now shows its two settings, photo and reminder emails, at a glance. Tap one to change it. Photos straight from your phone are welcome, and the save button lights up when yours is ready.",
+    href: "/profile",
+    linkLabel: "See your settings",
+  },
+  {
+    title: "Straight to your picks",
+    description:
+      "Your phone or computer now remembers the profile you chose and opens Picks to it. Tap Change to switch. You can also add the site to your home screen from your browser menu.",
+    href: "/picks",
+    linkLabel: "Open my picks",
+  },
+  {
+    title: "New phone-friendly look",
+    description:
+      "We've updated the site to work better on your phone. Team colors are now used across the site to make it more vibrant and fun!",
+    href: "/picks",
+    linkLabel: "See the new design",
+  },
+  {
     title: "A friendly reminder to make your picks",
-    description: "Turn on email reminders in your Entry Profile and choose a day, time, and time zone. The default is Wednesday at 6 p.m. Mountain time. We’ll remind you before the first kickoff only if you haven’t submitted. An email address must be on file. Thanks to Ken Reed for the suggestion!",
+    description:
+      "Turn on email reminders in your Entry Profile and choose a day, time, and time zone. The default is Wednesday at 6 p.m. Mountain time. We’ll remind you before the first kickoff only if you haven’t submitted. An email address must be on file. Thanks to Ken Reed for the suggestion!",
     href: "/profile",
     linkLabel: "Set up pick reminders",
   },
   {
     title: "Your saved picks, right away",
-    description: "Already submitted this week? Choose your profile to see who you picked. Use Back to edit picks to make changes while games are still open.",
+    description:
+      "Already submitted this week? Choose your profile to see who you picked. Use Back to edit picks to make changes while games are still open.",
     href: "/picks",
     linkLabel: "See your picks",
   },
-  {
-    title: "One clear profile photo",
-    description: "See your current photo separately from replacement links. Saving a new image clears pending choices, and Remove photo restores the silhouette.",
-    href: "/profile",
-    linkLabel: "Update your photo",
-  },
-  {
-    title: "See the whole family’s results",
-    description: "Results opens to the latest week with recorded results. See team images, winners, and everyone’s picks, with your selected player first.",
-    href: "/results",
-    linkLabel: "See weekly results",
-  },
-  {
-    title: "Playing for money",
-    description: "Standings now show admin-confirmed money participation. Find Angelo’s Venmo account and QR code on the new Play for Money page; status is updated manually after payment.",
-    href: "/PlayForMoney",
-    linkLabel: "Play for money",
-  },
-
-
-
 ] as const;

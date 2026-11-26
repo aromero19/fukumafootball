@@ -33,15 +33,29 @@ export default function ProfilePhotoForm({ entryId, photoUrl, admin = false }: {
       return result;
     } finally { setSaving(false); }
   }
+  const linkField = <>
+    <label>Or replace with an image link<input name="photo_url" type="url" maxLength={2048} value={replacementUrl} onChange={event => setReplacementUrl(event.target.value)} placeholder="https://example.com/my-photo.jpg" aria-describedby={`photo-help-${entryId}`} /></label>
+    <p id={`photo-help-${entryId}`} className="muted">Upload a photo or paste a publicly accessible HTTPS image link. Saving replaces your current photo and clears the replacement field. Only one photo is saved for your profile.</p>
+  </>;
+  const saveButton = <button className="button" name="photo_action" value="replace" type="submit" disabled={!replacementUrl.trim()}>Save replacement link</button>;
+  const removeButton = <button className="button secondary" name="photo_action" value="remove" type="submit" formNoValidate disabled={!savedUrl}>Remove photo</button>;
   return <div className="form-stack">
-    <div className="profile-photo-preview"><ProfileAvatar key={savedUrl} url={httpsImageUrl(savedUrl)} /><span className="muted">{savedUrl ? "Current saved photo" : "No saved photo"}</span></div>
+    {/* The profile page already shows the saved photo in its header; admin has no header. */}
+    {admin && <div className="profile-photo-preview"><ProfileAvatar key={savedUrl} url={httpsImageUrl(savedUrl)} /><span className="muted">{savedUrl ? "Current saved photo" : "No saved photo"}</span></div>}
     <ImageUpload key={revision} profile destination={`kind=${admin ? 'admin-profile' : 'profile'}&entry=${entryId}`} disabled={saving} onSaved={url => { saved(url); setUploadMessage("Your new photo is saved. Previous image choices have been cleared."); }} onBusyChange={setUploading} />
     {uploadMessage && <p role="status">{uploadMessage}</p>}
     <fieldset disabled={uploading}><AdminForm action={saveLink} className="form-stack">
       <input type="hidden" name="entry_id" value={entryId} />
-      <label>Or replace with an image link<input name="photo_url" type="url" maxLength={2048} value={replacementUrl} onChange={event => setReplacementUrl(event.target.value)} placeholder="https://example.com/my-photo.jpg" aria-describedby={`photo-help-${entryId}`} /></label>
-      <p id={`photo-help-${entryId}`} className="muted">Upload a photo or paste a publicly accessible HTTPS image link. Saving replaces your current photo and clears the replacement field. Only one photo is saved for your profile.</p>
-      <div className="toolbar"><button className="button" name="photo_action" value="replace" type="submit" disabled={!replacementUrl.trim()}>Save replacement link</button><button className="button secondary" name="photo_action" value="remove" type="submit" formNoValidate disabled={!savedUrl}>Remove photo</button></div>
+      {admin ? <>
+        {linkField}
+        <div className="toolbar">{saveButton}{removeButton}</div>
+      </> : <>
+        <details className="setting-more">
+          <summary>Use an image link instead</summary>
+          <div className="form-stack">{linkField}{saveButton}</div>
+        </details>
+        {savedUrl && removeButton}
+      </>}
     </AdminForm></fieldset>
   </div>;
 }

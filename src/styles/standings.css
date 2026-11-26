@@ -1,0 +1,124 @@
+.money-status {
+  display: inline-grid;
+  place-items: center;
+  width: 1.8rem;
+  height: 1.8rem;
+  border: 2px solid #237444;
+  border-radius: 50%;
+  color: #237444;
+  font-weight: 800;
+}
+.money-invite {
+  font-size: .8rem;
+  color: var(--blue);
+}
+.leaderboard-table a {
+  color: var(--ink);
+  font-weight: 650;
+  text-decoration: none;
+}
+.leaderboard-table a:hover {
+  text-decoration: underline;
+}
+.leaderboard-table .numeric {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.leaderboard-table .score {
+  font-size: 1.3rem;
+  font-weight: 750;
+}
+.leader-rank {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #edf2f6;
+  font-weight: 750;
+}
+.rank-1 {
+  background: #fff0bf;
+  color: #76530b;
+}
+.rank-2 {
+  background: #e6edf3;
+  color: #344b5e;
+}
+.rank-3 {
+  background: #f5e6dc;
+  color: #81522b;
+}
+.leader-row {
+  background: #fbfcfd;
+}
+
+/* Mobile responsive styles */
+@media (max-width: 599px) {
+  .leaderboard-table {
+    display: block;
+    min-width: 0;
+    width: 100%;
+    overflow: visible;
+  }
+
+  .leaderboard-table tbody {
+    display: block;
+  }
+
+  .leaderboard-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+
+  .leaderboard-table tbody tr {
+    display: grid;
+    grid-template-columns: 40px minmax(0, 1fr) 44px 32px;
+    align-items: center;
+    gap: 8px;
+    min-height: 56px;
+  }
+
+  .leaderboard-table tbody tr td {
+    display: block;
+    padding: 4px 0;
+    border: 0;
+  }
+}
+
+/* Outside media query */
+.rank-1 {
+  background: var(--fff-gold);
+  color: var(--fff-ink);
+}
+
+.rank-2 {
+  background: #cfd8e3;
+  color: var(--ink);
+}
+
+.rank-3 {
+  background: #d9a06b;
+  color: var(--fff-ink);
+}
+
+.table-scroll {
+  padding: 4px 12px;
+}
+
+.leaderboard-table tbody tr.is-me {
+  background: #fff1c2;
+  box-shadow: inset 5px 0 var(--fff-gold);
+}
+
+.you-tag {
+  padding: 1px 8px;
+  border-radius: 99px;
+  background: var(--fff-navy);
+  color: var(--fff-white);
+  font-size: 12px;
+  font-weight: 800;
+}

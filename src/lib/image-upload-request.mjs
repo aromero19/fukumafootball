@@ -1,3 +1,13 @@
+// Profile photos are cropped to 512px before upload, so large camera originals are fine.
+export const imageSizeLimitMb = profile => profile ? 15 : 5;
+
+// Some phones label JPEG files oddly or not at all, so .jpg and .jpeg names count too.
+export function imageFileProblem(file, profile) {
+  const known = ["image/jpeg", "image/jpg", "image/pjpeg", "image/png", "image/webp"].includes(file.type) || /\.jpe?g$/i.test(file.name ?? "");
+  const limit = imageSizeLimitMb(profile);
+  return known && file.size <= limit * 1024 * 1024 ? "" : `Choose a JPEG, PNG, or WebP smaller than ${limit} MB.`;
+}
+
 export async function withImageTimeout(operation, milliseconds, message, onTimeout = () => {}) {
   let timer;
   try {

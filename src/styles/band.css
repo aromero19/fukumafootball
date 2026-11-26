@@ -1,0 +1,109 @@
+/* Colored page headers, shared by Picks, Standings, Results and Profile. */
+.page-shell .page-band {
+  margin: 0 0 10px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: var(--fff-red);
+  color: var(--fff-white);
+}
+
+.page-shell .page-band.is-standings {
+  background: var(--accent-standings);
+  color: var(--fff-ink);
+}
+
+.page-shell .page-band.is-results {
+  background: var(--accent-results);
+}
+
+.page-shell .page-band.is-profile {
+  background: var(--fff-navy);
+}
+
+.page-shell .page-band h1 {
+  margin: 0;
+  color: inherit;
+  font-size: 1.35rem;
+  line-height: 1.25;
+}
+
+.band-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.band-player {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.page-shell .page-band .band-player h1 {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  font-size: 1.1rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.band-player a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 14px;
+  border-radius: 99px;
+  background: var(--fff-white);
+  color: var(--fff-red);
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+/* Filter labels are hidden visually; screen readers still announce them. */
+.page-shell .page-band .season-filters {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 260px));
+  gap: 8px;
+  margin: 8px 0 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.page-shell .page-band .season-filters label {
+  display: block;
+  min-width: 0;
+  font-size: 0;
+}
+
+.page-shell .page-band .season-filters label.filter-player {
+  grid-column: 1 / -1;
+}
+
+.page-shell .page-band .season-filters select {
+  width: 100%;
+  min-height: 36px;
+  padding: 0.3rem 0.7rem;
+  border: 0;
+  border-radius: 8px;
+  background: var(--fff-white);
+  color: var(--fff-ink);
+  font-size: 0.9rem;
+}
+
+.page-shell .page-band :focus-visible {
+  outline: 3px solid var(--fff-navy);
+  outline-offset: 2px;
+}
+
+.page-shell .page-band.is-profile :focus-visible {
+  outline-color: var(--fff-gold);
+}
+
+.page-band + p {
+  margin-top: 0;
+  margin-bottom: 14px;
+}

@@ -1,0 +1,118 @@
+.history-page {
+  display: grid;
+  gap: 1.3rem;
+}
+
+/* Purple accent for history */
+.history-page details {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+.history-page details[open] {
+  background-color: var(--fff-sky);
+}
+
+.history-page summary {
+  cursor: pointer;
+  padding: 1.2rem;
+  background-color: var(--fff-purple);
+  color: white;
+  font-weight: bold;
+}
+
+.history-page h1 {
+  color: var(--fff-purple);
+}
+
+.history-page .history-stats .card {
+  border-top: 6px solid var(--fff-purple);
+}
+
+.history-page .history-chart circle[fill="var(--blue)"] {
+  fill: var(--fff-purple);
+}
+
+.history-page .history-chart line[stroke="var(--blue)"] {
+  stroke: var(--fff-purple);
+}
+.history-stats small {
+  color: var(--muted);
+}
+.history-badge {
+  font-size: .75rem;
+  font-weight: normal;
+  margin-left: .75rem;
+  background: #e7eff5;
+  padding: .4rem .6rem;
+  border-radius: 4px;
+}
+.history-chart svg {
+  display: block;
+  width: 100%;
+  max-height: 360px;
+  overflow: visible;
+}
+.history-chart a:focus circle {
+  stroke: var(--red);
+  stroke-width: 3;
+}
+.history-chart-detail {
+  min-height: 2.5em;
+  font-size: .9rem;
+}
+.history-weeks {
+  display: flex;
+  gap: .4rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.2rem;
+}
+.history-weeks a {
+  display: grid;
+  place-items: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 4px;
+}
+.history-page caption {
+  text-align: left;
+  padding-bottom: 1rem;
+  color: var(--muted);
+}
+.history-plot {
+  overflow-x: auto;
+}
+.history-scroll-hint {
+  display: none;
+}
+.history-chart {
+  min-width: 0;
+}
+@media (max-width:650px) {
+  .history-plot svg {
+    min-width: 640px;
+  }
+  .history-scroll-hint {
+    display: block;
+    font-size: .85rem;
+  }
+}
+
+/* Keep each archive year to one compact bar. */
+.history-page summary {
+  display: list-item;
+  padding: 0.7rem 1rem;
+}
+
+.history-page summary h3,
+.history-page summary p {
+  display: inline;
+  margin: 0 0.5rem 0 0;
+  color: inherit;
+}
+
+.history-page details > :not(summary) {
+  margin-inline: 0.75rem;
+}

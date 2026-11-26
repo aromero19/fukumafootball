@@ -2,14 +2,15 @@
 
 import { useRouter } from "next/navigation";
 
-type Props = { path: string; seasons: number[]; weeks: number[]; year: number; week?: number; entry?: number; seasonTotal?: boolean };
+type Props = { path: string; seasons: number[]; weeks: number[]; year: number; week?: number; entry?: number; seasonTotal?: boolean; choose?: boolean };
 
-export default function SeasonFilters({ path, seasons, weeks, year, week, entry, seasonTotal }: Props) {
+export default function SeasonFilters({ path, seasons, weeks, year, week, entry, seasonTotal, choose }: Props) {
   const router = useRouter();
   function navigate(nextYear: string, nextWeek?: string) {
     const query = new URLSearchParams({ year: nextYear });
     if (nextWeek) query.set("week", nextWeek);
     if (entry) query.set("entry", String(entry));
+    if (choose) query.set("choose", "1");
     router.push(`${path}?${query}`);
   }
   return <div className="season-filters">

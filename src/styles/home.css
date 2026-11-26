@@ -1,0 +1,251 @@
+.hero {
+  padding: 2.5rem 0;
+}
+.text-link.light-link {
+  color: #fff;
+  border-color: rgba(255,255,255,.5);
+}
+.home-hero {
+  position: relative;
+  isolation: isolate;
+  min-height: 360px;
+  max-height: 260px;
+  border-radius: 12px;
+  overflow: hidden;
+  padding: clamp(2rem,7vw,5.5rem);
+  display: flex;
+  align-items: center;
+  color: #fff;
+  background-image: linear-gradient(90deg,rgba(5,26,44,.94) 0%,rgba(7,47,79,.82) 48%,rgba(7,47,79,.18) 100%),url('/legacy/football-hero.jpg');
+  background-size: cover;
+  background-position: center;
+}
+.home-hero:after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 7px;
+  background: linear-gradient(90deg,var(--red) 0 33%,#fff 33% 66%,var(--blue) 66%);
+}
+.hero-content {
+  max-width: 680px;
+}
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  margin-top: 1.8rem;
+}
+.season-stamp {
+  position: absolute;
+  right: clamp(1.2rem,5vw,4rem);
+  bottom: 2.5rem;
+  width: 112px;
+  height: 112px;
+  border: 1px solid rgba(255,255,255,.38);
+  border-radius: 50%;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  transform: rotate(-7deg);
+}
+.season-stamp:before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border: 1px dashed rgba(255,255,255,.32);
+  border-radius: 50%;
+}
+.home-grid {
+  grid-template-columns: 1.1fr .9fr;
+  margin-top: 1rem;
+}
+.standings-card {
+  background: var(--blue-dark);
+  color: #fff;
+}
+.standings-card .eyebrow {
+  color: #f37a70;
+}
+.standings-card .table td {
+  border-color: rgba(255,255,255,.13);
+}
+.home-top-three {
+  margin-top: 1rem;
+}
+.medal-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.medal-card {
+  background: var(--blue-dark);
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.medal-card:first-child {
+  background: linear-gradient(to bottom, var(--gold) 0%, var(--gold) 30%, var(--blue-dark) 30%, var(--blue-dark) 100%);
+}
+.medal-card:nth-child(2) {
+  background: linear-gradient(to bottom, var(--cream) 0%, var(--cream) 30%, var(--blue-dark) 30%, var(--blue-dark) 100%);
+}
+.medal-card:nth-child(3) {
+  background: linear-gradient(to bottom, #a56f4e 0%, #a56f4e 30%, var(--blue-dark) 30%, var(--blue-dark) 100%);
+}
+.medal-position {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+.medal-card h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1.1rem;
+}
+.medal-card .muted {
+  margin: 0;
+  font-size: 0.9rem;
+}
+.feature-updates {
+  list-style: none;
+  padding: 0;
+  margin: 1.25rem 0 0;
+}
+.feature-updates li+li {
+  border-top: 1px solid var(--line);
+  margin-top: 1.1rem;
+  padding-top: 1.1rem;
+}
+.feature-updates .text-link {
+  font-size: .9rem;
+}
+.home-hero {
+  min-height: 360px;
+  padding: 3rem 3.5rem;
+}
+.home-hero h1 {
+  font-size: clamp(2.8rem,5.4vw,4.5rem);
+  line-height: 1.02;
+}
+.home-grid {
+  display: block;
+  margin-top: 1.25rem;
+}
+.home-season {
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+.home-news {
+  margin-top: 1.25rem;
+}
+.feature-updates {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(230px,1fr));
+  gap: 1.5rem;
+}
+.feature-updates li+li {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.standings-card .muted {
+  color: #c1d2df;
+}
+@media (max-width:800px) {
+  .home-hero {
+    padding: 2rem;
+    min-height: 350px;
+    max-height: 260px;
+  }
+  .home-season {
+    grid-template-columns: 1fr;
+  }
+  .season-stamp {
+    display: none;
+  }
+}
+
+@media (max-width:520px) {
+  .home-hero {
+    min-height: 340px;
+    max-height: 260px;
+    padding: 1.75rem 1.25rem;
+  }
+  .home-hero h1 {
+    font-size: 2.7rem;
+  }
+  .hero-actions {
+    gap: 1rem;
+  }
+}
+
+/* Review fixes */
+.home-top-three .medal-card {
+  background: var(--fff-white);
+  color: var(--fff-ink);
+  border-top: 6px solid var(--fff-gold);
+  border-radius: 14px;
+}
+.home-top-three .medal-card h3,
+.home-top-three .medal-card p {
+  color: var(--fff-ink);
+}
+.home-top-three .medal-card:nth-child(2) {
+  border-top-color: #cfd8e3;
+}
+.home-top-three .medal-card:nth-child(3) {
+  border-top-color: #d9a06b;
+}
+
+@media (max-width: 600px) {
+  .page-shell .home-hero {
+    min-height: 0;
+    height: auto;
+    padding: 18px 16px 22px;
+  }
+  .page-shell .home-hero h1 {
+    font-size: 1.9rem;
+    margin: 4px 0 8px;
+  }
+  .home-hero .hero-actions {
+    flex-direction: row;
+    align-items: center;
+    margin-top: 10px;
+  }
+}
+
+.feature-updates li {
+  border-left: 5px solid var(--fff-red);
+  padding-left: 12px;
+}
+.feature-updates li:nth-child(4n+2) {
+  border-left-color: var(--fff-gold);
+}
+.feature-updates li:nth-child(4n+3) {
+  border-left-color: var(--fff-turf);
+}
+.feature-updates li:nth-child(4n+4) {
+  border-left-color: var(--fff-purple);
+}
+
+/* Color every announcement, not only the first. */
+.home-news .feature-updates li {
+  border-left: 5px solid var(--fff-red);
+  padding-left: 12px;
+}
+
+.home-news .feature-updates li:nth-child(4n + 2) {
+  border-left-color: var(--fff-gold);
+}
+
+.home-news .feature-updates li:nth-child(4n + 3) {
+  border-left-color: var(--fff-turf);
+}
+
+.home-news .feature-updates li:nth-child(4n + 4) {
+  border-left-color: var(--fff-purple);
+}

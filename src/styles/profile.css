@@ -1,0 +1,148 @@
+/* Profile: two settings as tap-to-open rows. */
+.settings {
+  display: grid;
+  gap: 10px;
+  max-width: 640px;
+}
+
+.page-shell .settings-heading {
+  margin: 4px 0 0;
+  color: var(--fff-navy);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.setting {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--fff-white);
+}
+
+.setting > summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: 12px;
+  min-height: 64px;
+  padding: 10px 14px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.setting > summary::-webkit-details-marker {
+  display: none;
+}
+
+.setting > summary::after {
+  content: "";
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  width: 9px;
+  height: 9px;
+  margin-right: 4px;
+  border-right: 3px solid var(--fff-navy);
+  border-bottom: 3px solid var(--fff-navy);
+  transform: rotate(45deg);
+}
+
+.setting[open] > summary::after {
+  transform: rotate(225deg);
+}
+
+.setting-name {
+  grid-column: 1;
+  color: var(--fff-ink);
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.setting-state {
+  grid-column: 1;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.setting-body {
+  padding: 12px 14px;
+  border-top: 1px solid var(--line);
+}
+
+.setting-body p {
+  margin: 0;
+}
+
+.setting-body fieldset {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.setting-body input[type="file"] {
+  max-width: 100%;
+}
+
+.setting-body [role="status"]:empty,
+.setting-body .form-feedback:empty {
+  display: none;
+}
+
+.setting-body .check-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+}
+
+.setting-body .check-row input {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  accent-color: var(--fff-turf);
+}
+
+.field-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.field-pair input,
+.field-pair select {
+  min-width: 0;
+  min-height: 46px;
+}
+
+.setting-more > summary {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--blue);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.setting-more > summary::before {
+  content: "+";
+}
+
+.setting-more[open] > summary::before {
+  content: "−";
+}
+
+.setting-more > :not(summary) {
+  margin-top: 8px;
+}
+
+.settings-picks {
+  margin-top: 4px;
+}
+
+.page-shell .settings-note {
+  margin: 0;
+  font-size: 0.78rem;
+  text-align: center;
+}

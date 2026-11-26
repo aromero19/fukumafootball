@@ -1,0 +1,28 @@
+:root {
+  /* Current site colors */
+  --ink: #102438;
+  --muted: #526679;
+  --cream: #f3f6f8;
+  --blue: #0d4f84;
+  --gold: #f1b92b;
+  --line: #d8e0e6;
+  --blue-dark: #082f50;
+  --red: #c82d3a;
+  --white: #fff;
+  --radius: 12px;
+
+  /* Redesign tokens */
+  --fff-navy: #0b2545;
+  --fff-red: #c8102e;
+  --fff-gold: #ffb703;
+  --fff-turf: #11775f;
+  --fff-purple: #5b3a99;
+  --fff-sky: #eaf2ff;
+  --fff-ink: #0b1220;
+  --fff-white: #ffffff;
+  --accent-picks: var(--fff-red);
+  --accent-standings: var(--fff-gold);
+  --accent-results: var(--fff-turf);
+  --accent-history: var(--fff-purple);
+  --accent-pages: var(--fff-navy);
+}

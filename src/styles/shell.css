@@ -1,0 +1,238 @@
+/* Header, navigation and footer. Phone: slim top bar plus bottom tabs. */
+.site-header {
+  display: block;
+  position: relative;
+  z-index: 20;
+  background: var(--fff-navy);
+}
+
+.site-header .header-inner {
+  width: min(1180px, 100% - 2rem);
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 68px;
+}
+
+.site-header .brand {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  color: var(--fff-white);
+  text-decoration: none;
+}
+
+.site-header .brand img {
+  width: 40px;
+  height: 40px;
+  padding: 2px;
+  object-fit: contain;
+  border-radius: 9px;
+  background: var(--fff-white);
+}
+
+.site-header .brand strong {
+  color: var(--fff-white);
+}
+
+.site-header .brand small {
+  color: var(--fff-gold);
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.site-nav [data-section] {
+  --tab-accent: var(--fff-red);
+  --tab-text: var(--fff-white);
+}
+
+.site-nav [data-section="standings"] {
+  --tab-accent: var(--accent-standings);
+  --tab-text: var(--fff-ink);
+}
+
+.site-nav [data-section="results"] {
+  --tab-accent: var(--accent-results);
+}
+
+.site-nav [data-section="history"] {
+  --tab-accent: var(--accent-history);
+}
+
+/* Navy accent would vanish on the navy bar, so these pages use a lighter blue. */
+.site-nav [data-section="pages"] {
+  --tab-accent: #1d5f9e;
+}
+
+.site-header .site-nav a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.5rem 0.7rem;
+  border-radius: 8px;
+  color: var(--fff-white);
+  font-size: 0.86rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.site-header .site-nav a:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.site-header .site-nav a:focus-visible,
+.site-header .site-nav button:focus-visible {
+  outline: 3px solid var(--fff-gold);
+  outline-offset: -3px;
+}
+
+.site-header .site-nav a[aria-current="page"] {
+  background: var(--tab-accent);
+  color: var(--tab-text);
+}
+
+.site-nav svg {
+  display: none;
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+}
+
+.site-nav .nav-more,
+.site-nav .nav-more-panel {
+  display: none;
+}
+
+.page-shell {
+  width: min(1180px, 100% - 2rem);
+  margin: auto;
+  padding: 1.5rem 0 4rem;
+}
+
+footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 2.2rem 1rem;
+  background: var(--fff-navy);
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+footer a {
+  margin-left: 1rem;
+  color: var(--fff-white);
+}
+
+@media (max-width: 799px) {
+  body {
+    padding-bottom: calc(60px + env(safe-area-inset-bottom));
+  }
+
+  .site-header .header-inner {
+    width: calc(100% - 1.5rem);
+    height: 56px;
+    min-height: 56px;
+  }
+
+  .site-header .brand img {
+    width: 36px;
+    height: 36px;
+  }
+
+  .site-header .site-nav {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 30;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    padding-bottom: env(safe-area-inset-bottom);
+    background: var(--fff-navy);
+    box-shadow: 0 -4px 14px rgba(11, 37, 69, 0.25);
+  }
+
+  .site-nav svg {
+    display: block;
+  }
+
+  .site-header .site-nav > a,
+  .site-nav .nav-more {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    height: 60px;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    color: #c4d3e4;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .site-header .site-nav > a[aria-current="page"] {
+    color: var(--tab-text);
+  }
+
+  .site-header .site-nav > a.nav-secondary {
+    display: none;
+  }
+
+  .site-nav .nav-more {
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .site-nav .nav-more.is-current,
+  .site-nav .nav-more[aria-expanded="true"] {
+    background: var(--tab-accent);
+    color: var(--tab-text);
+  }
+
+  .site-nav .nav-more-panel {
+    position: absolute;
+    right: 8px;
+    bottom: calc(100% + 8px);
+    display: grid;
+    gap: 4px;
+    min-width: 190px;
+    padding: 8px;
+    border-radius: 14px;
+    background: var(--fff-navy);
+    box-shadow: 0 8px 28px rgba(11, 37, 69, 0.4);
+  }
+
+  .site-nav .nav-more-panel[hidden] {
+    display: none;
+  }
+
+  .site-header .site-nav .nav-more-panel a {
+    justify-content: flex-start;
+    padding: 0.75rem 0.9rem;
+    font-size: 0.95rem;
+  }
+
+  .page-shell {
+    width: calc(100% - 1.5rem);
+    padding: 0.75rem 0 2.5rem;
+  }
+
+  footer a {
+    width: 100%;
+    margin-left: 0;
+  }
+}

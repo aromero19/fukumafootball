@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { uploadImage, withImageTimeout } from '@/lib/image-upload-request.mjs';
+import { imageFileProblem, imageSizeLimitMb, uploadImage, withImageTimeout } from '@/lib/image-upload-request.mjs';
 
 export default function ImageUpload({ destination, profile = false, onSaved, disabled = false, onBusyChange }: {
   destination: string; profile?: boolean; onSaved: (url: string) => void; disabled?: boolean; onBusyChange?: (busy: boolean) => void;
@@ -18,14 +18,13 @@ export default function ImageUpload({ destination, profile = false, onSaved, dis
   useEffect(() => { onBusyChange?.(busy); }, [busy, onBusyChange]);
   return <fieldset disabled={busy || disabled} className="form-stack">
     <label>Choose {profile ? 'a profile photo' : 'a team image'}
-      <input ref={input} type="file" accept="image/jpeg,image/png,image/webp" onChange={async event => {
+      <input ref={input} type="file" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg" onChange={async event => {
         const file = event.target.files?.[0];
         const current = ++generation.current;
         setPrepared(null); setPreview(''); setMessage('');
         if (!file) return;
-        if (!['image/jpeg','image/png','image/webp'].includes(file.type) || file.size > (profile ? 2 : 5) * 1024 * 1024) {
-          setMessage(`Choose a JPEG, PNG, or WebP smaller than ${profile ? 2 : 5} MB.`); return;
-        }
+        const problem = imageFileProblem(file, profile);
+        if (problem) { setMessage(problem); return; }
         setBusy(true); setStage('Preparing preview…');
         let expired = false;
         try {
@@ -53,12 +52,13 @@ export default function ImageUpload({ destination, profile = false, onSaved, dis
         finally { setBusy(false); }
       }} />
     </label>
-    <p className="muted">JPEG, PNG, or WebP · up to {profile ? '2' : '5'} MB. {profile ? 'Preview shows the centered square crop.' : 'Large images are resized automatically.'}</p>
+    <p className="muted">JPEG, PNG, or WebP · up to {imageSizeLimitMb(profile)} MB. {profile ? 'Preview shows the centered square crop.' : 'Large images are resized automatically.'}</p>
     {preview && <div>{/* Local object URL, revoked when replaced or unmounted. */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={preview} alt="Selected image preview" style={{ maxWidth: 200, maxHeight: 200, objectFit: 'contain' }} />
     </div>}
-    <button className="button secondary" type="button" disabled={!prepared || busy} onClick={async () => {
+    {/* Turns primary once a profile photo is ready, to show this is the next step. */}
+    <button className={profile && prepared ? 'button' : 'button secondary'} type="button" disabled={!prepared || busy} onClick={async () => {
       if (!prepared || busy) return;
       setBusy(true); setStage('Saving image…'); setMessage('');
       try {

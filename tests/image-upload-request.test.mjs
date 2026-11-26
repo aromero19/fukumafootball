@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { uploadImage, withImageTimeout } from '../src/lib/image-upload-request.mjs';
+import { imageFileProblem, uploadImage, withImageTimeout } from '../src/lib/image-upload-request.mjs';
 
 const image = new Blob(['prepared image'], { type: 'image/webp' });
 
@@ -43,4 +43,17 @@ test('stalled preparation rejects and invokes resource cleanup', async () => {
   let expired = false;
   await assert.rejects(withImageTimeout(new Promise(() => {}), 10, 'Preparation timed out', () => { expired = true; }), /Preparation timed out/);
   assert.equal(expired, true);
+});
+
+test('accepts camera-size JPEG profile photos, including oddly labelled ones', () => {
+  const mb = 1024 * 1024;
+  for (const file of [
+    { type: 'image/jpeg', name: 'IMG_1.JPG', size: 6 * mb },
+    { type: '', name: 'photo.jpeg', size: mb },
+    { type: 'image/jpg', name: 'photo', size: mb },
+    { type: 'image/png', name: 'photo.png', size: mb },
+  ]) assert.equal(imageFileProblem(file, true), '');
+  assert.match(imageFileProblem({ type: 'image/jpeg', name: 'a.jpg', size: 16 * mb }, true), /smaller than 15 MB/);
+  assert.match(imageFileProblem({ type: 'image/gif', name: 'a.gif', size: mb }, true), /JPEG, PNG, or WebP/);
+  assert.match(imageFileProblem({ type: 'image/jpeg', name: 'a.jpg', size: 6 * mb }, false), /smaller than 5 MB/);
 });
