@@ -1,5 +1,6 @@
 import { queryNumber } from "@/lib/data";
 import CorrectionForm from "@/components/admin-correction-form";
+import SeasonFilters from "@/components/season-filters";
 import { requireAdmin } from "@/lib/admin";
 
 export default async function AdminCorrections({ searchParams }: { searchParams: Promise<{year?:string;week?:string}> }) {
@@ -16,5 +17,8 @@ export default async function AdminCorrections({ searchParams }: { searchParams:
   ]);
   if (seasonsError || weeksError || teamsError || gamesError || playersError) return <p role="alert">Unable to load administration data. Refresh to retry.</p>;
   const names = Object.fromEntries((teams ?? []).map((team) => [team.team_id, team.team_name]));
-  return <section className="card"><h2>Audited pick correction</h2><form method="get" className="toolbar"><label>Season <select name="year" defaultValue={year}>{(seasons ?? []).map(row=><option key={row.year} value={row.year}>{row.year}</option>)}</select></label><label>Week <select name="week" defaultValue={week}>{(weeks ?? []).map(row=><option key={row.week} value={row.week}>{row.week}</option>)}</select></label><button className="button secondary">View week</button></form><p className="muted">Use only for verified corrections. The original and replacement pick are audited with your reason.</p><CorrectionForm key={year+"-"+week} players={players ?? []} games={games ?? []} names={names} /></section>;
+  return <div className="form-stack">
+    <div className="admin-picker"><SeasonFilters path="/admin/corrections" seasons={(seasons ?? []).map(row=>row.year)} weeks={(weeks ?? []).map(row=>row.week)} year={year} week={week} /></div>
+    <section className="card"><h2>Audited pick correction</h2><p className="muted">Use only for verified corrections. The original and replacement pick are audited with your reason.</p><CorrectionForm key={year+"-"+week} players={players ?? []} games={games ?? []} names={names} /></section>
+  </div>;
 }

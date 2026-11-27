@@ -15,8 +15,8 @@ function ImageEditor({ team, themeId, images, defaultId }: { team: { team_id: nu
   const [uploading, setUploading] = useState(false);
   const [state, action, pending] = useActionState(saveTeamImage, { message: "", ok: false });
   const preview = imageCandidates([...images.filter(row => !(row.team_id === team.team_id && row.theme_id === themeId)), { team_id: team.team_id, theme_id: themeId, image_url: url, thumbnail_url: thumbnail, active }], team.team_id, themeId, defaultId);
-  return <form action={action} className="card form-stack">
-    <h3>{team.team_name}</h3><div className="toolbar"><TeamImage key={preview.join("|")} urls={preview} /><span className="muted">Preview · falls back to Default, then team name</span></div>
+  return <form action={action} className="form-stack">
+    <div className="toolbar"><TeamImage key={preview.join("|")} urls={preview} /><span className="muted">Preview · falls back to Default, then team name</span></div>
     <input type="hidden" name="team_id" value={team.team_id} /><input type="hidden" name="theme_id" value={themeId} />
     <ImageUpload disabled={pending} onBusyChange={setUploading} destination={`kind=theme&theme=${themeId}&team=${team.team_id}&active=${active}`} onSaved={saved => { setUrl(saved); setThumbnail(''); }} />
     <fieldset disabled={uploading || pending} className="form-stack">
@@ -31,11 +31,23 @@ function ImageEditor({ team, themeId, images, defaultId }: { team: { team_id: nu
 export default function AdminTeamImages({ themes, teams, images }: { themes: Theme[]; teams: { team_id: number; team_name: string }[]; images: ImageRow[] }) {
   const [themeId, setThemeId] = useState(themes.find(theme => theme.is_default)?.theme_id ?? themes[0]?.theme_id);
   const theme = themes.find(row => row.theme_id === themeId);
-  return <section className="form-stack"><h2>Team images</h2>
+  const [search, setSearch] = useState("");
+  const defaultId = themes.find(row => row.is_default)?.theme_id;
+  const matches = (name: string) => name.toLocaleLowerCase().includes(search.trim().toLocaleLowerCase());
+  return <section className="form-stack admin-images"><h2>Team images</h2>
     <p className="muted">Upload an image or use a publicly accessible HTTPS image link. Upload and save replaces this team’s image and clears its old thumbnail. Uncheck Active image and save to restore the Default fallback.</p>
     <label>Manage images for <select value={themeId ?? ""} onChange={event => setThemeId(Number(event.target.value))}>{themes.map(row => <option key={row.theme_id} value={row.theme_id}>{row.theme_name}{row.active ? "" : " (inactive)"}</option>)}</select></label>
     {theme && !theme.active && <p className="status">This theme is inactive. Its images will appear to families when the theme is activated.</p>}
     {!theme && <p>Create a theme before adding images.</p>}
-    <div className="grid">{theme && teams.map(team => <ImageEditor key={themeId + "-" + team.team_id} team={team} themeId={theme.theme_id} images={images} defaultId={themes.find(row => row.is_default)?.theme_id} />)}</div>
+    <label>Find a team<input type="search" placeholder="Team name" value={search} onChange={event => setSearch(event.target.value)} /></label>
+    {/* Editors stay mounted while closed or filtered out, so nothing typed or uploading is lost. */}
+    <div className="admin-teams">{theme && teams.map(team => {
+      const urls = imageCandidates(images, team.team_id, theme.theme_id, defaultId);
+      return <details className="card admin-team" key={themeId + "-" + team.team_id} hidden={!matches(team.team_name)}>
+        <summary><TeamImage key={urls.join("|")} urls={urls} /><span>{team.team_name}</span></summary>
+        <ImageEditor team={team} themeId={theme.theme_id} images={images} defaultId={defaultId} />
+      </details>;
+    })}</div>
+    {theme && !teams.some(team => matches(team.team_name)) && <p className="status">No team matches that name.</p>}
   </section>;
 }

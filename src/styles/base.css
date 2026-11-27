@@ -166,11 +166,6 @@ body {
   color: var(--ink);
   font: inherit;
 }
-.admin-nav a {
-  font-weight: 700;
-  color: var(--blue);
-  text-decoration: none;
-}
 .player-form {
   display: grid;
   gap: .75rem;

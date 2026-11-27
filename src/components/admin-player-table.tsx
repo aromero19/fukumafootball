@@ -16,17 +16,35 @@ type Player = {
   photo_url: string | null;
 };
 
+/** One-tap payment marking. Sends the same save as the editor, after a named confirm. */
+function Money({ player, name }: { player: Player; name: string }) {
+  const [asking, setAsking] = useState(false);
+  if (player.playing_for_money) return <span className="player-paid"><span aria-hidden="true">$ </span>Paid</span>;
+  if (!player.active) return <span className="muted">Not paid</span>;
+  if (!asking) return <button className="button secondary" type="button" aria-label={`Mark ${name} as paid`} onClick={() => setAsking(true)}>Mark paid</button>;
+  return <AdminForm action={savePlayer} className="player-pay">
+    <input type="hidden" name="entry_id" value={player.entry_id} />
+    <input type="hidden" name="name_first" value={player.name_first} />
+    <input type="hidden" name="name_last" value={player.name_last} />
+    <input type="hidden" name="email" value={player.email} />
+    <input type="hidden" name="active" value="on" />
+    <input type="hidden" name="playing_for_money" value="on" />
+    <button className="button" type="submit">Confirm {name} paid</button>
+    <button className="button secondary" type="button" onClick={() => setAsking(false)}>Cancel</button>
+  </AdminForm>;
+}
+
 function PlayerRow({ player, hidden }: { player: Player; hidden: boolean }) {
   const [editing, setEditing] = useState(false);
   const name = `${player.name_first} ${player.name_last}`.trim();
   const panelId = `player-editor-${player.entry_id}`;
   return <>
-    <tr hidden={hidden}>
+    <tr hidden={hidden} className="player-row">
       <th scope="row"><div className="player-identity"><ProfileAvatar url={player.photo_url} small /><span>{name}<small>#{player.entry_id}</small></span></div></th>
       <td className="player-email">{player.email || <span className="muted">No email</span>}</td>
-      <td><span className={`player-status ${player.active ? "is-active" : ""}`}>{player.active ? "Active" : "Inactive"}</span></td>
-      <td>{player.playing_for_money ? <span className="player-paid"><span aria-hidden="true">$ </span>Confirmed</span> : <span className="muted">Not confirmed</span>}</td>
-      <td><button className="button secondary" type="button" aria-expanded={editing} aria-controls={panelId} aria-label={`${editing ? "Close editor for" : "Edit"} ${name}`} onClick={() => setEditing(!editing)}>{editing ? "Close" : "Edit"}</button></td>
+      <td className="player-state"><span className={`player-status ${player.active ? "is-active" : ""}`}>{player.active ? "Active" : "Inactive"}</span></td>
+      <td className="player-money"><Money player={player} name={name} /></td>
+      <td className="player-action"><button className="button secondary" type="button" aria-expanded={editing} aria-controls={panelId} aria-label={`${editing ? "Close editor for" : "Edit"} ${name}`} onClick={() => setEditing(!editing)}>{editing ? "Close" : "Edit"}</button></td>
     </tr>
     <tr hidden={hidden || !editing} className="player-editor-row" id={panelId}><td colSpan={5}>
       {editing && <div className="player-editor">
@@ -62,7 +80,7 @@ export default function AdminPlayerTable({ players }: { players: Player[] }) {
       <label>Status<select value={status} onChange={e => setStatus(e.target.value)}><option value="all">All players</option><option value="active">Active</option><option value="inactive">Inactive</option></select></label>
       <label>Playing for money<select value={money} onChange={e => setMoney(e.target.value)}><option value="all">Everyone</option><option value="confirmed">Confirmed</option><option value="unconfirmed">Not confirmed</option></select></label>
     </div>
-    <p className="muted player-directory-help">Edit a player to update their details or photo. Confirm money participation after checking Venmo.</p>
+    <p className="muted player-directory-help">Check Venmo, then use Mark paid. Edit changes details or the photo.</p>
     <div className="table-scroll" role="region" aria-label="Player directory" tabIndex={0}>
       <table className="table admin-player-table"><caption className="sr-only">Player contact details and current participation. Each Edit button opens that player’s controls.</caption>
         <thead><tr><th scope="col">Player</th><th scope="col">Email</th><th scope="col">Status</th><th scope="col">Playing for money</th><th scope="col">Actions</th></tr></thead>
