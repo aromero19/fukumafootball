@@ -1,6 +1,13 @@
 // Keep newest additions first. The home page displays the first five entries.
 export const featureUpdates = [
   {
+    title: "Trends on the pick sheet",
+    description:
+      "Tap Trends on any game to see your record picking each team, the team\u2019s recent form and how the whole league has done. Some older weeks are missing.",
+    href: "/picks",
+    linkLabel: "Check a matchup",
+  },
+  {
     title: "A simpler profile page",
     description:
       "Your profile now shows its two settings, photo and reminder emails, at a glance. Tap one to change it. Photos straight from your phone are welcome, and the save button lights up when yours is ready.",
@@ -27,12 +34,5 @@ export const featureUpdates = [
       "Turn on email reminders in your Entry Profile and choose a day, time, and time zone. The default is Wednesday at 6 p.m. Mountain time. We’ll remind you before the first kickoff only if you haven’t submitted. An email address must be on file. Thanks to Ken Reed for the suggestion!",
     href: "/profile",
     linkLabel: "Set up pick reminders",
-  },
-  {
-    title: "Your saved picks, right away",
-    description:
-      "Already submitted this week? Choose your profile to see who you picked. Use Back to edit picks to make changes while games are still open.",
-    href: "/picks",
-    linkLabel: "See your picks",
   },
 ] as const;

@@ -3,6 +3,7 @@
 import { submitPicks } from "@/app/picks/actions";
 import { useRouter } from "next/navigation";
 import TeamImage from "@/components/team-image";
+import GameTrends from "@/components/game-trends";
 import { imageCandidates } from "@/lib/theme-images.mjs";
 import { Fragment, useMemo, useRef, useState, type CSSProperties } from "react";
 import { hasEveryOpenPick, submissionPicks } from "@/lib/picks.mjs";
@@ -66,6 +67,7 @@ export default function PicksForm({
   const [requestId, setRequestId] = useState<string | null>(null);
   const [message, setMessage] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [trendsGame, setTrendsGame] = useState<number | null>(null);
   const names = useMemo(
     () => Object.fromEntries(teams.map((team) => [team.team_id, team.team_name])),
     [teams],
@@ -166,6 +168,20 @@ export default function PicksForm({
                         Started
                       </span>
                     )}
+                    <button
+                      type="button"
+                      className="trend-toggle"
+                      aria-expanded={trendsGame === game.game_id}
+                      aria-controls={`trends-${game.game_id}`}
+                      onClick={() =>
+                        setTrendsGame((open) => (open === game.game_id ? null : game.game_id))
+                      }
+                    >
+                      <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M4 20V10h4v10zm6 0V4h4v16zm6 0v-7h4v7z" />
+                      </svg>
+                      Trends
+                    </button>
                   </div>
                   <div className="pick-pair">
                     {[game.away_team_id, game.home_team_id].map((teamId, side) => {
@@ -209,6 +225,17 @@ export default function PicksForm({
                       );
                     })}
                   </div>
+                  <GameTrends
+                    id={`trends-${game.game_id}`}
+                    hidden={trendsGame !== game.game_id}
+                    year={year}
+                    entryId={entry}
+                    sides={[
+                      { id: game.away_team_id, name: names[game.away_team_id] },
+                      { id: game.home_team_id, name: names[game.home_team_id] },
+                    ]}
+                    names={names}
+                  />
                 </div>
               );
             })}
